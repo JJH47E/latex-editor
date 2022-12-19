@@ -1,0 +1,13 @@
+:host {
+    display: flex;
+    flex: 1;
+}
+
+pdf-viewer {
+    max-width: 100%;
+}
+
+ngs-code-editor {
+    height: 100%;
+    //TODO: auto-resizing on gutter move
+}

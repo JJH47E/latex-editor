@@ -1,0 +1,17 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+    <span>{{documentName$ | async}}</span>
+    <span class="fill-remaining-space"></span>
+    <button mat-icon-button (click)="openHelp()">
+        <mat-icon>help</mat-icon>
+    </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="sub-toolbar">
+        <span class="toolbar-options">
+            <button mat-button>File</button>
+            <button mat-button>Edit</button>
+            <button mat-button (click)="openDialog()">Insert</button>
+            <button mat-button (click)="openHelp()">Help</button>
+        </span>
+    </mat-toolbar-row>
+</mat-toolbar>
