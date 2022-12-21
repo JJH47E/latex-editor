@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {MatMenuModule} from '@angular/material/menu';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RendererComponent } from './components/renderer/renderer.component';
 import { KatexModule } from 'ng-katex';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {TextFieldModule} from '@angular/cdk/text-field';
@@ -27,7 +26,6 @@ import { CodeEditorModule } from '@ngstack/code-editor';
 @NgModule({
   declarations: [
     AppComponent,
-    RendererComponent,
     ToolbarComponent,
     MacroHelperComponent,
     MainViewComponent,
@@ -49,6 +47,7 @@ import { CodeEditorModule } from '@ngstack/code-editor';
     AngularSplitModule,
     PdfViewerModule,
     CodeEditorModule.forRoot(),
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

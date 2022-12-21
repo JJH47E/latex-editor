@@ -1,6 +1,6 @@
 <mat-toolbar>
     <mat-toolbar-row>
-    <span>{{documentName$ | async}}</span>
+    <span>{{(workspaceService.getWorkspaceName() | async) || 'LaTeX Editor'}}</span>
     <span class="fill-remaining-space"></span>
     <button mat-icon-button (click)="openHelp()">
         <mat-icon>help</mat-icon>
@@ -8,10 +8,22 @@
     </mat-toolbar-row>
     <mat-toolbar-row class="sub-toolbar">
         <span class="toolbar-options">
-            <button mat-button>File</button>
-            <button mat-button>Edit</button>
-            <button mat-button (click)="openDialog()">Insert</button>
-            <button mat-button (click)="openHelp()">Help</button>
+            <button mat-button [matMenuTriggerFor]="fileMenu">{{ToolbarActions.File}}</button>
+            <button mat-button [matMenuTriggerFor]="editMenu">{{ToolbarActions.Edit}}</button>
+            <button mat-button (click)="openDialog()">{{ToolbarActions.Insert}}</button>
+            <button mat-button [matMenuTriggerFor]="helpMenu">{{ToolbarActions.Help}}</button>
         </span>
     </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-menu #fileMenu="matMenu">
+    <button *ngFor="let action of fileActions" mat-menu-item (click)="action.action()">{{ action.title }}</button> 
+</mat-menu>
+
+<mat-menu #editMenu="matMenu">
+    <button *ngFor="let action of editActions" mat-menu-item (click)="action.action()">{{ action.title }}</button> 
+</mat-menu>
+
+<mat-menu #helpMenu="matMenu">
+    <button *ngFor="let action of helpActions" mat-menu-item (click)="action.action()">{{ action.title }}</button> 
+</mat-menu>
