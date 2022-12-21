@@ -3,6 +3,9 @@ import { Observable } from 'rxjs';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MacroHelperComponent } from '../macro-helper/macro-helper.component';
 import { HelpViewComponent } from '../help-view/help-view.component';
+import { MenuBar } from 'src/app/Enums/menu-bar.enum';
+import { ToolbarActions } from 'src/app/Enums/toolbar-actions.enum';
+import { WorkspaceService } from 'src/app/services/workspace.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -10,11 +13,23 @@ import { HelpViewComponent } from '../help-view/help-view.component';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
+  public ToolbarActions = ToolbarActions;
+  public fileActions = [
+    {title: MenuBar.SaveWorkspace, action: () => {}},
+    {title: MenuBar.OpenWorkspace, action: () => {}}
+  ];
 
-  @Input()
-  public documentName$!: Observable<string>;
+  public editActions = [
+    {title: MenuBar.EditWorkspaceSettings, action: () => {}}
+  ];
 
-  constructor(public dialog: MatDialog) { }
+  public helpActions = [
+    {title: MenuBar.About, action: () => {}},
+    {title: MenuBar.OpenSourceNotes, action: () => {}},
+    {title: MenuBar.Help, action: this.openHelp}
+  ];
+
+  constructor(public dialog: MatDialog, public workspaceService: WorkspaceService) { }
 
   ngOnInit(): void {
   }

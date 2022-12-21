@@ -8,5 +8,4 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AppComponent {
   title = 'latex-editor';
-  placeholderName$ = new BehaviorSubject<string>('test');
 }
