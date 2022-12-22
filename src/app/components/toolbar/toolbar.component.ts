@@ -15,6 +15,7 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 export class ToolbarComponent implements OnInit {
   public ToolbarActions = ToolbarActions;
   public fileActions = [
+    {title: MenuBar.NewWorkspace, action: () => {}},
     {title: MenuBar.SaveWorkspace, action: () => {}},
     {title: MenuBar.OpenWorkspace, action: () => {}}
   ];
