@@ -22,6 +22,9 @@ import { HelpViewComponent } from './components/help-view/help-view.component';
 import { CodeEditorModule } from '@ngstack/code-editor';
 import { CodeEditorComponent } from './components/code-editor/code-editor.component';
 import { PreviewComponent } from './components/preview/preview.component';
+import { NewWorkspaceComponent } from './components/new-workspace/new-workspace.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -33,7 +36,8 @@ import { PreviewComponent } from './components/preview/preview.component';
     MainViewComponent,
     HelpViewComponent,
     CodeEditorComponent,
-    PreviewComponent
+    PreviewComponent,
+    NewWorkspaceComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +56,8 @@ import { PreviewComponent } from './components/preview/preview.component';
     PdfViewerModule,
     CodeEditorModule.forRoot(),
     MatMenuModule,
+    MatSnackBarModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
