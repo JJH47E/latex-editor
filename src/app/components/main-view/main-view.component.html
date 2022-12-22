@@ -3,10 +3,9 @@
         <p>Tree view</p>
     </as-split-area>
     <as-split-area [size]="42" [minSize]="25" [maxSize]="75">
-        <ngs-code-editor [codeModel]="(codeModel$ | async)!"></ngs-code-editor>
+        <app-code-editor></app-code-editor>
     </as-split-area>
     <as-split-area [size]="42" [minSize]="20" [maxSize]="45">
-        <pdf-viewer [src]="getPdf()" [render-text]="true" [original-size]="false" [autoresize]="true" style="width: 100%; height: 100%">
-        </pdf-viewer>
+        <app-preview></app-preview>
     </as-split-area>
 </as-split>

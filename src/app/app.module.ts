@@ -20,6 +20,8 @@ import { AngularSplitModule } from 'angular-split';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { HelpViewComponent } from './components/help-view/help-view.component';
 import { CodeEditorModule } from '@ngstack/code-editor';
+import { CodeEditorComponent } from './components/code-editor/code-editor.component';
+import { PreviewComponent } from './components/preview/preview.component';
 
 
 
@@ -29,7 +31,9 @@ import { CodeEditorModule } from '@ngstack/code-editor';
     ToolbarComponent,
     MacroHelperComponent,
     MainViewComponent,
-    HelpViewComponent
+    HelpViewComponent,
+    CodeEditorComponent,
+    PreviewComponent
   ],
   imports: [
     BrowserModule,
