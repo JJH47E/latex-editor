@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { WorkspaceApiService } from './workspace-api.service';
+import { IndexedDbService } from './indexed-db.service';
 
-describe('WorkspaceApiService', () => {
-  let service: WorkspaceApiService;
+describe('IndexedDbService', () => {
+  let service: IndexedDbService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(WorkspaceApiService);
+    service = TestBed.inject(IndexedDbService);
   });
 
   it('should be created', () => {

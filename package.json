@@ -22,6 +22,7 @@
     "@angular/router": "^14.2.0",
     "@ngstack/code-editor": "^4.0.0",
     "angular-split": "^14.1.0",
+    "dexie": "^3.2.2",
     "ng-katex": "^2.0.3",
     "ng2-pdf-viewer": "^9.1.2",
     "rxjs": "~7.5.0",

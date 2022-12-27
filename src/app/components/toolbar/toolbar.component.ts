@@ -31,6 +31,8 @@ export class ToolbarComponent implements OnInit {
     {title: MenuBar.Help, action: () => this.openHelp()}
   ];
 
+  public workspaceName$ = this.workspaceService.getWorkspaceName();
+
   constructor(public dialog: MatDialog, public workspaceService: WorkspaceService) { }
 
   ngOnInit(): void {
@@ -56,8 +58,6 @@ export class ToolbarComponent implements OnInit {
       width: '750px',
     });
 
-    dialogRef.afterClosed().subscribe(workspaceName => {
-      this.workspaceService.setWorkspaceName(workspaceName);
-    });
+    dialogRef.afterClosed().subscribe(_ => { });
   }
 }

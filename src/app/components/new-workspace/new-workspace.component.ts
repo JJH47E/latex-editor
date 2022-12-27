@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { WorkspaceApiService } from 'src/app/services/workspace-api.service';
+import { WorkspaceService } from 'src/app/services/workspace.service';
 
 @Component({
   selector: 'app-new-workspace',
@@ -14,7 +14,7 @@ export class NewWorkspaceComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<NewWorkspaceComponent>,
     private matSnackbar: MatSnackBar,
-    private workspaceApiService: WorkspaceApiService
+    private workspaceService: WorkspaceService
     ) { }
 
   public workspaceName = new FormControl('', [
@@ -29,20 +29,14 @@ export class NewWorkspaceComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public createWorkspace() {
+  public async createWorkspace() {
     if (this.form.invalid) {
       return;
     }
 
     //TODO: tidy this up
     const name = this.form.get('workspaceName')?.value!;
-    this.workspaceApiService.createWorkspace(name).subscribe({
-      next: response => {
-        this.dialogRef.close(response);
-      },
-      error: _ => {
-        this.matSnackbar.open('Unable to create workspace', 'OK', {duration: 5000});
-      }
-    });
+    await this.workspaceService.createWorkspace(name)
+      .then(response => this.dialogRef.close(response));
   }
 }
