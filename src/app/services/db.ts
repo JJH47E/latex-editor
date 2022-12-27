@@ -17,11 +17,13 @@ export interface File {
 
 export class AppDB extends Dexie {
     workspace!: Table<Workspace, string>;
+    workspaceFiles!: Table<Data, string>;
 
     constructor() {
         super('ngdexieliveQuery');
         this.version(3).stores({
             workspace: '++id',
+            workspaceFiles: '++id',
         });
         this.on('populate', () => this.populate());
     }

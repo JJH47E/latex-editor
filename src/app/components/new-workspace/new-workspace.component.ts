@@ -13,7 +13,6 @@ export class NewWorkspaceComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<NewWorkspaceComponent>,
-    private matSnackbar: MatSnackBar,
     private workspaceService: WorkspaceService
     ) { }
 
