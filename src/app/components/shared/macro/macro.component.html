@@ -1,0 +1,10 @@
+<div class="macro-config">
+    <p>
+        {{name$ | async}}
+    </p>
+    <div class="equation-preview">
+        <ng-katex [equation]="(current$ | async) ?? 'I am error'"></ng-katex>
+    </div>
+    <textarea [value]="template$ | async" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+</div>

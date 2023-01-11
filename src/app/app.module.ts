@@ -25,6 +25,7 @@ import { PreviewComponent } from './components/preview/preview.component';
 import { NewWorkspaceComponent } from './components/new-workspace/new-workspace.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
+import { MacroComponent } from './components/shared/macro/macro.component';
 
 
 
@@ -37,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     HelpViewComponent,
     CodeEditorComponent,
     PreviewComponent,
-    NewWorkspaceComponent
+    NewWorkspaceComponent,
+    MacroComponent
   ],
   imports: [
     BrowserModule,
