@@ -1,10 +1,24 @@
-<div class="macro-config">
+<div *ngIf="macroModel$ | async; let macro" class="macro-config">
     <p>
-        {{name$ | async}}
+        {{macro.name}}
     </p>
     <div class="equation-preview">
-        <ng-katex [equation]="(current$ | async) ?? 'I am error'"></ng-katex>
+        <ng-katex [equation]="(currentEquation$ | async) ?? getTemplateEquation()"></ng-katex>
     </div>
-    <textarea [value]="template$ | async" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-        cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+    <div class="variables">
+        <div class="variable" *ngFor="let variable of macro.variables">
+            <mat-form-field>
+                <mat-label>
+                    {{variable}}
+                </mat-label>
+                <input matInput [formControl]="getVariableControl(variable)" [placeholder]="variable">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="insert-options">
+        <mat-checkbox>Inline</mat-checkbox>
+    </div>
+    <div class="render-options">
+        <button mat-raised-button color="primary" (click)="renderEquation()">Re-render</button>
+    </div>
 </div>

@@ -41,6 +41,7 @@ export class ToolbarComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(MacroHelperComponent, {
       width: '750px',
+      height: '90%',//TODO: There may be a tidier way of doing this!
     });
 
     dialogRef.afterClosed().subscribe(_ => { });

@@ -26,7 +26,7 @@ import { NewWorkspaceComponent } from './components/new-workspace/new-workspace.
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { MacroComponent } from './components/shared/macro/macro.component';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -60,6 +60,7 @@ import { MacroComponent } from './components/shared/macro/macro.component';
     MatMenuModule,
     MatSnackBarModule,
     HttpClientModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
