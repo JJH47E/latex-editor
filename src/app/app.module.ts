@@ -19,7 +19,6 @@ import { MainViewComponent } from './components/main-view/main-view.component';
 import { AngularSplitModule } from 'angular-split';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { HelpViewComponent } from './components/help-view/help-view.component';
-import { CodeEditorModule } from '@ngstack/code-editor';
 import { CodeEditorComponent } from './components/code-editor/code-editor.component';
 import { PreviewComponent } from './components/preview/preview.component';
 import { NewWorkspaceComponent } from './components/new-workspace/new-workspace.component';
@@ -29,6 +28,8 @@ import { MacroComponent } from './components/shared/macro/macro.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MacroListComponent } from './components/macro-list/macro-list.component';
 import {MatListModule} from '@angular/material/list';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
+import { NgxMonacoEditorConfig } from 'ngx-monaco-editor-v2/public-api';
 
 @NgModule({
   declarations: [
@@ -58,12 +59,12 @@ import {MatListModule} from '@angular/material/list';
     MatDialogModule,
     AngularSplitModule,
     PdfViewerModule,
-    CodeEditorModule.forRoot(),
     MatMenuModule,
     MatSnackBarModule,
     HttpClientModule,
     MatCheckboxModule,
-    MatListModule
+    MatListModule,
+    MonacoEditorModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

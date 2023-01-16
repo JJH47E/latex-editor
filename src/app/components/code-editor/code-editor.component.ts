@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CodeModel } from '@ngstack/code-editor';
 import { of } from 'rxjs';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 
@@ -10,7 +9,9 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
   styleUrls: ['./code-editor.component.scss']
 })
 export class CodeEditorComponent implements OnInit {
-  public codeModel$ = of({language: 'tex', value: 'test'} as CodeModel);
+  public options = {
+    theme: 'vs-dark'
+  };
 
   constructor(
     private workspaceService: WorkspaceService,
