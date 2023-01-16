@@ -45,3 +45,17 @@
     justify-content: flex-end;
     align-items: center;
 }
+
+.raw-text {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.raw-content {
+    width: 100%;
+}

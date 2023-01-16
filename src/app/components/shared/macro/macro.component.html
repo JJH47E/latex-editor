@@ -1,12 +1,12 @@
-<div *ngIf="macroModel$ | async; let macro" class="macro-config">
+<div *ngIf="macroModel$ | async; let macro" class="macro-config" [formGroup]="form">
     <p>
         {{macro.name}}
     </p>
     <div class="equation-preview">
-        <ng-katex [equation]="(currentEquation$ | async) ?? getTemplateEquation()"></ng-katex>
+        <ng-katex [options]="previewOptions" [equation]="(currentEquation$ | async) ?? getTemplateEquation()"></ng-katex>
     </div>
     <div class="variables">
-        <div class="variable" *ngFor="let variable of macro.variables">
+        <div class="variable" *ngFor="let variable of equationVariables$ | async">
             <mat-form-field>
                 <mat-label>
                     {{variable}}
@@ -15,8 +15,15 @@
             </mat-form-field>
         </div>
     </div>
+    <div class="raw-text">
+        <button mat-button (click)="toggleShowTemplate()">{{showTemplate ? 'Hide' : 'Show'}} Template</button>
+        <mat-form-field class="raw-content" *ngIf="showTemplate">
+            <mat-label>LaTeX Code</mat-label>
+            <textarea matInput formControlName="template"></textarea>
+        </mat-form-field>
+    </div>
     <div class="insert-options">
-        <mat-checkbox>Inline</mat-checkbox>
+        <mat-checkbox [formControl]="inlineCheckboxControl">Inline</mat-checkbox>
     </div>
     <div class="render-options">
         <button mat-raised-button color="primary" (click)="renderEquation()">Re-render</button>

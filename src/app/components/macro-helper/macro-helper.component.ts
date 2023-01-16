@@ -8,19 +8,31 @@ import { MacroModel } from 'src/app/macros/macro.model';
 })
 export class MacroHelperComponent implements OnInit {
 
-  public testMacro: MacroModel = {
+  public testList: MacroModel[] = [{
     name: "Simple Equation",
-    template: "{{%c%}} = \\pm\\sqrt{{{%a%}}^2 + {{%b%}}^2}",
-    variables: [
-      "a",
-      "b",
-      "c"
-    ]
-  };
+    template: "{{#c#}} = \\pm\\sqrt{{{#a#}}^2 + {{#b#}}^2}",
+  },
+  {
+    name: "Second Simple Equation",
+    template: "{{#x#}}^{{#n#}} + {{#y#}}^{{#n#}} = {{#z#}}^{{#n#}}",//! multiple variables needs to be fixed!
+  }];
+
+  public isMacroSelected = false;
+  public selectedMacro: MacroModel | null = null;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public selectMacro(macro: MacroModel): void {
+    this.selectedMacro = macro;
+    this.isMacroSelected = true;
+  }
+
+  public unselectMacro(): void {
+    this.isMacroSelected = false;
+    this.selectedMacro = null;
   }
 
 }

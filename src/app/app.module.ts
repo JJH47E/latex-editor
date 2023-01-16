@@ -27,7 +27,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { MacroComponent } from './components/shared/macro/macro.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import { MacroListComponent } from './components/macro-list/macro-list.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     CodeEditorComponent,
     PreviewComponent,
     NewWorkspaceComponent,
-    MacroComponent
+    MacroComponent,
+    MacroListComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatMenuModule,
     MatSnackBarModule,
     HttpClientModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

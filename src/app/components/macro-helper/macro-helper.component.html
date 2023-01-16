@@ -1,8 +1,20 @@
 <h1 mat-dialog-title>Macros</h1>
 <div mat-dialog-content>
-    <app-macro [macro]="testMacro"></app-macro>
+    <div *ngIf="!isMacroSelected || !selectedMacro; else macroDisplay">
+        <app-macro-list [macroList]="testList" (macroSelected)="selectMacro($event)"></app-macro-list>
+    </div>
 </div>
 <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="null">Back</button>
-    <button mat-button [mat-dialog-close]="'ok'" cdkFocusInitial>Insert</button>
+    <div *ngIf="!isMacroSelected; else macroSelected">
+        <button mat-button [mat-dialog-close]="null">Cancel</button>
+    </div>
 </div>
+
+<ng-template #macroSelected>
+    <button mat-button (click)="unselectMacro()">Back</button>
+    <button mat-button [mat-dialog-close]="'ok'" cdkFocusInitial>Insert</button>
+</ng-template>
+
+<ng-template #macroDisplay>
+    <app-macro [macro]="selectedMacro!"></app-macro>
+</ng-template>
