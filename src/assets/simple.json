@@ -1,0 +1,9 @@
+{
+	"name": "Simple Equation",
+	"template": "&c = \\pm\\sqrt{&a^2 + &b^2}",
+	"variables": [
+		"a",
+		"b",
+		"c"
+	]
+}

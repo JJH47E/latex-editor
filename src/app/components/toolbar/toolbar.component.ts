@@ -6,6 +6,7 @@ import { HelpViewComponent } from '../help-view/help-view.component';
 import { MenuBar } from 'src/app/Enums/menu-bar.enum';
 import { ToolbarActions } from 'src/app/Enums/toolbar-actions.enum';
 import { WorkspaceService } from 'src/app/services/workspace.service';
+import { NewWorkspaceComponent } from '../new-workspace/new-workspace.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -15,7 +16,7 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 export class ToolbarComponent implements OnInit {
   public ToolbarActions = ToolbarActions;
   public fileActions = [
-    {title: MenuBar.NewWorkspace, action: () => {}},
+    {title: MenuBar.NewWorkspace, action: () => this.openNewWorkspace()},
     {title: MenuBar.SaveWorkspace, action: () => {}},
     {title: MenuBar.OpenWorkspace, action: () => {}}
   ];
@@ -27,8 +28,10 @@ export class ToolbarComponent implements OnInit {
   public helpActions = [
     {title: MenuBar.About, action: () => {}},
     {title: MenuBar.OpenSourceNotes, action: () => {}},
-    {title: MenuBar.Help, action: this.openHelp}
+    {title: MenuBar.Help, action: () => this.openHelp()}
   ];
+
+  public workspaceName$ = this.workspaceService.getWorkspaceName();
 
   constructor(public dialog: MatDialog, public workspaceService: WorkspaceService) { }
 
@@ -37,7 +40,9 @@ export class ToolbarComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(MacroHelperComponent, {
-      width: '250px',
+      width: '750px',
+      maxHeight: '90%',
+      height: 'auto'
     });
 
     dialogRef.afterClosed().subscribe(_ => { });
@@ -45,6 +50,15 @@ export class ToolbarComponent implements OnInit {
 
   openHelp(): void {
     const dialogRef = this.dialog.open(HelpViewComponent, { });
+
+    dialogRef.afterClosed().subscribe(_ => { });
+  }
+
+  openNewWorkspace(): void {
+    const dialogRef = this.dialog.open(NewWorkspaceComponent, {
+      //TODO: adjust for phones etc
+      width: '750px',
+    });
 
     dialogRef.afterClosed().subscribe(_ => { });
   }
