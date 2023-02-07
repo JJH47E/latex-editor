@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "electron": {
+      "implementation": "./index.js",
+      "schema": "./schema.json",
+      "description": "Renders Angular application in Electron."
+    }
+  }
+}

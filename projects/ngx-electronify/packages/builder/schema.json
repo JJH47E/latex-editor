@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "properties": {
+    "workspaceConfig": {
+      "description": "The configuration option we use when running the app.",
+      "type": "string"
+    },
+    "devTools": {
+      "description": "Open Chromium devtools",
+      "type": "boolean",
+      "default": false
+    },
+    "allowIntegration": {
+      "description": "Gives access of the Electron API to the app.",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
