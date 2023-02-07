@@ -1,0 +1,7 @@
+<div>
+    <mat-action-list>
+        <button mat-list-item *ngFor="let macro of macroList" (click)="onSelect(macro)">
+            {{macro.name}}
+        </button>
+    </mat-action-list>
+</div>
