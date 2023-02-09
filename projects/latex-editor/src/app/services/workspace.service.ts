@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ElectronService } from 'ngx-electronyzer';
 import { BehaviorSubject, from, Observable } from 'rxjs';
+import { WorkspaceConfig } from '../models/workspace-config';
 import { isNullOrWhitespace } from '../utils/string.utils';
-import { IndexedDbService } from './indexed-db.service';
+import { IpcService } from './ipc.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,6 @@ export class WorkspaceService {
   public workspaceId = new BehaviorSubject<string>('');
 
   constructor(
-    private indexedDbService: IndexedDbService,
     private electronService: ElectronService
   ) { }
 
@@ -34,8 +34,14 @@ export class WorkspaceService {
     return this.workspaceId.asObservable();
   }
 
-  public getMainContent(id: string): Observable<string> {
-    return from(this.indexedDbService.getFileContent(id, this.mainFileName));
+  // public getMainContent(id: string): Observable<string> {
+  //   return from(this.indexedDbService.getFileContent(id, this.mainFileName));
+  // }
+
+  public selectWorkspace(): void {
+    console.log('sending');
+    this.electronService.ipcRenderer.send('selectWorkspace');
+    console.log('sent');
   }
 
   public async createWorkspace(workspaceName: string): Promise<boolean> {

@@ -16,12 +16,14 @@
     "save": "devDependencies"
   },
   "dependencies": {
+    "adm-zip": "^0.5.10",
     "electron": "^19.0.8",
     "electron-devtools-installer": "^3.2.0",
     "ngx-electronyzer": "1.0.0"
   },
   "schematics": "./schematics/collection.json",
   "devDependencies": {
+    "@types/adm-zip": "^0.5.0",
     "@types/uuid": "^9.0.0"
   }
 }

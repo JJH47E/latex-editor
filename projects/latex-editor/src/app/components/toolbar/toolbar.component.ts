@@ -7,6 +7,8 @@ import { ToolbarActions } from 'src/app/Enums/toolbar-actions.enum';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 import { NewWorkspaceComponent } from '../new-workspace/new-workspace.component';
 import { ElectronService } from 'ngx-electronyzer';
+import { WorkspaceConfig } from 'src/app/models/workspace-config';
+import { IpcService } from 'src/app/services/ipc.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -36,10 +38,11 @@ export class ToolbarComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public workspaceService: WorkspaceService,
-    public electronService: ElectronService
+    private ipcService: IpcService
   ) { }
 
   ngOnInit(): void {
+    this.ipcService.setupLoadFileHandlers();
   }
 
   openDialog(): void {
@@ -66,6 +69,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   openWorkspace(): void {
-    this.electronService.ipcRenderer.send('openWorkspace');
+    this.workspaceService.selectWorkspace();
   }
 }
