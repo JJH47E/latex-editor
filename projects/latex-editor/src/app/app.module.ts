@@ -29,7 +29,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MacroListComponent } from './components/macro-list/macro-list.component';
 import {MatListModule} from '@angular/material/list';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
-import { NgxMonacoEditorConfig } from 'ngx-monaco-editor-v2/public-api';
+import { FileTreeComponent } from './components/file-tree/file-tree.component';
+import {MatTreeModule} from '@angular/material/tree';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { NgxMonacoEditorConfig } from 'ngx-monaco-editor-v2/public-api';
     PreviewComponent,
     NewWorkspaceComponent,
     MacroComponent,
-    MacroListComponent
+    MacroListComponent,
+    FileTreeComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { NgxMonacoEditorConfig } from 'ngx-monaco-editor-v2/public-api';
     HttpClientModule,
     MatCheckboxModule,
     MatListModule,
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    MatTreeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

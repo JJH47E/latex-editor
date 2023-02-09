@@ -1,6 +1,6 @@
 <mat-toolbar>
     <mat-toolbar-row>
-    <span>{{(workspaceName$ | async) || 'LaTeX Editor'}}</span>
+    <span>{{workspaceName$ | async}}</span>
     <span class="fill-remaining-space"></span>
     <button mat-icon-button (click)="openHelp()">
         <mat-icon>help</mat-icon>

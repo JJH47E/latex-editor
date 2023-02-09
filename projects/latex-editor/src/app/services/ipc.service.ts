@@ -33,7 +33,8 @@ export class IpcService {
         throw Error(`extractedPath is not valid: ${workspaceConfig}`);
       }
       console.log(JSON.stringify(workspaceConfig));
-      this.workspaceService.setWorkspaceName(workspaceConfig.name);
+      this.workspaceService.workspaceName$.next(workspaceConfig.name);
+      this.workspaceService.workspaceFiles$.next(workspaceConfig.filePaths);
     });
 
     this.isLoadSetup = true;

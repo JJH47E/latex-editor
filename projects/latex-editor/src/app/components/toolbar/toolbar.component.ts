@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MacroHelperComponent } from '../macro-helper/macro-helper.component';
 import { HelpViewComponent } from '../help-view/help-view.component';
@@ -9,6 +9,7 @@ import { NewWorkspaceComponent } from '../new-workspace/new-workspace.component'
 import { ElectronService } from 'ngx-electronyzer';
 import { WorkspaceConfig } from 'src/app/models/workspace-config';
 import { IpcService } from 'src/app/services/ipc.service';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -33,16 +34,21 @@ export class ToolbarComponent implements OnInit {
     {title: MenuBar.Help, action: () => this.openHelp()}
   ];
 
-  public workspaceName$ = this.workspaceService.getWorkspaceName();
+  public workspaceName$ = new BehaviorSubject<string>('LaTeX Editor');
 
   constructor(
     public dialog: MatDialog,
     public workspaceService: WorkspaceService,
-    private ipcService: IpcService
+    private ipcService: IpcService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.ipcService.setupLoadFileHandlers();
+    this.workspaceService.workspaceName$.subscribe(name => {
+      this.workspaceName$.next(name);
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   openDialog(): void {

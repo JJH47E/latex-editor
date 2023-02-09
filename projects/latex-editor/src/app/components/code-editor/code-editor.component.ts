@@ -18,15 +18,5 @@ export class CodeEditorComponent implements OnInit {
     private matSnackBar: MatSnackBar
   ) { }
 
-  ngOnInit(): void {
-    this.workspaceService.getWorkspaceId().subscribe({
-      next: id => {
-        //TODO: load content of main.tex into codeModel$
-      },
-      error: err => {
-        this.matSnackBar.open('Unable to create new workspace');
-      }
-    })
-  }
-
+  ngOnInit(): void { }
 }
