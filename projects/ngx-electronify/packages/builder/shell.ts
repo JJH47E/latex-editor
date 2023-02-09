@@ -6,6 +6,7 @@ import { existsSync, mkdirSync } from 'node:fs';
 import { WorkspaceConfig } from './workspace-config';
 import * as AdmZip from 'adm-zip';
 import path = require('node:path');
+import { FileBlob } from './file-blob';
 const ANGULAR_DEVTOOLS = 'ienfalfjdbdpebioblfackkekamfmbnh';
 
 const [port, devTools, allowIntegration] = process.argv.slice(2);
@@ -74,6 +75,10 @@ app.whenReady().then(async () => {
     console.log(`ABSOLUTE PATH: ${workingPath}`);
     event.sender.send('loadWorkspace-reply', await getConfigContents(workingPath));
   });
+  ipcMain.on('getFile', async (event:any, id: string, path: string) => {
+    console.log(`loading file: ${path}, conversation: ${id}`);
+    event.sender.send('getFile-reply', await getFileContents(id, path));
+  })
   createWindow();
 });
 
@@ -139,10 +144,20 @@ async function loadWorkspace(relativePath: string): Promise<string> {
 
 async function getConfigContents(path: string): Promise<WorkspaceConfig> {
   try {
-    const data = await readFile(`${path}/.config`, { encoding: 'utf8' });//! should be okay
+    const data = await readFile(`${path}/.config`, { encoding: 'utf8' });
     return JSON.parse(data) as WorkspaceConfig;
   } catch(err) {
     console.log(err);
     return {} as WorkspaceConfig;
+  }
+}
+
+async function getFileContents(conversationId: string, relativePath: string): Promise<FileBlob> {
+  try {
+    const data = await readFile(path.resolve(`./${relativePath}`), { encoding: 'base64' });
+    return {id: conversationId, data: new Blob([Buffer.from(data, 'base64')])} as FileBlob;
+  } catch(err) {
+    console.log(err);
+    return {} as FileBlob;
   }
 }

@@ -1,0 +1,8 @@
+<div *ngIf="!useImagePreview; then sourceEdit else imagePreview"></div>
+
+<ng-template #sourceEdit>
+    <app-code-editor></app-code-editor>
+</ng-template>
+<ng-template #imagePreview>
+    <img [src]="thumbnail"/>
+</ng-template>

@@ -31,6 +31,7 @@ import {MatListModule} from '@angular/material/list';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { FileTreeComponent } from './components/file-tree/file-tree.component';
 import {MatTreeModule} from '@angular/material/tree';
+import { SourceEditorComponent } from './components/source-editor/source-editor.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {MatTreeModule} from '@angular/material/tree';
     NewWorkspaceComponent,
     MacroComponent,
     MacroListComponent,
-    FileTreeComponent
+    FileTreeComponent,
+    SourceEditorComponent
   ],
   imports: [
     BrowserModule,
