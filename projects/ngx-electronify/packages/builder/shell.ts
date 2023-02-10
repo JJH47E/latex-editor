@@ -7,8 +7,9 @@ import { WorkspaceConfig } from './workspace-config';
 import * as AdmZip from 'adm-zip';
 import path = require('node:path');
 import { FileBlob } from './file-blob';
-const ANGULAR_DEVTOOLS = 'ienfalfjdbdpebioblfackkekamfmbnh';
 
+var mime = require('mime-types')
+const ANGULAR_DEVTOOLS = 'ienfalfjdbdpebioblfackkekamfmbnh';
 const [port, devTools, allowIntegration] = process.argv.slice(2);
 const appUrl = `http://localhost:${port}/`;
 const workingDirectory = './.tmp/active';
@@ -75,9 +76,11 @@ app.whenReady().then(async () => {
     console.log(`ABSOLUTE PATH: ${workingPath}`);
     event.sender.send('loadWorkspace-reply', await getConfigContents(workingPath));
   });
-  ipcMain.on('getFile', async (event:any, id: string, path: string) => {
-    console.log(`loading file: ${path}, conversation: ${id}`);
-    event.sender.send('getFile-reply', await getFileContents(id, path));
+  ipcMain.on('getFile', async (event:any, path: string) => {
+    console.log(`loading file: ${path}`);
+    let fileBlob = await getFileContents(path);
+    console.log(`loaded file: ${path}, returning to renderer process`);
+    event.returnValue = fileBlob;
   })
   createWindow();
 });
@@ -152,10 +155,11 @@ async function getConfigContents(path: string): Promise<WorkspaceConfig> {
   }
 }
 
-async function getFileContents(conversationId: string, relativePath: string): Promise<FileBlob> {
+async function getFileContents(relativePath: string): Promise<FileBlob> {
   try {
-    const data = await readFile(path.resolve(`./${relativePath}`), { encoding: 'base64' });
-    return {id: conversationId, data: new Blob([Buffer.from(data, 'base64')])} as FileBlob;
+    const filePath = path.resolve(`${workingDirectory}/${relativePath}`)
+    const data = await readFile(filePath, { encoding: 'base64' });
+    return {path: relativePath, data: Buffer.from(data, 'base64'), contentType: mime.contentType(filePath)} as FileBlob;
   } catch(err) {
     console.log(err);
     return {} as FileBlob;

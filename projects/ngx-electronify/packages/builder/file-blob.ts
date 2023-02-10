@@ -1,4 +1,5 @@
 export interface FileBlob {
-    id: string;
-    data: Blob;
+    path: string;
+    data: Buffer;
+    contentType: string;
 }

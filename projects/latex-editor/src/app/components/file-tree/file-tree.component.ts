@@ -1,6 +1,6 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { TreeNode } from 'src/app/models/tree-node.model';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 
@@ -37,8 +37,13 @@ export class FileTreeComponent implements OnInit {
       this.filePaths$.next(nodes);
       this.changeDetectorRef.detectChanges();
     });
+
+    this.workspaceService.filePath$.subscribe(_ => this.changeDetectorRef.detectChanges());
+  }
+  
+  public isFileSelected(fileName: string): Observable<boolean> {
+    return this.workspaceService.filePath$.pipe(map(path => path.endsWith(fileName)));
   }
 
   hasChild = (_: number, node: TreeNode) => !!node.children && node.children.length > 0;
-
 }

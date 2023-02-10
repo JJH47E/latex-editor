@@ -10,7 +10,7 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 })
 export class SourceEditorComponent implements OnInit {
   thumbnail: any;
-  useImagePreview = false;//TODO: make this functional (MIME types?)
+  useImagePreview = false;
 
   constructor(
     private workspaceService: WorkspaceService,
@@ -19,9 +19,8 @@ export class SourceEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.workspaceService.fileBlob$
-      .pipe(map(fileBlob => fileBlob.data))
       .subscribe(blob => {
-        const objectURL = URL.createObjectURL(blob);
+        const objectURL = URL.createObjectURL(new Blob([blob.data.buffer], { type: blob.contentType }));
         const img = this.sanitizer.bypassSecurityTrustUrl(objectURL);
         this.thumbnail = img;
       });
