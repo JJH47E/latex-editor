@@ -1,0 +1,13 @@
+.code-editor {
+    display: flex;
+    height: 100%;
+    align-items: stretch;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-content: stretch;
+}
+
+:host ::ng-deep .CodeMirror{
+    flex-grow: 1;
+}

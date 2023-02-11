@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { of } from 'rxjs';
-import { WorkspaceService } from 'src/app/services/workspace.service';
 
 @Component({
   selector: 'app-code-editor',
@@ -10,13 +7,21 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 })
 export class CodeEditorComponent implements OnInit {
   public options = {
-    theme: 'vs-dark'
+    mode:'text/x-stex',
+    indentWithTabs: true,
+    smartIndent: true,
+    lineNumbers: true,
+    lineWrapping: true,
+    extraKeys: { "Ctrl-Space": "autocomplete" },
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+    autoCloseBrackets: true,
+    matchBrackets: true,
+    lint: true
   };
 
-  constructor(
-    private workspaceService: WorkspaceService,
-    private matSnackBar: MatSnackBar
-  ) { }
+  public content = {};
+
+  constructor() { }
 
   ngOnInit(): void { }
 }

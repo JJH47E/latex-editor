@@ -8,7 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -28,10 +28,11 @@ import { MacroComponent } from './components/shared/macro/macro.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MacroListComponent } from './components/macro-list/macro-list.component';
 import {MatListModule} from '@angular/material/list';
-import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { FileTreeComponent } from './components/file-tree/file-tree.component';
 import {MatTreeModule} from '@angular/material/tree';
 import { SourceEditorComponent } from './components/source-editor/source-editor.component';
+import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SourceEditorComponent } from './components/source-editor/source-editor.
     MacroComponent,
     MacroListComponent,
     FileTreeComponent,
-    SourceEditorComponent
+    SourceEditorComponent,
+    ImagePreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -68,8 +70,9 @@ import { SourceEditorComponent } from './components/source-editor/source-editor.
     HttpClientModule,
     MatCheckboxModule,
     MatListModule,
-    MonacoEditorModule.forRoot(),
-    MatTreeModule
+    MatTreeModule,
+    CodemirrorModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
