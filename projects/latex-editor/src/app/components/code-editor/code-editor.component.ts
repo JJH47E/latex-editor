@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { BehaviorSubject, filter } from 'rxjs';
+import { FileBlob } from 'src/app/models/file-blob';
+import { WorkspaceService } from 'src/app/services/workspace.service';
 
 @Component({
   selector: 'app-code-editor',
@@ -6,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./code-editor.component.scss']
 })
 export class CodeEditorComponent implements OnInit {
+  private decoder = new TextDecoder();
+  
+  public textData = '';
+
   public options = {
     mode:'text/x-stex',
     indentWithTabs: true,
@@ -19,9 +26,15 @@ export class CodeEditorComponent implements OnInit {
     lint: true
   };
 
-  public content = {};
+  @Input()
+  public set fileText(uint8Array: Uint8Array) {
+    this.textData = this.decoder.decode(uint8Array);
+    this.changeDetectorRef.detectChanges();
+  };
 
-  constructor() { }
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void { }
 }

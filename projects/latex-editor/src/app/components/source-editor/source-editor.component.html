@@ -1,8 +1,9 @@
 <div *ngIf="useImagePreview$ | async; then imagePreview else sourceEdit"></div>
 
 <ng-template #sourceEdit>
-    <app-code-editor></app-code-editor>
+    <app-code-editor *ngIf="fileBlob$ | async; let fileBlob" [fileText]="fileBlob.data"></app-code-editor>
 </ng-template>
+
 <ng-template #imagePreview>
-    <app-image-preview *ngIf="fileBlob$ | async as fileBlob" [imageData]="fileBlob.data" [contentType]="fileBlob.contentType"></app-image-preview>
+    <app-image-preview *ngIf="fileBlob$ | async; let fileBlob" [imageData]="fileBlob.data" [contentType]="fileBlob.contentType"></app-image-preview>
 </ng-template>

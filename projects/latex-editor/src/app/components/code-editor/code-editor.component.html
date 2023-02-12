@@ -1,3 +1,8 @@
 <div class="full-height">
-    <ngx-codemirror class="code-editor" [(ngModel)]="content" [options]="options"></ngx-codemirror>
+    <div *ngIf="!!textData">
+        <ngx-codemirror class="code-editor" [(ngModel)]="textData" [options]="options"></ngx-codemirror>
+    </div>
+    <div *ngIf="!textData">
+        <p>An error has occured, try loading the file again, or refer to logs for further information</p>
+    </div>
 </div>
