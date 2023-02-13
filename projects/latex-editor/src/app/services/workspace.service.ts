@@ -21,6 +21,8 @@ export class WorkspaceService {
   public fileBlob$ = this._fileBlob$.pipe(tap(_ => console.log('blob updated')), shareReplay(1));
   public filePath$ = this._filePath$.pipe(shareReplay(1));
 
+  public saveAndLoadFile$ = new BehaviorSubject<string>('');
+
   constructor(
     private electronService: ElectronService
   ) {
@@ -44,10 +46,35 @@ export class WorkspaceService {
         this.loadFile('main.tex');
       }
     });
+    this.electronService.ipcRenderer.on('saveFile-reply', (_, newFileToLoad: string) => {
+      this.saveAndLoadFile$.next('');
+      console.log(`file saved, loading new file: ${newFileToLoad}`);
+      this.loadFile(newFileToLoad);
+    })
   }
 
   public selectWorkspace(): void {
     this.electronService.ipcRenderer.send('selectWorkspace');
+  }
+
+  public saveAndLoadFile(filePath: string) {
+    // trigger save
+    this.saveAndLoadFile$.next(filePath);
+  }
+
+  public saveData(data: Uint8Array, newFileToLoad: string) {
+    // send save request to main process
+    let blob = this._fileBlob$.getValue();
+
+    if (blob.contentType.includes('image')) {
+      // hacky fix, could be done better
+      this.loadFile(newFileToLoad);
+      return;
+    }
+
+    blob.data = data;
+    console.log(blob);
+    this.electronService.ipcRenderer.send('saveFile', blob, newFileToLoad);
   }
 
   public loadFile(filePath: string) {

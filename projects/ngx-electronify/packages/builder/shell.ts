@@ -1,12 +1,12 @@
 import { app, BrowserWindow, ipcMain, shell, dialog } from 'electron';
-import { readFile, rmdir } from 'node:fs/promises';
+import { readFile, rmdir, writeFile } from 'node:fs/promises';
 import { v4 as uuidv4 } from 'uuid';
 import installExtension from 'electron-devtools-installer';
 import { existsSync, mkdirSync } from 'node:fs';
 import { WorkspaceConfig } from './workspace-config';
 import * as AdmZip from 'adm-zip';
 import path = require('node:path');
-import { FileBlob } from './file-blob';
+import { FileBlob, FileBlobRx } from './file-blob';
 
 var mime = require('mime-types')
 const ANGULAR_DEVTOOLS = 'ienfalfjdbdpebioblfackkekamfmbnh';
@@ -81,7 +81,12 @@ app.whenReady().then(async () => {
     let fileBlob = await getFileContents(path);
     console.log(`loaded file: ${path}, returning to renderer process`);
     event.returnValue = fileBlob;
-  })
+  });
+  ipcMain.on('saveFile', async (event: any, fileToSave: FileBlobRx, newFileToLoad: string) => {
+    console.log(`recieved request to save file: ${fileToSave.path}`);
+    await writeFileToDisk(fileToSave);
+    event.sender.send('saveFile-reply', newFileToLoad);
+  });
   createWindow();
 });
 
@@ -128,7 +133,7 @@ async function selectWorkspace() {
 
 async function refreshWorkingDirectory() {
   if (existsSync(workingDirectory)) {
-    await rmdir(workingDirectory, { recursive: true });
+    await rmdir(workingDirectory, { recursive: true }); //TODO: Fix this to remove non-empty folders
   }
 
   await mkdirSync(workingDirectory, { recursive: true });
@@ -164,4 +169,9 @@ async function getFileContents(relativePath: string): Promise<FileBlob> {
     console.log(err);
     return {} as FileBlob;
   }
+}
+
+async function writeFileToDisk(fileToSave: FileBlobRx): Promise<void> {
+  var pathToWrite = path.resolve(`${workingDirectory}/${fileToSave.path}`);
+  await writeFile(pathToWrite, Buffer.from(fileToSave.data), { encoding: 'base64' });
 }

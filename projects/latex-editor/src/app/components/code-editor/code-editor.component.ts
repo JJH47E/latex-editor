@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject, filter, map, Observable } from 'rxjs';
-import { FileBlob } from 'src/app/models/file-blob';
+import { map, Observable } from 'rxjs';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 
 @Component({
@@ -10,6 +9,7 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 })
 export class CodeEditorComponent implements OnInit {
   private decoder = new TextDecoder();
+  private encoder = new TextEncoder();
   
   public textData = '';
   public fileSelected$ = new Observable<boolean>();
@@ -41,5 +41,13 @@ export class CodeEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.fileSelected$ = this.workspaceService.filePath$.pipe(map(path => !!path));
+    this.workspaceService.saveAndLoadFile$.subscribe(newFilePath => {
+      if (newFilePath) {
+        console.log(`Saving current file and then loading: ${newFilePath}`);
+        // encode text and send to service for saving
+        let encodedText = this.encoder.encode(this.textData);
+        this.workspaceService.saveData(encodedText, newFilePath);
+      }
+    });
   }
 }

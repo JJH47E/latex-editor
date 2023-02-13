@@ -49,7 +49,7 @@ export class FileTreeComponent implements OnInit {
   public log(id: number): void {
     const newFilePath = this.findNodeFromId(id);
     console.log(`clicked: ${newFilePath}`);
-    this.workspaceService.loadFile(newFilePath);
+    this.workspaceService.saveAndLoadFile(newFilePath);
   }
 
   private findNodeFromId(id: number): string {
