@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MacroHelperComponent } from '../macro-helper/macro-helper.component';
 import { HelpViewComponent } from '../help-view/help-view.component';
@@ -6,10 +6,7 @@ import { MenuBar } from 'src/app/Enums/menu-bar.enum';
 import { ToolbarActions } from 'src/app/Enums/toolbar-actions.enum';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 import { NewWorkspaceComponent } from '../new-workspace/new-workspace.component';
-import { ElectronService } from 'ngx-electronyzer';
-import { WorkspaceConfig } from 'src/app/models/workspace-config';
-import { IpcService } from 'src/app/services/ipc.service';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -25,7 +22,7 @@ export class ToolbarComponent implements OnInit {
   ];
 
   public editActions = [
-    {title: MenuBar.EditWorkspaceSettings, action: () => {}}
+    {title: MenuBar.EditWorkspaceSettings, action: () => {this.workspaceService.loadFile('/images/rick.jpg')}}
   ];
 
   public helpActions = [
@@ -39,12 +36,10 @@ export class ToolbarComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public workspaceService: WorkspaceService,
-    private ipcService: IpcService,
     private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    this.ipcService.setupLoadFileHandlers();
     this.workspaceService.workspaceName$.subscribe(name => {
       this.workspaceName$.next(name);
       this.changeDetectorRef.detectChanges();

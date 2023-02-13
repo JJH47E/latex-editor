@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { BehaviorSubject, filter } from 'rxjs';
 import { FileBlob } from 'src/app/models/file-blob';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 
@@ -11,18 +10,20 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 })
 export class SourceEditorComponent implements OnInit {
   public useImagePreview$ = new BehaviorSubject<boolean>(false);
-  public fileBlob$: Observable<FileBlob>;
+  public fileBlob$ = new BehaviorSubject<FileBlob>({} as FileBlob);
 
   constructor(
-    private workspaceService: WorkspaceService
-  ) {
-    this.fileBlob$ = this.workspaceService.fileBlob$;
-  }
+    private workspaceService: WorkspaceService,
+    private changeDetecterRef: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
-    this.workspaceService.fileBlob$
+    this.workspaceService.fileBlob$.pipe(filter(x => !!x))
       .subscribe(blob => {
+        console.log('blob loaded');
         this.useImagePreview$.next(blob.contentType.startsWith('image'));
+        this.fileBlob$.next(blob);
+        this.changeDetecterRef.detectChanges();
       });
   }
 
