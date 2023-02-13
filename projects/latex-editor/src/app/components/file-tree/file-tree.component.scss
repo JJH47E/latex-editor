@@ -2,7 +2,14 @@
     padding-left: 10px;
 }
 
+.tree-container {
+    padding-left: 10px;
+}
+
+.tree-container * {
+    font-size: 14px;
+}
+
 .accent {
-    background-color: black;
-    color: white;
+    background-color: #333333;
 }

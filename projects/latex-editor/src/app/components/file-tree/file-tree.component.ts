@@ -23,10 +23,11 @@ export class FileTreeComponent implements OnInit {
   ngOnInit(): void {
     this.workspaceService.workspaceFiles$.pipe(map(path => path)).subscribe(paths => {
       let nodes: TreeNode[] = [];
+      let counter = 0;
       paths.reduce((r, path) => {
-        path.split('/').reduce((o, name) => {
+        path.split('/').reduce((o, name, _) => {
             var temp = (o.children = o.children || []).find(q => q.name === name);
-            if (!temp) o.children.push(temp = { name, children: [] });
+            if (!temp) o.children.push(temp = { name, children: [], id: counter++ });
             return temp;
         }, r);
         return r;
@@ -43,6 +44,43 @@ export class FileTreeComponent implements OnInit {
   
   public isFileSelected(fileName: string): Observable<boolean> {
     return this.workspaceService.filePath$.pipe(map(path => path.endsWith(fileName)));
+  }
+
+  public log(id: number): void {
+    const newFilePath = this.findNodeFromId(id);
+    console.log(`clicked: ${newFilePath}`);
+    this.workspaceService.loadFile(newFilePath);
+  }
+
+  private findNodeFromId(id: number): string {
+    const searchResult = this.filePaths$.getValue().map(node => {
+      return this.findNodeAndParents(node, id).reverse().join('/');
+    }).filter(x => x.length > 0);
+
+    if (searchResult.length !== 1) {
+      throw Error(`Unable to find definitive node with Id: ${id}`);
+    }
+
+    let toReturn = searchResult[0];
+    if (toReturn.startsWith('/')) {
+      return toReturn.slice(1);
+    }
+
+    return toReturn;
+  }
+
+  private findNodeAndParents(node: TreeNode, id: number, path: string[] = []): string[] {
+    if (node.id === id) {
+      path.unshift(node.name);
+      return path;
+    }
+    for (const child of node.children) {
+      const result = this.findNodeAndParents(child, id, [...path, node.name]);
+      if (result.length > 0) {
+        return result;
+      }
+    }
+    return [];
   }
 
   hasChild = (_: number, node: TreeNode) => !!node.children && node.children.length > 0;

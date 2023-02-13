@@ -1,16 +1,16 @@
-<div class="full-height child-node accent" *ngIf="filePaths$ | async as nodes">
-    <mat-list>
+<div class="full-height tree-container accent" *ngIf="filePaths$ | async as nodes">
+    <mat-action-list>
         <div *ngFor="let node of nodes">
             <ng-container *ngTemplateOutlet="nestedNode; context: node"></ng-container>
         </div>
-    </mat-list>
+    </mat-action-list>
 </div>
 
-<ng-template #nestedNode let-name="name" let-children="children">
-    <mat-list-item>
+<ng-template #nestedNode let-name="name" let-children="children" let-id="id">
+    <button mat-list-item [disabled]="children.length !== 0" (click)="log(id)">
         <mat-icon *ngIf="children.length !== 0" matListItemIcon>folder</mat-icon>
-        <span matListItemTitle>{{' '}}{{name}}</span>
-    </mat-list-item>
+        <span matListItemTitle>&nbsp;{{name}}</span>
+    </button>
     <div *ngFor="let child of children" class="child-node">
         <ng-container *ngTemplateOutlet="nestedNode; context: child"></ng-container>
     </div>
