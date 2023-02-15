@@ -50,20 +50,24 @@ export class ToolbarComponent implements OnInit {
     const dialogRef = this.dialog.open(MacroHelperComponent, {
       width: '750px',
       maxHeight: '90%',
-      height: 'auto'
+      height: 'auto',
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(_ => { });
   }
 
   openHelp(): void {
-    this.dialog.open(HelpViewComponent, { });
+    this.dialog.open(HelpViewComponent, {
+      autoFocus: false
+    });
   }
 
   openNewWorkspace(): void {
     const dialogRef = this.dialog.open(NewWorkspaceComponent, {
       //TODO: adjust for phones etc
       width: '750px',
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(_ => { });

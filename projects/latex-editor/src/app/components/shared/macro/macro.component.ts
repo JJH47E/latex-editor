@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { KatexOptions } from 'ng-katex';
 import { BehaviorSubject, map, merge, Subject, takeWhile } from 'rxjs';
 import { MacroModel } from 'src/app/macros/macro.model';
+import { SubMacroComponent } from '../../sub-macro/sub-macro.component';
 
 @Component({
   selector: 'app-macro',
@@ -32,7 +34,7 @@ export class MacroComponent implements OnInit {
     this.equationTemplate = newMacro.template;
   };
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.form.addControl('inlineCheckbox', this.inlineCheckboxControl);
@@ -104,6 +106,24 @@ export class MacroComponent implements OnInit {
       }
     }
     this.showTemplate = !this.showTemplate;
+  }
+
+  public insertVariableTemplate(control: FormControl): void {
+    if (!control) {
+      throw Error('Unable to find control');
+    }
+    const dialogRef = this.dialog.open(SubMacroComponent, {
+      width: '300px',
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(templateValue => {
+      if (!templateValue) {
+        return;
+      }
+      control.setValue(templateValue);
+      this.renderEquation();
+    });
   }
 
   private getAllVariables(template: string): string[] {

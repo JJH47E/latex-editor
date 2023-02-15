@@ -33,6 +33,9 @@ import {MatTreeModule} from '@angular/material/tree';
 import { SourceEditorComponent } from './components/source-editor/source-editor.component';
 import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+import { SubMacroComponent } from './components/sub-macro/sub-macro.component';
+import { VariableTemplateOptionComponent } from './components/variable-template-option/variable-template-option.component';
+import {MatRippleModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,9 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
     MacroListComponent,
     FileTreeComponent,
     SourceEditorComponent,
-    ImagePreviewComponent
+    ImagePreviewComponent,
+    SubMacroComponent,
+    VariableTemplateOptionComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,8 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
     MatListModule,
     MatTreeModule,
     CodemirrorModule,
-    FormsModule
+    FormsModule,
+    MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
