@@ -1,20 +1,27 @@
-import { app, BrowserWindow, ipcMain, shell, dialog } from 'electron';
-import { readFile, rmdir, writeFile } from 'node:fs/promises';
-import { v4 as uuidv4 } from 'uuid';
+import { app, BrowserWindow, ipcMain, shell, dialog, FileFilter } from 'electron';
+import { copyFile, readFile, rm, writeFile } from 'node:fs/promises';
 import installExtension from 'electron-devtools-installer';
 import { existsSync, mkdirSync } from 'node:fs';
 import { WorkspaceConfig } from './workspace-config';
 import * as AdmZip from 'adm-zip';
 import path = require('node:path');
 import { FileBlob, FileBlobRx } from './file-blob';
+import { COPYFILE_EXCL } from 'node:constants';
 
 var mime = require('mime-types')
 const ANGULAR_DEVTOOLS = 'ienfalfjdbdpebioblfackkekamfmbnh';
 const [port, devTools, allowIntegration] = process.argv.slice(2);
 const appUrl = `http://localhost:${port}/`;
 const workingDirectory = './.tmp/active';
+const templateDirectory = './templates';
+const fileFilters = [
+  {
+    name: 'TeXProject',
+    extensions: ['texproj']
+  } as FileFilter
+];
 
-const id = uuidv4();
+let workspacePath = '';
 
 function createWindow() {
   const options: Electron.BrowserWindowConstructorOptions = {
@@ -56,8 +63,9 @@ async function installAngularDevtools() {
 app.whenReady().then(async () => {
   await installAngularDevtools();
   console.log('setting up handlers');
-  ipcMain.on('createWorkspace', (_, workspaceName) => {
-    createWorkspace(workspaceName);
+  ipcMain.on('createWorkspace', async (event, workspaceName) => {
+    await createWorkspace(workspaceName, 'test_template.tex');
+    event.sender.send('loadWorkspace-reply', await getConfigContents(workingDirectory));
   });
   ipcMain.on('selectWorkspace', async event => {
     var paths = (await selectWorkspace()).filePaths;
@@ -68,6 +76,7 @@ app.whenReady().then(async () => {
       return;
     }
     console.log(`file selected, path: ${paths[0]}`);
+    workspacePath = paths[0];
     event.sender.send('selectWorkspace-reply', paths[0]);
   });
   ipcMain.on('loadWorkspace', async (event, relativePath) => {
@@ -86,6 +95,21 @@ app.whenReady().then(async () => {
     console.log(`recieved request to save file: ${fileToSave.path}`);
     await writeFileToDisk(fileToSave);
     event.sender.send('saveFile-reply', newFileToLoad);
+  });
+  ipcMain.on('saveWorkspace', async (event) => {
+    saveWorkspace(workspacePath);
+    event.sender.send('saveWorkspace-reply', true);
+  });
+  ipcMain.on('saveWorkspaceAs', async (event) => {
+    let configContents = await getConfigContents(workingDirectory);
+    let savePath = await openSavePrompt(configContents.name);
+    if (!savePath) {
+      console.log('Save aborted');
+      return;
+    }
+    console.log(`saving to: ${savePath}`);
+    saveWorkspace(workspacePath, savePath);
+    event.sender.send('saveWorkspace-reply', true);
   });
   createWindow();
 });
@@ -112,28 +136,27 @@ function getBoolean(value: string) {
   return value === 'true' ? true : false;
 }
 
-function createWorkspace(name: string) {
-  const dir = '.tmp/' + id;
-  console.log(`creating workspace, ${name}, id: ${id}, directory: ${dir}`);
+async function createWorkspace(name: string, template: string) {
+  refreshWorkingDirectory();
 
-  if (existsSync(dir)) {
-    throw Error(`directory: ${dir} already exists`);
-  }
+  console.log(`creating workspace, ${name}, directory: ${workingDirectory}`);
 
-  mkdirSync(dir, { recursive: true });
+  // create .config & save to working directory & copy main.tex from template
+  const workspaceConfig = {name, filePaths: ['main.tex']} as WorkspaceConfig;
+  await Promise.all([await writeFile(`${workingDirectory}/.config`, JSON.stringify(workspaceConfig)), await copyTemplate(template, 'main.tex')]);
+}
 
-  console.log('created directory');
-
-  // Create main.tex & .config (refer to notes)
+async function copyTemplate(template: string, destFileName: string) {
+  await copyFile(`${templateDirectory}/${template}`, `${workingDirectory}/${destFileName}`, COPYFILE_EXCL)
 }
 
 async function selectWorkspace() {
-  return await dialog.showOpenDialog({properties: ['openFile']});
+  return await dialog.showOpenDialog({filters: fileFilters, properties: ['openFile']});
 }
 
 async function refreshWorkingDirectory() {
   if (existsSync(workingDirectory)) {
-    await rmdir(workingDirectory, { recursive: true }); //TODO: Fix this to remove non-empty folders
+    await rm(workingDirectory, { recursive: true, force: true });
   }
 
   await mkdirSync(workingDirectory, { recursive: true });
@@ -174,4 +197,30 @@ async function getFileContents(relativePath: string): Promise<FileBlob> {
 async function writeFileToDisk(fileToSave: FileBlobRx): Promise<void> {
   var pathToWrite = path.resolve(`${workingDirectory}/${fileToSave.path}`);
   await writeFile(pathToWrite, Buffer.from(fileToSave.data), { encoding: 'base64' });
+}
+
+async function saveWorkspace(workspacePath: string, destinationPath: string = ''): Promise<void> {
+  var zip = new AdmZip();
+
+  // add config to zip
+  let worksapceConfig = await readFile(`${workingDirectory}/.config`, 'utf-8');
+  const _workspaceConfig = JSON.parse(worksapceConfig) as WorkspaceConfig;
+  var configBuffer = Buffer.from(worksapceConfig);
+  zip.addFile('.config', configBuffer)
+
+  _workspaceConfig.filePaths.forEach(async path => {
+    var buffer = Buffer.from(await readFile(`${workingDirectory}/${path}`, 'utf-8'));
+    zip.addFile(path, buffer)
+  });
+
+  await zip.writeZipPromise(!!destinationPath ? destinationPath : workspacePath);
+}
+
+async function openSavePrompt(title: string): Promise<string> {
+  var saveResult = await dialog.showSaveDialog({title, filters: fileFilters});
+  if (!!saveResult.filePath) {
+    return saveResult.filePath;
+  } else {
+    return '';
+  }
 }
