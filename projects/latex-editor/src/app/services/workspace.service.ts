@@ -97,11 +97,11 @@ export class WorkspaceService {
     this.electronService.ipcRenderer.send('createWorkspace', workspaceName);
 
     return Promise.resolve(true);
+  }
 
-    // return await this.indexedDbService.createWorkspace(workspaceName).then(id => {
-    //   this.setWorkspaceName(workspaceName);
-    //   this.setWorkspaceId(id);
-    //   return true;
-    // }).catch(_ => false);
+  public saveWorkspace() {
+    // save current file
+    // send request to save workspace
+    this.electronService.ipcRenderer.send('saveWorkspace');
   }
 }

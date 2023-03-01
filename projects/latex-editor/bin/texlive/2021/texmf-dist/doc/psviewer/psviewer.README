@@ -1,0 +1,7 @@
+Psviewer is a simple script which converts its argument to a
+temporary pdf and displays it in the default pdf viewer.
+
+Double-clicking an .eps- or .ps file should result in viewing the
+converted file. If this does not work, then try right-click and
+'Open with', which should give you the option to set psviewer as
+default program for .[e]ps files.

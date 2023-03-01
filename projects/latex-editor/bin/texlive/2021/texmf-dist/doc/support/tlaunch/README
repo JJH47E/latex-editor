@@ -1,0 +1,28 @@
+The TeX Live Launcher is an easy way to give Windows users access to
+a TeX Live installation on a network as if it were a local
+installation.
+
+Features:
+
+- On first startup, the launcher does the user configuration which
+  would otherwise have been done during a local installation.
+
+- the menu items and buttons within the launcher replace the several
+  Start menu items normally created during a local installation.
+
+- Easy customization with an ini file, e.g. incorporating additional
+  software
+
+See the manual for placement of tlaunch.exe and tlaunch.ini, and for
+customizing the ini file.
+
+The launcher is already part of TeX Live. The 2017 installer has an
+option to make the installation launcher-based.
+
+A script tlaunchmode is included which can convert a classic
+installation into a launcher-based one and back. The manual has a
+section on this script.
+
+The file rug.zip contains as an example a more elaborate
+configuration, based on the installation at the Rijksuniversiteit
+Groningen.

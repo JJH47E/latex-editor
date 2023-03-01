@@ -1,0 +1,42 @@
+name lineno
+category Package
+revision 61719
+shortdesc Line numbers on paragraphs
+longdesc Adds line numbers to selected paragraphs with reference
+longdesc possible through the LaTeX \ref and \pageref cross reference
+longdesc mechanism. Line numbering may be extended to footnote lines,
+longdesc using the fnlineno package.
+containersize 62316
+containerchecksum 0a813a8e6154963d7cf7c879c4f25c2b428bdfae11e8d8e158538a64c80335078f011473a3b7ce3542750ecd2caf8edcde5b4d90dc70bf744f1780bf639fa910
+doccontainersize 649996
+doccontainerchecksum 677d99aa82fb433082b063f2ac8f5d2ac4d2c90c0511b766524d97a6f9e3efcc64b8fa7c979ac16961eba3e36ba99948ac5f90c544473ff1fbecefc96093425f
+docfiles size=218
+ texmf-dist/doc/latex/lineno/CHANGEs.txt
+ texmf-dist/doc/latex/lineno/COPYING.txt
+ texmf-dist/doc/latex/lineno/README
+ texmf-dist/doc/latex/lineno/README.txt details="Readme"
+ texmf-dist/doc/latex/lineno/SRCFILEs.txt
+ texmf-dist/doc/latex/lineno/fnlineno.pdf
+ texmf-dist/doc/latex/lineno/lineno.pdf details="Package documentation:"
+ texmf-dist/doc/latex/lineno/lnosuppl.pdf details="Supplementary files as PDF"
+ texmf-dist/doc/latex/lineno/ulineno.pdf details="User manual:"
+srccontainersize 44284
+srccontainerchecksum a3536d669d8fac02db619a714fc3e793ddd403b034c3e3b5f3062005078444640c2b19f1dcfbebab6b69e32c28073826861037e5d1b70b2101fa0bd5c62ec734
+srcfiles size=40
+ texmf-dist/source/latex/lineno/fnlineno.tex
+ texmf-dist/source/latex/lineno/lineno.tex
+ texmf-dist/source/latex/lineno/lnosuppl.tex
+ texmf-dist/source/latex/lineno/ulineno.tex
+runfiles size=60
+ texmf-dist/tex/latex/lineno/ednmath0.sty
+ texmf-dist/tex/latex/lineno/edtable.sty
+ texmf-dist/tex/latex/lineno/fnlineno.sty
+ texmf-dist/tex/latex/lineno/lineno.sty
+ texmf-dist/tex/latex/lineno/vplref.sty
+catalogue-also numline edmac ledmac ednotes manyfoot poemscol
+catalogue-contact-repository https://github.com/latex-lineno/lineno
+catalogue-contact-support http://www.webdesign-bu.de/uwe_lueck/contact.html
+catalogue-ctan /macros/latex/contrib/lineno
+catalogue-license lppl
+catalogue-topics typesetting line-nos
+catalogue-version 4.41

@@ -1,0 +1,29 @@
+name euro
+category Package
+revision 22191
+shortdesc Provide Euro values for national currency amounts
+longdesc Converts arbitrary national currency amounts using the Euro as
+longdesc base unit, and typesets monetary amounts in almost any desired
+longdesc way. Write, e.g., \ATS{17.6} to get something like '17,60 oS
+longdesc (1,28 Euro)' automatically. Conversion rates for the initial
+longdesc Euro-zone countries are already built-in. Further rates can be
+longdesc added easily. The package uses the fp package to do its sums.
+containersize 2564
+containerchecksum 35a1c763998bdbc3b3b54ade3e4887859aa9d166699ccfc73db432aab3439be075d858e88d3542c25f8a0065301f0b1fea9bc368f85ed767e9deafa090f35beb
+doccontainersize 200188
+doccontainerchecksum 896a040cf80bec968e4fed5b2bd774e433997d336855775c1e6e5215cd6d9bb094550da324a2433d4da94ead4af3cfa6b192382efa73bb7c6bc951c22bb02fb3
+docfiles size=61
+ texmf-dist/doc/latex/euro/Makefile
+ texmf-dist/doc/latex/euro/euro.pdf details="Package documentation"
+ texmf-dist/doc/latex/euro/euro.txt
+srccontainersize 14508
+srccontainerchecksum cf587911ccf53bd78d100221518aa62595279fd5880152d715950ece34b23eb5ef39b0ec190d2c5b5060a4f68861a8b9ac2ef93a3a6f3dbe3b85223dc386bef4
+srcfiles size=13
+ texmf-dist/source/latex/euro/euro.dtx
+ texmf-dist/source/latex/euro/euro.ins
+runfiles size=2
+ texmf-dist/tex/latex/euro/euro.sty
+catalogue-ctan /macros/latex/contrib/euro
+catalogue-license lppl
+catalogue-topics calculation
+catalogue-version 1.1

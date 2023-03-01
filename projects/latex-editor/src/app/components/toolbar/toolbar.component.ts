@@ -17,7 +17,7 @@ export class ToolbarComponent implements OnInit {
   public ToolbarActions = ToolbarActions;
   public fileActions = [
     {title: MenuBar.NewWorkspace, action: () => this.openNewWorkspace()},
-    {title: MenuBar.SaveWorkspace, action: () => {}},
+    {title: MenuBar.SaveWorkspace, action: () => this.saveWorkspace()},
     {title: MenuBar.OpenWorkspace, action: () => this.openWorkspace()}
   ];
 
@@ -75,5 +75,9 @@ export class ToolbarComponent implements OnInit {
 
   openWorkspace(): void {
     this.workspaceService.selectWorkspace();
+  }
+
+  saveWorkspace(): void {
+    this.workspaceService.saveWorkspace();
   }
 }

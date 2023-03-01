@@ -1,0 +1,86 @@
+name tex-gyre-math
+category Package
+revision 41264
+shortdesc Maths fonts to match tex-gyre text fonts
+longdesc TeX-Gyre-Math is a collection of maths fonts to match the text
+longdesc fonts of the TeX-Gyre collection. The collection is available
+longdesc in OpenType format, only; fonts conform to the developing
+longdesc standards for OpenType maths fonts. TeX-Gyre-Math-Bonum (to
+longdesc match TeX-Gyre-Bonum), TeX-Gyre-Math-Pagella (to match
+longdesc TeX-Gyre-Pagella), TeX-Gyre-Math-Schola (to match
+longdesc TeX-Gyre-Schola) and TeX-Gyre-Math-Termes (to match
+longdesc TeX-Gyre-Termes) fonts are provided.
+containersize 1182712
+containerchecksum a50a9eaa30cfd7754ae702a3bd6fced2d07fac858215b913945665940c71a0aafd2b59a0d0baa0fb9d5090773ef69a86864cc11126a5e30adc3d0e94cdbd2594
+doccontainersize 436052
+doccontainerchecksum cd346226dc36bb4fb5324a43dfab7790cd80ec6bba992849dfcca74ea6fe8d85fe7e0ac66408a41ac1ef644e6b32c9b06d337c4f394fbfd8fba4153fbc1abfe9
+docfiles size=179
+ texmf-dist/doc/fonts/tex-gyre-math/GUST-FONT-LICENSE.txt
+ texmf-dist/doc/fonts/tex-gyre-math/INSTALL.txt
+ texmf-dist/doc/fonts/tex-gyre-math/LICENSE-DejaVu.txt
+ texmf-dist/doc/fonts/tex-gyre-math/MANIFEST-TeX-Gyre-Bonum-Math.txt
+ texmf-dist/doc/fonts/tex-gyre-math/MANIFEST-TeX-Gyre-DejaVu-Math.txt
+ texmf-dist/doc/fonts/tex-gyre-math/MANIFEST-TeX-Gyre-Pagella-Math.txt
+ texmf-dist/doc/fonts/tex-gyre-math/MANIFEST-TeX-Gyre-Schola-Math.txt
+ texmf-dist/doc/fonts/tex-gyre-math/MANIFEST-TeX-Gyre-Termes-Math.txt
+ texmf-dist/doc/fonts/tex-gyre-math/README details="Readme"
+ texmf-dist/doc/fonts/tex-gyre-math/README-TeX-Gyre-Bonum-Math.txt
+ texmf-dist/doc/fonts/tex-gyre-math/README-TeX-Gyre-DejaVu-Math.txt
+ texmf-dist/doc/fonts/tex-gyre-math/README-TeX-Gyre-Pagella-Math.txt
+ texmf-dist/doc/fonts/tex-gyre-math/README-TeX-Gyre-Schola-Math.txt
+ texmf-dist/doc/fonts/tex-gyre-math/README-TeX-Gyre-Termes-Math.txt
+ texmf-dist/doc/fonts/tex-gyre-math/math-test-context.tex
+ texmf-dist/doc/fonts/tex-gyre-math/math-test.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-context-texgyre_bonum_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-context-texgyre_bonum_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-context-texgyre_dejavu_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-context-texgyre_dejavu_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-context-texgyre_pagella_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-context-texgyre_pagella_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-context-texgyre_schola_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-context-texgyre_schola_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-context-texgyre_termes_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-context-texgyre_termes_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-lualatex-texgyre_bonum_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-lualatex-texgyre_bonum_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-lualatex-texgyre_dejavu_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-lualatex-texgyre_dejavu_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-lualatex-texgyre_pagella_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-lualatex-texgyre_pagella_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-lualatex-texgyre_schola_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-lualatex-texgyre_schola_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-lualatex-texgyre_termes_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-lualatex-texgyre_termes_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-word-texgyre_bonum_math.docx
+ texmf-dist/doc/fonts/tex-gyre-math/test-word-texgyre_bonum_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-word-texgyre_dejavu_math.docx
+ texmf-dist/doc/fonts/tex-gyre-math/test-word-texgyre_dejavu_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-word-texgyre_pagella_math.docx
+ texmf-dist/doc/fonts/tex-gyre-math/test-word-texgyre_pagella_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-word-texgyre_schola_math.docx
+ texmf-dist/doc/fonts/tex-gyre-math/test-word-texgyre_schola_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-word-texgyre_termes_math.docx
+ texmf-dist/doc/fonts/tex-gyre-math/test-word-texgyre_termes_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-xelatex-texgyre_bonum_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-xelatex-texgyre_bonum_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-xelatex-texgyre_dejavu_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-xelatex-texgyre_dejavu_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-xelatex-texgyre_pagella_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-xelatex-texgyre_pagella_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-xelatex-texgyre_schola_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-xelatex-texgyre_schola_math.tex
+ texmf-dist/doc/fonts/tex-gyre-math/test-xelatex-texgyre_termes_math.pdf
+ texmf-dist/doc/fonts/tex-gyre-math/test-xelatex-texgyre_termes_math.tex
+srccontainersize 474164
+srccontainerchecksum 3c58821e5307257578ec149317cb621331aafa00bfa465eeb055f1f93691ce57a489a32a7eea068b12b70228433031de33c0ffe36b0e8e10b368e0ef5e33fe24
+srcfiles size=780
+ texmf-dist/source/fonts/tex-gyre-math/texgyredejavu-math.sfd
+runfiles size=681
+ texmf-dist/fonts/opentype/public/tex-gyre-math/texgyrebonum-math.otf
+ texmf-dist/fonts/opentype/public/tex-gyre-math/texgyredejavu-math.otf
+ texmf-dist/fonts/opentype/public/tex-gyre-math/texgyrepagella-math.otf
+ texmf-dist/fonts/opentype/public/tex-gyre-math/texgyreschola-math.otf
+ texmf-dist/fonts/opentype/public/tex-gyre-math/texgyretermes-math.otf
+catalogue-ctan /fonts/tex-gyre-math
+catalogue-license gfl
+catalogue-topics font font-collection font-maths font-otf

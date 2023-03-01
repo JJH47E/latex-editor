@@ -1,0 +1,86 @@
+name l3experimental
+category Package
+revision 61903
+shortdesc Experimental LaTeX3 concepts
+longdesc The l3experimental packages are a collection of experimental
+longdesc implementations for aspects of the LaTeX3 kernel, dealing with
+longdesc higher-level ideas such as the Designer Interface. Some of them
+longdesc work as stand alone packages, providing new functionality, and
+longdesc can be used on top of LaTeX2e with no changes to the existing
+longdesc kernel. The present release includes: l3benchmark for measuring
+longdesc the time taken by TeX to run certain code; l3draw, a code-level
+longdesc interface for constructing drawings; l3graphics, an interfaces
+longdesc for the inclusion of graphics files; l3opacity, support for
+longdesc opacity in PDF output; l3str, support for string manipulation;
+longdesc l3bitset, support for bit vectors; l3sys-shell, which provides
+longdesc abstractions for common shell functions like file deletion and
+longdesc copying; xcoffins, which allows the alignment of boxes using a
+longdesc series of 'handle' positions, supplementing the simple TeX
+longdesc reference point; xgalley, which controls boxes receiving text
+longdesc for typesetting.
+depend l3kernel
+containersize 23196
+containerchecksum 0e73d57fd0f68acd69b8e9f2de64f794a02c446ea570f584a9af4fe8c6a303f12ce45d0786f553465aba568e6b24d9940d52bdace651ec4e1a3fbb777777a511
+doccontainersize 3507648
+doccontainerchecksum 830dfacd9b39228b6d83cc69b6387b3e7bf621dedaeae98790a8034ffc84b72b9abc6e34904d99ecf1c5303e30af65dec3311059e266ceef3c61565dd689406d
+docfiles size=1093
+ texmf-dist/doc/latex/l3experimental/CHANGELOG.md
+ texmf-dist/doc/latex/l3experimental/README.md details="Readme"
+ texmf-dist/doc/latex/l3experimental/l3benchmark/l3benchmark.pdf details="l3benchmark documentation"
+ texmf-dist/doc/latex/l3experimental/l3bitset/l3bitset.pdf details="l3bitset documentation"
+ texmf-dist/doc/latex/l3experimental/l3draw/l3draw-code.pdf
+ texmf-dist/doc/latex/l3experimental/l3draw/l3draw-code.tex
+ texmf-dist/doc/latex/l3experimental/l3draw/l3draw.pdf details="l3draw documentation"
+ texmf-dist/doc/latex/l3experimental/l3graphics/l3graphics.pdf details="l3graphics documentation"
+ texmf-dist/doc/latex/l3experimental/l3opacity/l3opacity.pdf details="l3opacity documentation"
+ texmf-dist/doc/latex/l3experimental/l3str/l3str-format.pdf details="l3str-format documentation"
+ texmf-dist/doc/latex/l3experimental/l3sys-shell/l3sys-shell.pdf details="l3sys-shell documentation"
+ texmf-dist/doc/latex/l3experimental/xcoffins/xcoffins.pdf details="xcoffins documentation"
+ texmf-dist/doc/latex/l3experimental/xgalley/l3galley.pdf
+ texmf-dist/doc/latex/l3experimental/xgalley/xgalley.pdf details="xgalley documentation"
+srccontainersize 79956
+srccontainerchecksum 982a69d46a67803c88594e7abe26f1d380d4a4f3fc2fd8b1667738abcd60cf5076547521108cfd78b58762465131384a1a3345ac486d60e388ea57b76d7a2484
+srcfiles size=132
+ texmf-dist/source/latex/l3experimental/l3benchmark/l3benchmark.dtx
+ texmf-dist/source/latex/l3experimental/l3benchmark/l3benchmark.ins
+ texmf-dist/source/latex/l3experimental/l3bitset/l3bitset.dtx
+ texmf-dist/source/latex/l3experimental/l3bitset/l3bitset.ins
+ texmf-dist/source/latex/l3experimental/l3draw/l3draw-boxes.dtx
+ texmf-dist/source/latex/l3experimental/l3draw/l3draw-layers.dtx
+ texmf-dist/source/latex/l3experimental/l3draw/l3draw-paths.dtx
+ texmf-dist/source/latex/l3experimental/l3draw/l3draw-points.dtx
+ texmf-dist/source/latex/l3experimental/l3draw/l3draw-scopes.dtx
+ texmf-dist/source/latex/l3experimental/l3draw/l3draw-softpath.dtx
+ texmf-dist/source/latex/l3experimental/l3draw/l3draw-state.dtx
+ texmf-dist/source/latex/l3experimental/l3draw/l3draw-transforms.dtx
+ texmf-dist/source/latex/l3experimental/l3draw/l3draw.dtx
+ texmf-dist/source/latex/l3experimental/l3draw/l3draw.ins
+ texmf-dist/source/latex/l3experimental/l3graphics/l3graphics.dtx
+ texmf-dist/source/latex/l3experimental/l3graphics/l3graphics.ins
+ texmf-dist/source/latex/l3experimental/l3opacity/l3opacity.dtx
+ texmf-dist/source/latex/l3experimental/l3opacity/l3opacity.ins
+ texmf-dist/source/latex/l3experimental/l3str/l3str-format.dtx
+ texmf-dist/source/latex/l3experimental/l3str/l3str.ins
+ texmf-dist/source/latex/l3experimental/l3sys-shell/l3sys-shell.dtx
+ texmf-dist/source/latex/l3experimental/l3sys-shell/l3sys-shell.ins
+ texmf-dist/source/latex/l3experimental/xcoffins/xcoffins.dtx
+ texmf-dist/source/latex/l3experimental/xcoffins/xcoffins.ins
+ texmf-dist/source/latex/l3experimental/xgalley/l3galley.dtx
+ texmf-dist/source/latex/l3experimental/xgalley/xgalley.dtx
+ texmf-dist/source/latex/l3experimental/xgalley/xgalley.ins
+runfiles size=49
+ texmf-dist/tex/latex/l3experimental/l3benchmark/l3benchmark.sty
+ texmf-dist/tex/latex/l3experimental/l3bitset/l3bitset.sty
+ texmf-dist/tex/latex/l3experimental/l3draw/l3draw.sty
+ texmf-dist/tex/latex/l3experimental/l3graphics/l3graphics.sty
+ texmf-dist/tex/latex/l3experimental/l3opacity/l3opacity.sty
+ texmf-dist/tex/latex/l3experimental/l3str/l3str-format.sty
+ texmf-dist/tex/latex/l3experimental/l3sys-shell/l3sys-shell.sty
+ texmf-dist/tex/latex/l3experimental/xcoffins/xcoffins.sty
+ texmf-dist/tex/latex/l3experimental/xgalley/l3galley.sty
+ texmf-dist/tex/latex/l3experimental/xgalley/xgalley.sty
+catalogue-also l3kernel l3packages
+catalogue-contact-home http://www.latex-project.org/code.html
+catalogue-ctan /macros/latex/contrib/l3experimental
+catalogue-license lppl1.3c
+catalogue-topics macro-supp layout latex3 pre-release

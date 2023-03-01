@@ -7,6 +7,7 @@ import * as AdmZip from 'adm-zip';
 import path = require('node:path');
 import { FileBlob, FileBlobRx } from './file-blob';
 import { COPYFILE_EXCL } from 'node:constants';
+import { spawn } from 'node:child_process';
 
 var mime = require('mime-types')
 const ANGULAR_DEVTOOLS = 'ienfalfjdbdpebioblfackkekamfmbnh';
@@ -97,7 +98,19 @@ app.whenReady().then(async () => {
     event.sender.send('saveFile-reply', newFileToLoad);
   });
   ipcMain.on('saveWorkspace', async (event) => {
-    saveWorkspace(workspacePath);
+    console.log(`recieved request to save workspace. current loaded directory: ${workspacePath}`);
+    if (workspacePath) {
+      await saveWorkspace(workspacePath);
+    } else {
+      let configContents = await getConfigContents(workingDirectory);
+      let savePath = await openSavePrompt(configContents.name);
+      if (!savePath) {
+        console.log('Save aborted');
+        return;
+      }
+      console.log(`saving to: ${savePath}`);
+      await saveWorkspace(workspacePath, savePath);
+    }
     event.sender.send('saveWorkspace-reply', true);
   });
   ipcMain.on('saveWorkspaceAs', async (event) => {
@@ -108,8 +121,19 @@ app.whenReady().then(async () => {
       return;
     }
     console.log(`saving to: ${savePath}`);
-    saveWorkspace(workspacePath, savePath);
+    await saveWorkspace(workspacePath, savePath);
     event.sender.send('saveWorkspace-reply', true);
+  });
+  ipcMain.on('generatePreview', async (event) => {
+    // compile doc
+    var process = spawn('python', ['./bin/pdflatex.py', path.resolve(`${workingDirectory}/main.tex`)]);
+    process.stdout.on('error', (err: any) => {
+      event.sender.send('generatePreview-error', err);
+    });
+    process.stdout.on('exit', async () => {
+      let fileBlob = await getFileContents('main.pdf');
+      event.sender.send('generatePreview-reply', fileBlob);
+    });
   });
   createWindow();
 });
@@ -137,13 +161,14 @@ function getBoolean(value: string) {
 }
 
 async function createWorkspace(name: string, template: string) {
-  refreshWorkingDirectory();
+  await refreshWorkingDirectory();
 
   console.log(`creating workspace, ${name}, directory: ${workingDirectory}`);
 
   // create .config & save to working directory & copy main.tex from template
   const workspaceConfig = {name, filePaths: ['main.tex']} as WorkspaceConfig;
-  await Promise.all([await writeFile(`${workingDirectory}/.config`, JSON.stringify(workspaceConfig)), await copyTemplate(template, 'main.tex')]);
+  await copyTemplate(template, 'main.tex');
+  await writeFile(`${workingDirectory}/.config`, JSON.stringify(workspaceConfig));
 }
 
 async function copyTemplate(template: string, destFileName: string) {

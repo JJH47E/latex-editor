@@ -12,7 +12,7 @@ export class MacroListComponent implements OnInit {
   public macroList: MacroModel[] = [];
 
   @Output()
-  public macroSelected = new EventEmitter<MacroModel>()
+  public macroSelected = new EventEmitter<MacroModel>();
 
   constructor() { }
 

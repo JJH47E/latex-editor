@@ -1,0 +1,43 @@
+name collection-fontsrecommended
+category Collection
+revision 54074
+shortdesc Recommended fonts
+longdesc Recommended fonts, including the base 35 PostScript fonts,
+longdesc Latin Modern, TeX Gyre, and T1 and other encoding support for
+longdesc Computer Modern, in outline form.
+depend avantgar
+depend bookman
+depend charter
+depend cm-super
+depend cmextra
+depend collection-basic
+depend courier
+depend euro
+depend euro-ce
+depend eurosym
+depend fpl
+depend helvetic
+depend lm
+depend lm-math
+depend manfnt-font
+depend marvosym
+depend mathpazo
+depend mflogo-font
+depend ncntrsbk
+depend palatino
+depend pxfonts
+depend rsfs
+depend symbol
+depend tex-gyre
+depend tex-gyre-math
+depend times
+depend tipa
+depend txfonts
+depend utopia
+depend wasy
+depend wasy-type1
+depend wasysym
+depend zapfchan
+depend zapfding
+containersize 560
+containerchecksum eaa6e54780a0813a88102258ee3bd7a4640787be0b89eff4ba2c9cc19298bf3e2799ffab4e03e49f20131d07fbac9f601a7223fc1b47257dd0feeb04797c56a8

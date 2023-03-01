@@ -1,0 +1,8 @@
+name thumbpdf.win32
+category Package
+revision 15404
+shortdesc win32 files of thumbpdf
+containersize 684
+containerchecksum 19f001794e022666e365fc0a38d343cb0c53475508e9daabb316e56e57541040619c897dd9bf2051d342e16405658e9e6a94e2a5bbd6778d4d7f96143754a3bf
+binfiles arch=win32 size=1
+ bin/win32/thumbpdf.exe
