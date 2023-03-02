@@ -1,7 +1,7 @@
-<div *ngIf="!!textData; then editor else error"></div>
+<div *ngIf="!!workspaceService.textData; then editor else error"></div>
 
 <ng-template #editor class="full-height">
-    <ngx-codemirror class="code-editor" [(ngModel)]="textData" [options]="options"></ngx-codemirror>
+    <ngx-codemirror class="code-editor" [(ngModel)]="workspaceService.textData" [options]="options"></ngx-codemirror>
 </ng-template>
 
 <ng-template #error class="full-height">

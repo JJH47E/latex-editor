@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 
@@ -9,9 +9,7 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 })
 export class CodeEditorComponent implements OnInit {
   private decoder = new TextDecoder();
-  private encoder = new TextEncoder();
   
-  public textData = '';
   public fileSelected$ = new Observable<boolean>();
 
   public options = {
@@ -27,27 +25,20 @@ export class CodeEditorComponent implements OnInit {
     lint: true
   };
 
-  @Input()
-  public set fileText(uint8Array: Uint8Array) {
-    this.textData = this.decoder.decode(uint8Array);
-    console.log(`set text data to: ${this.textData}`);
-    this.changeDetectorRef.detectChanges();
-  };
-
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private workspaceService: WorkspaceService
+    public workspaceService: WorkspaceService,
   ) { }
 
   ngOnInit(): void {
     this.fileSelected$ = this.workspaceService.filePath$.pipe(map(path => !!path));
-    this.workspaceService.saveAndLoadFile$.subscribe(newFilePath => {
-      if (newFilePath) {
-        console.log(`Saving current file and then loading: ${newFilePath}`);
-        // encode text and send to service for saving
-        let encodedText = this.encoder.encode(this.textData);
-        this.workspaceService.saveData(encodedText, newFilePath);
-      }
+
+    this.workspaceService.fileBlob$
+      .pipe(map(blob => blob.data))
+      .subscribe(data => {
+        this.workspaceService.textData = this.decoder.decode(data);
+        console.log(`set text data`);
+        this.changeDetectorRef.detectChanges();
     });
   }
 }

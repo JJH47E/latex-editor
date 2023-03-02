@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElectronService } from 'ngx-electronyzer';
-import { BehaviorSubject, shareReplay, Subject, tap } from 'rxjs';
+import { BehaviorSubject, shareReplay, tap } from 'rxjs';
 import { FileBlob } from '../models/file-blob';
 import { WorkspaceConfig } from '../models/workspace-config';
 import { isNullOrWhitespace } from '../utils/string.utils';
@@ -14,14 +14,14 @@ export class WorkspaceService {
   private _workspaceFiles$ = new BehaviorSubject<string[]>([]);
   private _fileBlob$ = new BehaviorSubject<FileBlob>({} as FileBlob);
   private _filePath$ = new BehaviorSubject<string>('');
+  private encoder = new TextEncoder();
 
   public workspaceName$ = this._workspaceName$.pipe(shareReplay(1));
   public workspaceId$ = this._workspaceId$.pipe(shareReplay(1));
   public workspaceFiles$ = this._workspaceFiles$.pipe(shareReplay(1));
   public fileBlob$ = this._fileBlob$.pipe(tap(_ => console.log('blob updated')), shareReplay(1));
   public filePath$ = this._filePath$.pipe(shareReplay(1));
-
-  public saveAndLoadFile$ = new BehaviorSubject<string>('');
+  public textData = '';
 
   constructor(
     private electronService: ElectronService
@@ -46,11 +46,10 @@ export class WorkspaceService {
         this.loadFile('main.tex');
       }
     });
-    this.electronService.ipcRenderer.on('saveFile-reply', (_, newFileToLoad: string) => {
-      this.saveAndLoadFile$.next('');
+    this.electronService.ipcRenderer.on('saveFileAsync-reply', (_, newFileToLoad: string) => {
       console.log(`file saved, loading new file: ${newFileToLoad}`);
       this.loadFile(newFileToLoad);
-    })
+    });
   }
 
   public selectWorkspace(): void {
@@ -58,8 +57,8 @@ export class WorkspaceService {
   }
 
   public saveAndLoadFile(filePath: string) {
-    // trigger save
-    this.saveAndLoadFile$.next(filePath);
+    const data = this.encoder.encode(this.textData);
+    this.saveData(data, filePath);
   }
 
   public saveData(data: Uint8Array, newFileToLoad: string) {
@@ -74,7 +73,7 @@ export class WorkspaceService {
 
     blob.data = data;
     console.log(blob);
-    this.electronService.ipcRenderer.send('saveFile', blob, newFileToLoad);
+    this.electronService.ipcRenderer.send('saveFileAsync', blob, newFileToLoad);
   }
 
   public loadFile(filePath: string) {
@@ -101,6 +100,16 @@ export class WorkspaceService {
 
   public saveWorkspace() {
     // save current file
+    /*
+      There is no nice way to do this given how saving is currently set up.
+      Options:
+        1. Introduce yet another observable to alert the code editor component to trigger a save (will not scale well at all)
+        2. Move the NgModel used by the code editor component into the workspace server (could get nasty)
+        3. Use IPC to send a message to main process that is then relayed back (not nice)
+        4.
+
+        2 is probably the best option here
+    */
     // send request to save workspace
     this.electronService.ipcRenderer.send('saveWorkspace');
   }

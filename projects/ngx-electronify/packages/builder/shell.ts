@@ -92,6 +92,11 @@ app.whenReady().then(async () => {
     console.log(`loaded file: ${path}, returning to renderer process`);
     event.returnValue = fileBlob;
   });
+  ipcMain.on('saveFileAsync', async (event: any, fileToSave: FileBlobRx, newFileToLoad: string) => {
+    console.log(`recieved request to save file: ${fileToSave.path}`);
+    await writeFileToDisk(fileToSave);
+    event.sender.send('saveFileAsync-reply', newFileToLoad);
+  });
   ipcMain.on('saveFile', async (event: any, fileToSave: FileBlobRx, newFileToLoad: string) => {
     console.log(`recieved request to save file: ${fileToSave.path}`);
     await writeFileToDisk(fileToSave);
@@ -194,7 +199,7 @@ async function loadWorkspace(relativePath: string): Promise<string> {
 
   var zip = new AdmZip(relativePath);
   await refreshWorkingDirectory();
-  zip.extractAllTo(workingDirectory, false);
+  zip.extractAllTo(workingDirectory, true);
   return path.resolve(workingDirectory);
 }
 
@@ -233,10 +238,11 @@ async function saveWorkspace(workspacePath: string, destinationPath: string = ''
   var configBuffer = Buffer.from(worksapceConfig);
   zip.addFile('.config', configBuffer)
 
-  _workspaceConfig.filePaths.forEach(async path => {
-    var buffer = Buffer.from(await readFile(`${workingDirectory}/${path}`, 'utf-8'));
-    zip.addFile(path, buffer)
-  });
+  for (var path of _workspaceConfig.filePaths) {
+    console.log(`Adding ${path}`);
+    var buffer = Buffer.from(await readFile(`${workingDirectory}/${path}`, { encoding: 'base64'}), 'base64');
+    zip.addFile(path, buffer);
+  }
 
   await zip.writeZipPromise(!!destinationPath ? destinationPath : workspacePath);
 }
