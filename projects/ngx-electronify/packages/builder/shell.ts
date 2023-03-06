@@ -297,7 +297,9 @@ async function generatePreview(event: Electron.IpcMainEvent): Promise<void> {
   exec(path.resolve(`${binDirectory}/pdflatex.bat ${path.resolve(workingDirectory)}`), (error: Error, _: string, stderr: string) => {
     if (error || stderr) {
       console.log('error, returning');
-      event.sender.send('generatePreview-error', stderr);
+      const errorRegex = /l\.[0-9]+\ .+/g;
+      var errorLines = readFileSync(`${workingDirectory}/main.log`).toString().split("\n").filter(line => errorRegex.test(line));
+      event.sender.send('generatePreview-error', errorLines);
       return;
     }
 

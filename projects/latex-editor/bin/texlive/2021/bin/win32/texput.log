@@ -1,20 +1,19 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.30)  6 MAR 2023 12:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.30)  6 MAR 2023 17:49
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
-**C:/Users/JJ/Documents/GitHub/latex-editor/projects/latex-editor/.tmp/active C
-:/Users/JJ/Documents/GitHub/latex-editor/projects/latex-editor/.tmp/active/main
-.tex
+**yes -output-directory C:\Users\JJ\Documents\GitHub\latex-editor\projects\late
+x-editor\.tmp\active C:/Users/JJ/Documents/GitHub/latex-editor/projects/latex-e
+ditor/.tmp/active/main.tex
 
 ! Emergency stop.
-<*> ...x-editor/projects/latex-editor/.tmp/active 
-                                                  C:/Users/JJ/Documents/GitH...
-*** (job aborted, file error in nonstop mode)
-
+<*> yes 
+        -output-directory C:\Users\JJ\Documents\GitHub\latex-editor\projects...
  
 Here is how much of TeX's memory you used:
  3 strings out of 480236
- 172 string characters out of 5896100
+ 106 string characters out of 5896100
  284331 words of memory out of 5000000
  18060 multiletter control sequences out of 15000+600000
  469259 words of font info for 28 fonts, out of 8000000 for 9000

@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ElectronService } from 'ngx-electronyzer';
 import { BehaviorSubject, shareReplay } from 'rxjs';
 import { FileBlob } from '../models/file-blob';
@@ -26,7 +27,9 @@ export class WorkspaceService {
   public textData = '';
 
   constructor(
-    private electronService: ElectronService
+    private electronService: ElectronService,
+    private snackBar: MatSnackBar,
+    private zone: NgZone
   ) {
     this.electronService.ipcRenderer.on('selectWorkspace-reply', (event, path: string) => {
       console.log(`Path selected: ${path}`)
@@ -52,8 +55,15 @@ export class WorkspaceService {
       console.log(`file saved, loading new file: ${newFileToLoad}`);
       this.loadFile(newFileToLoad);
     });
-    this.electronService.ipcRenderer.on('generatePreview-error', (_) => {
-      console.log('An error occured when generating the PDF');
+    this.electronService.ipcRenderer.on('generatePreview-error', (_, errs: string[]) => {
+      const err = errs.at(-1);
+      const line = err?.substring(2);
+      this.zone.run(() => {
+        const snackbar = this.snackBar.open(`An error occured when generating preview. Line ${line}`, 'OK', { duration: 5000 });
+        snackbar.onAction().subscribe(() => {
+          snackbar.dismiss();
+        })
+      });
     });
     this.electronService.ipcRenderer.on('generatePreview-reply', (_, pdfData: FileBlob) => {
       console.log('PDF generated successfully, updating blob');
@@ -126,18 +136,7 @@ export class WorkspaceService {
   }
 
   public saveWorkspace() {
-    // save current file
-    /*
-      There is no nice way to do this given how saving is currently set up.
-      Options:
-        1. Introduce yet another observable to alert the code editor component to trigger a save (will not scale well at all)
-        2. Move the NgModel used by the code editor component into the workspace server (could get nasty)
-        3. Use IPC to send a message to main process that is then relayed back (not nice)
-        4.
-
-        2 is probably the best option here
-    */
-    // send request to save workspace
+    // save current file & then save workspace
     this.saveData(this.encoder.encode(this.textData), this._filePath$.getValue());
     this.electronService.ipcRenderer.send('saveWorkspace');
   }

@@ -1,3 +1,17 @@
 .max-height {
     height: 100%;
 }
+
+.preview {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.preview-container {
+    flex-grow: 1;
+    background-color: #EEEEEE;
+}
