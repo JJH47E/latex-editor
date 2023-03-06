@@ -36,6 +36,7 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { SubMacroComponent } from './components/sub-macro/sub-macro.component';
 import { VariableTemplateOptionComponent } from './components/variable-template-option/variable-template-option.component';
 import {MatRippleModule} from '@angular/material/core';
+import { PreviewToolbarComponent } from './components/preview-toolbar/preview-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {MatRippleModule} from '@angular/material/core';
     SourceEditorComponent,
     ImagePreviewComponent,
     SubMacroComponent,
-    VariableTemplateOptionComponent
+    VariableTemplateOptionComponent,
+    PreviewToolbarComponent
   ],
   imports: [
     BrowserModule,

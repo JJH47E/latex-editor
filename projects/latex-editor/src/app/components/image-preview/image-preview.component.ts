@@ -22,7 +22,7 @@ export class ImagePreviewComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {  }
   
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(_: SimpleChanges): void {
     const objectURL = URL.createObjectURL(new Blob([this.imageData], { type: this.contentType }));
     const img = this.sanitizer.bypassSecurityTrustUrl(objectURL);
     this.thumbnail = img;

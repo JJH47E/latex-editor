@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElectronService } from 'ngx-electronyzer';
-import { BehaviorSubject, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, shareReplay } from 'rxjs';
 import { FileBlob } from '../models/file-blob';
 import { WorkspaceConfig } from '../models/workspace-config';
 import { isNullOrWhitespace } from '../utils/string.utils';
@@ -14,13 +14,15 @@ export class WorkspaceService {
   private _workspaceFiles$ = new BehaviorSubject<string[]>([]);
   private _fileBlob$ = new BehaviorSubject<FileBlob>({} as FileBlob);
   private _filePath$ = new BehaviorSubject<string>('');
+  private _previewPdfBlob$ = new BehaviorSubject<FileBlob>({} as FileBlob);
   private encoder = new TextEncoder();
 
   public workspaceName$ = this._workspaceName$.pipe(shareReplay(1));
   public workspaceId$ = this._workspaceId$.pipe(shareReplay(1));
   public workspaceFiles$ = this._workspaceFiles$.pipe(shareReplay(1));
-  public fileBlob$ = this._fileBlob$.pipe(tap(_ => console.log('blob updated')), shareReplay(1));
+  public fileBlob$ = this._fileBlob$.pipe(shareReplay(1));
   public filePath$ = this._filePath$.pipe(shareReplay(1));
+  public previewPdfBlob$ = this._previewPdfBlob$.pipe(shareReplay(1));
   public textData = '';
 
   constructor(
@@ -50,6 +52,13 @@ export class WorkspaceService {
       console.log(`file saved, loading new file: ${newFileToLoad}`);
       this.loadFile(newFileToLoad);
     });
+    this.electronService.ipcRenderer.on('generatePreview-error', (_) => {
+      console.log('An error occured when generating the PDF');
+    });
+    this.electronService.ipcRenderer.on('generatePreview-reply', (_, pdfData: FileBlob) => {
+      console.log('PDF generated successfully, updating blob');
+      this._previewPdfBlob$.next(pdfData);
+    });
   }
 
   public selectWorkspace(): void {
@@ -58,7 +67,22 @@ export class WorkspaceService {
 
   public saveAndLoadFile(filePath: string) {
     const data = this.encoder.encode(this.textData);
-    this.saveData(data, filePath);
+    this.saveDataAsync(data, filePath);
+  }
+
+  public saveDataAsync(data: Uint8Array, newFileToLoad: string) {
+    // send save request to main process
+    let blob = this._fileBlob$.getValue();
+
+    if (blob.contentType.includes('image')) {
+      // hacky fix, could be done better
+      this.loadFile(newFileToLoad);
+      return;
+    }
+
+    blob.data = data;
+    console.log(blob);
+    this.electronService.ipcRenderer.send('saveFileAsync', blob, newFileToLoad);
   }
 
   public saveData(data: Uint8Array, newFileToLoad: string) {
@@ -73,7 +97,10 @@ export class WorkspaceService {
 
     blob.data = data;
     console.log(blob);
-    this.electronService.ipcRenderer.send('saveFileAsync', blob, newFileToLoad);
+    const newFile = this.electronService.ipcRenderer.sendSync('saveFile', blob, newFileToLoad) as string;
+    console.log('file saved, laoding new file');
+    this.loadFile(newFile);
+    return;
   }
 
   public loadFile(filePath: string) {
@@ -111,6 +138,16 @@ export class WorkspaceService {
         2 is probably the best option here
     */
     // send request to save workspace
+    this.saveData(this.encoder.encode(this.textData), this._filePath$.getValue());
     this.electronService.ipcRenderer.send('saveWorkspace');
+  }
+
+  public reloadPreview(): void {
+    this.saveData(this.encoder.encode(this.textData), this._filePath$.getValue());
+    this.electronService.ipcRenderer.send('generatePreview');
+  }
+
+  public downloadPdf(): void {
+    this.electronService.ipcRenderer.send('downloadPdf');
   }
 }

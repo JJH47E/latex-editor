@@ -1,13 +1,13 @@
 import { app, BrowserWindow, ipcMain, shell, dialog, FileFilter } from 'electron';
 import { copyFile, readFile, rm, writeFile } from 'node:fs/promises';
 import installExtension from 'electron-devtools-installer';
-import { existsSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { WorkspaceConfig } from './workspace-config';
 import * as AdmZip from 'adm-zip';
 import path = require('node:path');
 import { FileBlob, FileBlobRx } from './file-blob';
 import { COPYFILE_EXCL } from 'node:constants';
-import { spawn } from 'node:child_process';
+import { exec } from 'node:child_process';
 
 var mime = require('mime-types')
 const ANGULAR_DEVTOOLS = 'ienfalfjdbdpebioblfackkekamfmbnh';
@@ -15,10 +15,18 @@ const [port, devTools, allowIntegration] = process.argv.slice(2);
 const appUrl = `http://localhost:${port}/`;
 const workingDirectory = './.tmp/active';
 const templateDirectory = './templates';
-const fileFilters = [
+const binDirectory = './bin';
+const workspaceFilters = [
   {
     name: 'TeXProject',
     extensions: ['texproj']
+  } as FileFilter
+];
+
+const pdfFilters = [
+  {
+    name: 'PDF',
+    extensions: ['pdf']
   } as FileFilter
 ];
 
@@ -100,7 +108,7 @@ app.whenReady().then(async () => {
   ipcMain.on('saveFile', async (event: any, fileToSave: FileBlobRx, newFileToLoad: string) => {
     console.log(`recieved request to save file: ${fileToSave.path}`);
     await writeFileToDisk(fileToSave);
-    event.sender.send('saveFile-reply', newFileToLoad);
+    event.returnValue = newFileToLoad;
   });
   ipcMain.on('saveWorkspace', async (event) => {
     console.log(`recieved request to save workspace. current loaded directory: ${workspacePath}`);
@@ -108,7 +116,7 @@ app.whenReady().then(async () => {
       await saveWorkspace(workspacePath);
     } else {
       let configContents = await getConfigContents(workingDirectory);
-      let savePath = await openSavePrompt(configContents.name);
+      let savePath = await openSavePrompt(configContents.name, workspaceFilters);
       if (!savePath) {
         console.log('Save aborted');
         return;
@@ -120,7 +128,7 @@ app.whenReady().then(async () => {
   });
   ipcMain.on('saveWorkspaceAs', async (event) => {
     let configContents = await getConfigContents(workingDirectory);
-    let savePath = await openSavePrompt(configContents.name);
+    let savePath = await openSavePrompt(configContents.name, workspaceFilters);
     if (!savePath) {
       console.log('Save aborted');
       return;
@@ -131,14 +139,18 @@ app.whenReady().then(async () => {
   });
   ipcMain.on('generatePreview', async (event) => {
     // compile doc
-    var process = spawn('python', ['./bin/pdflatex.py', path.resolve(`${workingDirectory}/main.tex`)]);
-    process.stdout.on('error', (err: any) => {
-      event.sender.send('generatePreview-error', err);
-    });
-    process.stdout.on('exit', async () => {
-      let fileBlob = await getFileContents('main.pdf');
-      event.sender.send('generatePreview-reply', fileBlob);
-    });
+    await generatePreview(event);
+  });
+  ipcMain.on('downloadPdf', async (event) => {
+    await generatePreview(event);
+    let configContents = await getConfigContents(workingDirectory);
+    let savePath = await openSavePrompt(configContents.name, pdfFilters);
+    if (!savePath) {
+      console.log('Save aborted');
+      return;
+    }
+    console.log(`saving to: ${savePath}`);
+    await saveFile((await getFileContents('main.pdf')).data, savePath);
   });
   createWindow();
 });
@@ -181,7 +193,7 @@ async function copyTemplate(template: string, destFileName: string) {
 }
 
 async function selectWorkspace() {
-  return await dialog.showOpenDialog({filters: fileFilters, properties: ['openFile']});
+  return await dialog.showOpenDialog({filters: workspaceFilters, properties: ['openFile']});
 }
 
 async function refreshWorkingDirectory() {
@@ -224,6 +236,17 @@ async function getFileContents(relativePath: string): Promise<FileBlob> {
   }
 }
 
+function getFileContentsSync(relativePath: string): FileBlob {
+  try {
+    const filePath = path.resolve(`${workingDirectory}/${relativePath}`)
+    const data = readFileSync(filePath, { encoding: 'base64' });
+    return {path: relativePath, data: Buffer.from(data, 'base64'), contentType: mime.contentType(filePath)} as FileBlob;
+  } catch(err) {
+    console.log(err);
+    return {} as FileBlob;
+  }
+}
+
 async function writeFileToDisk(fileToSave: FileBlobRx): Promise<void> {
   var pathToWrite = path.resolve(`${workingDirectory}/${fileToSave.path}`);
   await writeFile(pathToWrite, Buffer.from(fileToSave.data), { encoding: 'base64' });
@@ -247,11 +270,49 @@ async function saveWorkspace(workspacePath: string, destinationPath: string = ''
   await zip.writeZipPromise(!!destinationPath ? destinationPath : workspacePath);
 }
 
-async function openSavePrompt(title: string): Promise<string> {
+async function saveFile(buffer: Buffer, destinationPath: string) {
+  return await writeFile(destinationPath, buffer);
+}
+
+async function openSavePrompt(title: string, fileFilters: FileFilter[]): Promise<string> {
   var saveResult = await dialog.showSaveDialog({title, filters: fileFilters});
   if (!!saveResult.filePath) {
     return saveResult.filePath;
   } else {
     return '';
   }
+}
+
+function doesFileExist(filePath: string): boolean {
+  return existsSync(filePath);
+}
+
+async function generatePreview(event: Electron.IpcMainEvent): Promise<void> {
+	if (!doesFileExist(`${workingDirectory}/main.tex`)) {
+		console.log('Unable to find main.tex in given directory, exiting...');
+		event.sender.send('generatePreview-error', 'main.tex not found');
+    return;
+	}
+	console.log('Starting generate preview process');
+  exec(path.resolve(`${binDirectory}/pdflatex.bat ${path.resolve(workingDirectory)}`), (error: Error, _: string, stderr: string) => {
+    if (error || stderr) {
+      console.log('error, returning');
+      event.sender.send('generatePreview-error', stderr);
+      return;
+    }
+
+    console.log('Finished successfully');
+    if (existsSync(`${workingDirectory}/main.log`)) {
+      rmSync(`${workingDirectory}/main.log`, { force: true });
+    }
+
+    if (existsSync(`${workingDirectory}/main.aux`)) {
+      rmSync(`${workingDirectory}/main.aux`, { force: true });
+    }
+
+    let fileBlob = getFileContentsSync('main.pdf');
+    console.log('file contents read successfuly, returning');
+    event.sender.send('generatePreview-reply', fileBlob);
+    return;
+  });
 }
