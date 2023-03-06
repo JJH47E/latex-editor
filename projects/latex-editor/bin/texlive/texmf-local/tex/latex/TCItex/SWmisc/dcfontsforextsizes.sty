@@ -1,0 +1,111 @@
+%
+% Use the cm font family instead of the ec fonts explicitly called
+% for in the extsizes class files.  Originally provided by Phil
+% Viton to solve the problem for the beamer class.
+%
+% ================================== begin PAV modification
+% Mod by Phil Viton to allow using the dc fonts and
+% the latex_ml format in Beamer with SWP. Note that if you update
+% Beamer you will need to copy this file (beamerbasefont.sty.pav)
+% to (and over-write) beamerbasefont.sty, which references the
+% ec fonts rather than the dc fonts we use.
+% Basically, this hack copies the \DeclareFontFamily and
+% \DeclareFontShape lines from T1cmr.fd and T1cmss.fd  
+% then we add, on the lnes declaring the largest font size
+% used in "normal latex", ie <24.88>, some new declarations, namely
+% 			 <29.86><35.83><42.99><51.59>
+%
+\DeclareFontFamily{T1}{cmr}{}
+\DeclareFontShape{T1}{cmr}{m}{n}{%
+      <5><6><7><8><9>gen*dcr%
+      <10><10.95>dcr10%
+      <12><14.4>dcr12%
+      <17.28><20.74><24.88><29.86><35.83><42.99><51.59>dcr17}{}
+\DeclareFontShape{T1}{cmr}{m}{sl}{%
+      <5><6><7><8>dcsl8%
+      <9>dcsl9%
+      <10><10.95>dcsl10%
+      <12><14.4>dcsl12%
+      <17.28><20.74><24.88><29.86><35.83><42.99><51.59>dcsl17%
+      }{}
+\DeclareFontShape{T1}{cmr}{m}{it}{%
+      <5><6>dcti7%
+      <7><8><9>gen*dcti%
+      <10><10.95>dcti10%
+      <12><14.4>dcti12%
+      <17.28><20.74><24.88><29.86><35.83><42.99><51.59>dcti17%
+      }{}
+\DeclareFontShape{T1}{cmr}{m}{sc}{%
+      <5><6><7><8><9><10><10.95>dccsc10%
+      <12><14.4>dccsc12%
+      <17.28><20.74><24.88><29.86><35.83><42.99><51.59>dccsc17%
+      }{}
+\DeclareFontShape{T1}{cmr}{m}{ui}{%
+      <5><6>dcu7%
+      <7><8><9>gen*dcu%
+      <10><10.95>dcu10%
+      <12><14.4>dcu12%
+      <17.28><20.74><24.88><29.86><35.83><42.99><51.59>dcu17%
+      }{}
+%%%%%%% bold series
+\DeclareFontShape{T1}{cmr}{b}{n}{%
+      <5><6><7><8><9>gen*dcb%
+      <10><10.95>dcb10%
+      <12><14.4>dcb12%
+      <17.28><20.74><24.88><29.86><35.83><42.99><51.59>dcb17%
+      }{}
+%%%%%%%% bold extended series
+\DeclareFontShape{T1}{cmr}{bx}{n}{%
+      <5><6><7><8><9>gen*dcbx%
+      <10><10.95>dcbx10%
+      <12><14.4><17.28><20.74><24.88><29.86><35.83><42.99><51.59>dcbx12%
+      }{}
+\DeclareFontShape{T1}{cmr}{bx}{sl}{%
+      <5><6><7><8><9>gen*dcbxsl%
+      <10><10.95>dcbxsl10%
+      <12><14.4><17.28><20.74><24.88>dcbxsl12%
+      }{}
+\DeclareFontShape{T1}{cmr}{bx}{it}{%
+      <5><6><7><8><9><10><10.95>dcbxti10%
+      <12><14.4>dcbxti12%
+      <17.28><20.74><24.88><29.86><35.83><42.99><51.59>dcbxti17%
+      }{}
+      
+\DeclareFontFamily{T1}{cmss}{}
+\DeclareFontShape{T1}{cmss}{m}{n}{%
+      <5><6><7><8>dcss8%
+      <9>dcss9%
+      <10><10.95>dcss10%
+      <12><14.4>dcss12%
+      <17.28><20.74><24.88><29.86><35.83><42.99><51.59>dcss17%
+      }{}
+\DeclareFontShape{T1}{cmss}{m}{it}%
+      {<->sub*cmss/m/sl}{}
+\DeclareFontShape{T1}{cmss}{m}{sl}{%
+      <5><6><7><8>dcssi8%
+      <9>dcssi9%
+      <10><10.95>dcssi10%
+      <12><14.4>dcssi12%
+      <17.28><20.74><24.88><29.86><35.83><42.99><51.59>dcssi17%
+      }{}
+%%%%%% Font/shape undefined, therefore substituted
+\DeclareFontShape{T1}{cmss}{m}{sc}%
+       {<->sub*cmr/m/sc}{}
+%%%%%%% semibold condensed series
+\DeclareFontShape{T1}{cmss}{sbc}{n}{%
+      <5><6><7><8><9><10><10.95><12><14.4><17.28>%
+      <20.74><24.88>%
+dcssdc10
+       }{}
+%%%%%%%% bold extended series
+\DeclareFontShape{T1}{cmss}{bx}{n}{%
+      <5><6><7><8><9><10><10.95><12><14.4><17.28>%
+      <20.74><24.88><29.86><35.83><42.99><51.59>dcssbx10%
+      }{}
+%%%%%% Font/shape undefined, therefore substituted
+\DeclareFontShape{T1}{cmss}{bx}{sc}%
+       {<->sub*cmr/m/sc}{}
+
+       
+%
+% ============================== end PAV modification

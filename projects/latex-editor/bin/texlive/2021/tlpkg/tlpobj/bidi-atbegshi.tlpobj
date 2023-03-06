@@ -1,0 +1,33 @@
+name bidi-atbegshi
+category Package
+revision 62009
+shortdesc Bidi-aware shipout macros
+longdesc The package adds some commands to the atbegshi package for
+longdesc proper placement of background material in the left and right
+longdesc corners of the output page, in both LTR and RTL modes. The
+longdesc package only works with xelatex format and should be loaded
+longdesc before the bidi package.
+containersize 1388
+containerchecksum 5b16cfee9c71927cff133db3b967dc835634553d0980f74164fe8996ef86c3529439e85e00678219879cab41bde2027f3258b2862906b58634713e4b7d16c515
+doccontainersize 160664
+doccontainerchecksum 05b8118cbc59f06aeb87ab3b5b6a7f7a14dd23543c9d45621352ceec58998601a97af31bb6b0c999047efb362c24508f769be3c2e483c21a814b8ff35bd0bb96
+docfiles size=57
+ texmf-dist/doc/xelatex/bidi-atbegshi/README details="Readme"
+ texmf-dist/doc/xelatex/bidi-atbegshi/bidi-atbegshi-doc.pdf details="Package documentation"
+ texmf-dist/doc/xelatex/bidi-atbegshi/bidi-atbegshi-doc.tex
+ texmf-dist/doc/xelatex/bidi-atbegshi/test-LTR.pdf
+ texmf-dist/doc/xelatex/bidi-atbegshi/test-LTR.tex
+ texmf-dist/doc/xelatex/bidi-atbegshi/test-RTL.pdf
+ texmf-dist/doc/xelatex/bidi-atbegshi/test-RTL.tex
+ texmf-dist/doc/xelatex/bidi-atbegshi/test-foreground-LTR.pdf
+ texmf-dist/doc/xelatex/bidi-atbegshi/test-foreground-LTR.tex
+ texmf-dist/doc/xelatex/bidi-atbegshi/test-foreground-RTL.pdf
+ texmf-dist/doc/xelatex/bidi-atbegshi/test-foreground-RTL.tex
+runfiles size=1
+ texmf-dist/tex/xelatex/bidi-atbegshi/bidi-atbegshi.sty
+catalogue-contact-bugs https://github.com/tex-persian/bidi-atbegshi/issues
+catalogue-contact-repository https://github.com/tex-persian/bidi-atbegshi
+catalogue-ctan /macros/xetex/latex/bidi-atbegshi
+catalogue-license lppl1.3
+catalogue-topics bidi xetex
+catalogue-version 0.2

@@ -1,0 +1,606 @@
+% \iffalse
+% caption.dtx - The caption package
+% (c) 1994-95 Axel Sommerfeldt (axel@hp1.ang-physik.uni-kiel.de)
+%
+%<*driver>
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\documentclass{ltxdoc}
+\newlength\artparindent
+\setlength\artparindent{\parindent}
+\setlength\parindent{0pt}
+\setlength\parskip{\smallskipamount}
+\usepackage{caption2}[1995/10/09]
+\IfFileExists{ltxdoc.cfg}{}{\OnlyDescription\RecordChanges\CodelineIndex}
+\begin{document}
+  \DocInput{caption2.dtx}
+  \IfFileExists{ltxdoc.cfg}{}{\PrintChanges\PrintIndex}
+\end{document}
+%</driver>
+% \fi
+%
+% \providecommand{\LaTeXcomp}{The \LaTeX{} Companion}
+% \newcommand{\purerm}[1]{{\upshape\mdseries\rmfamily #1}}
+% \newcommand{\puresf}[1]{{\upshape\mdseries\sffamily #1}}
+% \newenvironment{Options}[1]%
+%  {\begin{list}{}{\renewcommand{\makelabel}[1]{\texttt{##1}\hfil}%
+%     \settowidth{\labelwidth}{\texttt{#1\space}}%
+%     \setlength{\leftmargin}{\labelwidth}%
+%     \addtolength{\leftmargin}{\labelsep}}}%
+%  {\end{list}}
+%
+% \def\packageversion{2.0(BETA)}
+% \def\packagedate{1995/10/09}
+% \changes{v1.0}{27 Oct 94}{First release}
+% \changes{v1.2}{28 Nov 94}{Works now with the {\tt figure*} and {\tt table*}
+%                           environments, too}
+% \changes{v2.0}{ 9 Oct 95}{Totally rewritten; many new commands and features}
+%
+% \title{The \puresf{caption} package\thanks{This package has version number
+%        \packageversion, last revised \packagedate.}}
+% \author{Axel Sommerfeldt\\
+%         {\small axel@hp1.ang-physik.uni-kiel.de}}
+% \date{1995/10/09}
+% \maketitle
+%
+% \begin{abstract}
+% The \textsf{caption} package provides many ways to customise the captions
+% in floating environments such |figure|, |table|, |sidewaysfigure|, and
+% |sidewaystable|.
+% The following \LaTeXe\ packages are supported:
+% float, longtable, and subfigure.
+% But it works fine with the following packages as well:
+% floatfig, rotating, supertabular, and wrapfig.
+% \end{abstract}
+%
+% \section{Documentation? What documentation?}
+% I'm sorry to say this, but there is no documentation provided with the
+% new version of this package, yet. And it's still beta. I hope I can
+% eleminate both circumstances in the near future; at the moment my spare time
+% is very very very limited, so I decided to make this beta public.
+%
+% This new version is nearly compatible with the lastest official release
+% (version 1.4b), so you can use the old documentation so far.
+% Here is what differs this version from version 1.4b:
+%
+% \begin{itemize}
+% \item
+%   If the caption package will detect a loaded float package, it will
+%   \emph{not} redefine the boxed style of floats anymore. If you want to
+%   have the old behaviour, you have to specify the new option |boxed| to
+%   the caption2 package.
+% \item
+%   Anything said about the subfigure package in the old doc isn't
+%   true anymore; the caption package is now adapted to the new version
+%   2.0 of this package. Especially the caption package will \emph{not}
+%   redefine |\@thesubfigure| and |\@thesubtable| anymore and it will
+%   \emph{not} set |\subcapsize| -- you have to do this now for yourself
+%   if you want to, e.g.\ with the following code:
+%   \begin{quote}
+%       |\usepackage[normalsize]{subfigure}|\\
+%       |\usepackage[large]{caption}|
+%   \end{quote}
+%
+%   So you can load the caption2 package \emph{before} loading the subfigure
+%   package now without problems, in fact this is recommend now. Don't care
+%   about what the old doc or the doc of the subfigure package is telling you!
+% \end{itemize}
+%
+% As a summary, the new caption package won't lead into different results
+% of your documents just because of loading it (without options).
+%
+% If you are really interested in the (many!) new features of this totally
+% rewritten package, take a look in the provided test document (test2.tex)
+% to get a idea of the new commands and possibilities.
+% And feel yourself free to write a email to me, if any questions occur.
+%
+% \subsection{Just a few notes\dots}
+% If you use the new command |\setcaptionwidth| to set the absolut width of a
+% caption, you are not allowed to change |\captionmargin| anymore!
+% Instead, use the new command |\setcaptionmargin| to do this.
+%
+% Longtables will still take care of |\LTcapwidth|, even if you are setting
+% your own width via |\setcaptionwidth| or |\setcaptionmargin|. To get rid
+% of this, use the following code just after loading the caption2 package:
+% \begin{quote}
+%   |\dummycaptionstyle{longtable}{}|
+% \end{quote}
+% or just specify the new package option |longtable|.
+%
+% This package was developed and tested with following versions of the
+% other packages:
+% \begin{quote}\begin{tabular}{lll}
+%   package   & version & date \\\hline
+%   float     & 1.2c    & 1995/03/29 \\
+%   longtable & 3.15    & 1995/06/15 \\
+%   rotating  & 2.9     & 1995/04/07 \\
+%   subfigure & 2.0     & 1995/03/06 \\
+% \end{tabular}\end{quote}
+%
+% Maybe it will work with older versions, maybe not\dots
+%
+% BTW:
+% If you are interested in rotated versions (like |sidewaysfigure| or
+% |sidewaystable|) of new floats (defined with the float package), take a look
+% at the rotfloat package, which comes from a very talented young man with a
+% very german style of writing english docs (if he ever writes any!) and a
+% very big mouth - myself |:-)|
+%
+% \section{Thanks}
+% I would like to thank David Carlisle for his help writing the longtable
+% support; without the changes in his package this wouldn't become possible.
+%
+% \changes{v1.1}{ 3 Nov 94}{New captiontype: {\tt centerlast}}
+% \changes{v1.4}{30 Jan 95}{New option: {\tt nooneline}}
+% \changes{v1.4}{29 Jan 95}{{\tt\protect\bslash captionsize} changed to
+%                           {\tt\protect\bslash captionfont}}
+% \changes{v1.2}{28 Nov 94}{Support of the {\sf float} package}
+% \changes{v1.3}{ 8 Jan 95}{Support of {\tt\protect\bslash captionlabelfont} in
+%                           subcaptions}
+% \changes{v1.4b}{5 Apr 95}{Adapted to version 2.8 of the rotating package}
+% \changes{v2.0}{ 9 Oct 95}{support of the longtable package}
+%
+% \StopEventually{
+%   \begin{thebibliography}{9}
+%   \bibitem{float}
+%   Anselm Lingnau:
+%   \textsl{An Improved Environment for Floats},
+%   1995/03/25
+%   \bibitem{rotating}
+%   Sebastian Rahtz and Leonor Barroca:
+%   \textsl{A style option for rotated objects in \LaTeX},
+%   1994/10/02
+%   \bibitem{rotfloat}
+%   Axel Sommerfeldt:
+%   \textsl{The rotfloat package},
+%   1995/03/30
+%   \bibitem{subfigure}
+%   Steven Douglas Cochran:
+%   \textsl{The subfigure package},
+%   1995/03/06
+%   \bibitem{A-W:GMS94}
+%   Michel Goossens, Frank Mittelbach and Alexander Samarin:
+%   \newblock \textsl{The {\LaTeX} Companion},
+%   \newblock Addison-Wesley, Reading, Massachusetts, 1994.
+%   \bibitem{Anne}
+%   Anne Br\"uggemann-Klein:
+%   \textsl{Einf\"uhrung in die Dokumentverarbeitung},
+%   B.G. Teubner, Stuttgart, 1989
+%   \bibitem{Kopka-E}
+%   Helmut Kopka:
+%   \textsl{\LaTeX -- Erweiterungsm\"oglichkeiten},
+%   3. \"uberarbeitete Auf\/lage, Addison-Wesley, Bonn, 1991
+%   \end{thebibliography}
+% }
+% \setlength{\parskip}{0pt plus 1pt}
+%
+% \CheckSum{647}
+% \DoNotIndex{\\,\_,\ }
+% \DoNotIndex{\@gobble,\@ifundefined,\@namedef,\@nameuse,\@tempdima}
+% \DoNotIndex{\p@,\z@}
+% \DoNotIndex{\active,\addtolength,\advance,\begin,\bfseries}
+% \DoNotIndex{\catcode,\centering,\csname,\def,\divide}
+% \DoNotIndex{\else,\empty,\end,\endcsname,\endgraf,\expandafter}
+% \DoNotIndex{\fi,\footnotesize,\global}
+% \DoNotIndex{\hangindent,\hbox,\hskip,\hspace,\hss}
+% \DoNotIndex{\ifcase,\ifdim,\ifx,\itshape}
+% \DoNotIndex{\Large,\large,\leavevmode,\leftskip,\let,\linewidth}
+% \DoNotIndex{\mdseries,\message}
+% \DoNotIndex{\newcommand,\newdimen,\newlength,\newif,\newsavebox,\noindent}
+% \DoNotIndex{\normalsize,\or}
+% \DoNotIndex{\par,\parbox,\parfillskip,\protect}
+% \DoNotIndex{\raggedleft,\raggedright,\relax,\renewcommand,\rightskip}
+% \DoNotIndex{\rmfamily}
+% \DoNotIndex{\sbox,\scriptsize,\scshape,\setlength,\sffamily,\slshape,\small}
+% \DoNotIndex{\space,\strut}
+% \DoNotIndex{\textheight,\typeout,\ttfamily,\undefined,\upshape,\usebox}
+% \DoNotIndex{\vsize,\vskip,\wd}
+% \DoNotIndex{\AtBeginDocument,\AtEndOfPackage,\CurrentOption,\DeclareOption}
+% \DoNotIndex{\ExecuteOptions,\InputIfFileExists,\NeedsTeXFormat,\MessageBreak}
+% \DoNotIndex{\PackageError,\PackageWarningNoLine,\ProcessOptions}
+% \DoNotIndex{\ProvidesPackage}
+%
+% \clearpage
+% \section{The (not well documented) code}
+% \iffalse
+%<*package>
+% \fi
+%
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesPackage{caption2}[1995/10/09 v2.0 caption package (AS)]
+%
+% package detection message
+\let\caption@message\undefined
+\newcommand*\caption@package[1]{%
+  \ifx\caption@message\undefined
+    \message{\space\space\space\space\space\space\space\space\space
+             packages detected:}
+    \let\caption@message\empty
+  \fi
+  \message{#1}}
+%
+% `internal' stuff
+\newlength\realcaptionwidth
+\newsavebox\captionbox
+%
+% Code initialisation, `normal' stuff
+\newcommand*\captionsize{}
+\newcommand*\captionfont{\captionsize}
+\newcommand*\captionlabelfont{}
+\newcommand*\captionlabeldelim{:}
+\newdimen\captionlabelsep
+  \sbox\captionbox{ }
+  \setlength\captionlabelsep{\wd\captionbox}
+\newdimen\captionmargin
+\newdimen\captionwidth
+% only used by captionstyle `indent', but can be used in user-defines styles
+\newdimen\captionindent
+\newif\ifonelinecaptions
+\newif\iftakecaptionwidth
+%
+%\newcommand*\setcaptionfont[1]{%
+%  \def\captionfont{#1}}
+%\newcommand*\setcaptionlabelfont[1]{%
+%  \def\captionlabelfont{#1}}
+\newcommand*\setcaptionmargin[1]{%
+  \setlength\captionmargin{#1}%
+  \takecaptionwidthfalse}
+\newcommand*\setcaptionwidth[1]{%
+  \setlength\captionwidth{#1}%
+  \takecaptionwidthtrue}
+%
+% \newcaptionstyle, \renewcaptionstyle & \defcaptionstyle
+\newcommand\newcaptionstyle[2]{%
+  \expandafter\ifx\csname caption@@#1\endcsname\relax
+    \defcaptionstyle{#1}{#2}%
+  \else
+    \PackageError{caption}{Caption style `#1' already defined}{}%
+  \fi}
+\newcommand\renewcaptionstyle[2]{%
+  \expandafter\ifx\csname caption@@#1\endcsname\relax
+    \PackageError{caption}{Caption style `#1' undefined}{}%
+  \else
+    \defcaptionstyle{#1}{#2}%
+  \fi}
+\newcommand\defcaptionstyle[2]{%
+  \@namedef{caption@@#1}{#2}}
+\newcommand*\dummycaptionstyle[2]{%
+  \defcaptionstyle{#1}{%
+    \expandafter\ifx\csname caption@@\caption@style\expandafter\endcsname%
+                    \csname caption@@#1\endcsname
+      \PackageError{caption}{You can't use the caption style `#1' directy}{%
+        The caption style `#1' is only a dummy and does not really exists.%
+        \MessageBreak You have to redefine it (with \protect\renewcaptionstyle)
+        before you can select\MessageBreak it with \protect\captionstyle.}%
+    \else
+      #2\usecaptionstyle{\caption@style}%
+    \fi}}
+%
+% preimplemented types of captions, all with a label and text,
+% separated by \captionlabeldelim
+\newcaptionstyle{normal}{\caption@make{normal}}
+\newcaptionstyle{center}{\caption@make{center}}
+\newcaptionstyle{flushleft}{\caption@make{flushleft}}
+\newcaptionstyle{flushright}{\caption@make{flushright}}
+\newcaptionstyle{centerlast}{\caption@make{centerlast}}
+\newcaptionstyle{hang}{\caption@make{hang}}
+\newcaptionstyle{indent}{\caption@make{indent}}
+%
+% \captionstyle
+\newcommand*\captionstyle[1]{%
+  \expandafter\ifx\csname caption@@#1\endcsname\relax
+    \PackageError{caption}{Undefined caption style `#1'}{}%
+  \else
+    \def\caption@style{#1}%
+  \fi}
+%
+% Options
+\DeclareOption{normal}{\captionstyle{normal}}
+\DeclareOption{center}{\captionstyle{center}}
+\DeclareOption{flushleft}{\captionstyle{flushleft}}
+\DeclareOption{flushright}{\captionstyle{flushright}}
+\DeclareOption{centerlast}{\captionstyle{centerlast}}
+\DeclareOption{anne}{\ExecuteOptions{centerlast}}
+\DeclareOption{hang}{\captionstyle{hang}}
+\DeclareOption{isu}{\ExecuteOptions{hang}}
+\DeclareOption{indent}{\captionstyle{indent}}
+%
+\DeclareOption{oneline}{\onelinecaptionstrue}
+\DeclareOption{nooneline}{\onelinecaptionsfalse}
+%
+\DeclareOption{scriptsize}{\renewcommand*\captionsize{\scriptsize}}
+\DeclareOption{footnotesize}{\renewcommand*\captionsize{\footnotesize}}
+\DeclareOption{small}{\renewcommand*\captionsize{\small}}
+\DeclareOption{normalsize}{\renewcommand*\captionsize{\normalsize}}
+\DeclareOption{large}{\renewcommand*\captionsize{\large}}
+\DeclareOption{Large}{\renewcommand*\captionsize{\Large}}
+%
+\DeclareOption{up}{\renewcommand*\captionlabelfont{\upshape}}
+\DeclareOption{it}{\renewcommand*\captionlabelfont{\itshape}}
+\DeclareOption{sl}{\renewcommand*\captionlabelfont{\slshape}}
+\DeclareOption{sc}{\renewcommand*\captionlabelfont{\scshape}}
+\DeclareOption{md}{\renewcommand*\captionlabelfont{\mdseries}}
+\DeclareOption{bf}{\renewcommand*\captionlabelfont{\bfseries}}
+\DeclareOption{rm}{\renewcommand*\captionlabelfont{\rmfamily}}
+\DeclareOption{sf}{\renewcommand*\captionlabelfont{\sffamily}}
+\DeclareOption{tt}{\renewcommand*\captionlabelfont{\ttfamily}}
+%
+\DeclareOption{boxed}{\AtEndOfPackage{%
+  \ifx\caption@@ruled\undefined
+    \PackageWarningNoLine{caption}{%
+      Option `boxed' is set but there is no `float' package\MessageBreak
+      around here, so this option will be totally ignored}
+  \else
+    \dummycaptionstyle{boxed}{}%
+  \fi}}
+\DeclareOption{ruled}{\AtEndOfPackage{%
+  \ifx\caption@@ruled\undefined
+    \PackageWarningNoLine{caption}{%
+      Option `ruled' is set but there is no `float' package\MessageBreak
+      around here, so this option will be totally ignored}
+  \else
+    \dummycaptionstyle{ruled}{\onelinecaptionsfalse\setcaptionmargin{0pt}}%
+  \fi}}
+%
+\DeclareOption{longtable}{\AtEndOfPackage{%
+  \ifx\caption@@longtable\undefined
+    \PackageWarningNoLine{caption}{%
+      Option `longtable' is set but there is no `longtable' package\MessageBreak
+      around here, so this option will be totally ignored}
+  \else
+    \dummycaptionstyle{longtable}{}%
+  \fi}}
+%
+\DeclareOption*{\AtEndOfPackage{%
+  \InputIfFileExists{\CurrentOption.caption}{}{%
+    \PackageError{caption}{File `\CurrentOption.caption' not found}{%
+    You selected the unknown package option `\CurrentOption', so I
+    thought you want to\MessageBreak
+    input the definition file `\CurrentOption.caption' here
+    -- but there is no one!}}}}
+%
+\ExecuteOptions{normal,oneline}
+\ProcessOptions
+%
+% \@makecaption
+\renewcommand\@makecaption[2]{%
+  \vskip\abovecaptionskip
+  \realcaptionwidth\linewidth
+  \def\captionlabel{#1}%
+  \def\captiontext{#2}%
+  \usecaptionstyle{\caption@style}%
+  \vskip\belowcaptionskip}
+%
+% Helpers for caption style authors
+\newcommand*\caption@canterr[1]{%
+  \PackageError{caption}{You can't use \protect#1
+    in normal text}{The usage of \protect#1 is only
+    allowed inside code declared with\MessageBreak \protect\defcaptionstyle,
+    \protect\newcaptionstyle \space or \protect\renewcaptionstyle.}}
+\newcommand\onelinecaption[2]{%
+  \ifx\captiontext\undefined
+    \caption@canterr{\onelinecaption}%
+  \else
+    \def\caption@temp{#2}%
+    \ifonelinecaptions
+      \sbox\captionbox{#1}%
+      \ifdim\wd\captionbox >\realcaptionwidth
+        \caption@temp
+      \else
+        {\centering\usebox{\captionbox}\par}%
+      \fi
+    \else
+      \caption@temp
+    \fi
+    \let\caption@temp\undefined
+  \fi}
+\newcommand*\usecaptionmargin{%
+  \ifx\captiontext\undefined
+    \caption@canterr{\usecaptionmargin}%
+  \else
+    \iftakecaptionwidth
+      \leftskip\realcaptionwidth
+      \advance\leftskip by -\captionwidth
+      \divide\leftskip by 2
+      \rightskip\leftskip
+      \realcaptionwidth\captionwidth
+    \else
+      \leftskip\captionmargin
+      \rightskip\captionmargin
+      \advance\realcaptionwidth by -2\captionmargin
+    \fi
+  \fi}
+\newcommand*\usecaptionstyle[1]{%
+  \ifx\captiontext\undefined
+    \caption@canterr{\usecaptionstyle}%
+  \else
+    \@ifundefined{caption@@#1}%
+      {\PackageError{caption}{Caption style `#1' undefined}{}}%
+      {\@nameuse{caption@@#1}}
+  \fi}
+%
+% equal code for normal, center, centerlast, hang, and indent
+\newcommand*\caption@make[1]{%
+  \usecaptionmargin\captionfont
+  \def\caption@label{%
+    {\captionlabelfont\captionlabel\captionlabeldelim}%
+    \hskip\captionlabelsep}%
+  \onelinecaption{\caption@label\captiontext}%
+    {\@nameuse{caption@@@#1}}}
+%
+% the preimplemented caption styles
+\newcommand*\caption@@@normal{%
+  \caption@label\captiontext\par}
+\newcommand*\caption@@@center{%
+  \parbox[t]{\realcaptionwidth}{\centering
+  \caption@label\captiontext\par}}%
+\newcommand*\caption@@@flushleft{%
+  \parbox[t]{\realcaptionwidth}{\raggedright
+  \caption@label\captiontext\par}}%
+\newcommand*\caption@@@flushright{%
+  \parbox[t]{\realcaptionwidth}{\raggedleft
+  \caption@label\captiontext\par}}%
+\newcommand*\caption@@@centerlast{%
+  \advance\leftskip by 0pt plus 1fil%
+  \advance\rightskip by 0pt plus -1fil%
+  \parfillskip0pt plus 2fil%
+  \caption@label\captiontext\par}
+\newcommand*\caption@@@hang{%
+  \sbox\captionbox{\caption@label}%
+  \hangindent\wd\captionbox\noindent
+  \usebox\captionbox\captiontext\par}
+\newcommand*\caption@@@indent{%
+  \hangindent\captionindent\noindent
+  \caption@label\captiontext\par}
+%    \end{macrocode}
+%
+% \subsection*{Support of the float package}
+%    \begin{macrocode}
+\ifx\floatc@plain\undefined
+\else
+  \caption@package{float}
+%
+% interface float package -> caption package
+  \newcommand\caption@floatc[3]{%
+    \realcaptionwidth\linewidth
+    \def\captionlabel{#2}%
+    \def\captiontext{#3}%
+    \usecaptionstyle{#1}}
+%
+% floatstyle plain verwendet jetzt den gesetzten captionstyle
+  \renewcommand\floatc@plain{\caption@floatc{\caption@style}}
+%
+% floatstyle boxed auch (kann aber mit \renewcaptionstyle geaendert werden)
+  \dummycaptionstyle{boxed}{\def\captionlabelfont{\bfseries}}
+  \newcommand\floatc@boxed{\caption@floatc{boxed}}
+% jetzt muessen wir nur noch dafuer sorgen, dass es auch (statt floatc@plain)
+% in \fs@boxed verwendet wird...
+  \let\caption@boxed\fs@boxed
+  \renewcommand\fs@boxed{\let\floatc@plain\floatc@boxed\caption@boxed}
+%
+% floatstyle ruled, dies geht zum Glueck wieder geradeaus
+  \newcaptionstyle{ruled}{{\bfseries\captionlabel} \captiontext\par}
+  \renewcommand*\floatc@ruled{\caption@floatc{ruled}}
+%
+\fi
+%    \end{macrocode}
+%
+% \subsection*{Support of the longtable package}
+%    \begin{macrocode}
+\ifx\LT@makecaption\undefined
+\else
+  \caption@package{longtable}
+  \dummycaptionstyle{longtable}{\setcaptionwidth\LTcapwidth}
+  \renewcommand\LT@makecaption[3]{%
+    \LT@mcol\LT@cols c{\hbox to\z@{\hss\parbox[t]\linewidth{%
+    \realcaptionwidth\linewidth
+    \ifx#1\@gobble
+      \def\captionlabel{}%
+      \def\captionlabeldelim{}%
+      \captionlabelsep\z@
+    \else
+      \def\captionlabel{#2}%
+    \fi
+    \def\captiontext{#3}%
+    \usecaptionstyle{longtable}%
+    \endgraf\vskip\baselineskip}%
+    \hss}}}
+\fi
+%    \end{macrocode}
+%
+% \subsection*{Support of the subfigure package}
+%    \begin{macrocode}
+\newcommand*\addtosubcaption[1]{}
+\@ifundefined{@makesubfigurecaption}{}{%
+  \caption@package{subfigure}
+%    \end{macrocode}
+%
+% \begin{macro}{\subcapsize}
+%    \begin{macrocode}
+  \newcommand*\subcapstyle[1]{%
+    \expandafter\ifx\csname caption@@#1\endcsname\relax
+      \PackageError{caption}{Undefined caption style `#1'}{}%
+    \else
+      \def\caption@substyle{#1}%
+    \fi}
+%    \end{macrocode}
+% \end{macro}
+%
+% Detection of |\caption@substyle|.
+%    \begin{macrocode}
+  \subcapstyle{normal}
+  \ifsubcaphang
+    \subcapstyle{hang}
+  \fi
+  \ifsubcapcenter
+    \subcapstyle{center}
+  \fi
+  \ifsubcapcenterlast
+    \subcapstyle{centerlast}
+  \fi
+%    \end{macrocode}
+%
+% NOTE: \cs{subfigcapmargin} is \emph{not} a length, it's a command.
+% So we make \cs{subfigcapwidth} also a command!
+%    \begin{macrocode}
+  \newif\iftakesubfigcapwidth
+  \newcommand*\subfigcapwidth{0pt}
+% only used by captionstyle `indent', but can be used in user-defines styles
+  \newlength\subcapindent
+%    \end{macrocode}
+%
+% \begin{macro}{\setsubcapmargin}
+% \begin{macro}{\setsubcapwidth}
+%    \begin{macrocode}
+  \newcommand*\setsubcapmargin[1]{%
+    \renewcommand*\subcapfigmargin{#1}%
+    \takesubfigcapwidthfalse}
+  \newcommand*\setsubcapwidth[1]{%
+    \renewcommand*\subcapfigwidth{#1}%
+    \takesubfigcapwidthtrue}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%    \begin{macrocode}
+  \renewcommand\@makesubfigurecaption[2]{%
+    \realcaptionwidth\@tempdima
+    \def\captionlabel{#1}%
+    \def\captiontext{#2}%
+    \let\captionfont\subcapsize
+    \let\captionlabelfont\relax
+    \let\captionlabeldelim\empty
+    \captionlabelsep0pt
+    \ifsubcapnooneline\onelinecaptionsfalse\else\onelinecaptionstrue\fi
+    \iftakesubfigcapwidth\takecaptionwidthtrue\else\takecaptionwidthfalse\fi
+    \setlength\captionmargin{\subfigcapmargin}%
+    \setlength\captionwidth{\subfigcapwidth}%
+    \captionindent\subcapindent
+    \hbox{\parbox[t]\@tempdima{\strut\usecaptionstyle{\caption@substyle}}}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+  \renewcommand*\addtosubcaption[1]{%
+    \let\caption@makesubfigurecaption\@makesubfigurecaption
+    \renewcommand\@makesubfigurecaption[2]{%
+      #1\caption@makesubfigurecaption}
+    \let\@makesubtablecaption\@makesubfigurecaption}}
+%    \end{macrocode}
+%
+% \subsection*{Cleaning up}
+%    \begin{macrocode}
+\ifx\caption@message\undefined
+\else\message{^^J}\let\caption@message\undefined\fi
+\let\caption@package\undefined
+\let\caption@subcapsize\undefined
+%    \end{macrocode}
+% \clearpage
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \Finale
+%
+\endinput
+

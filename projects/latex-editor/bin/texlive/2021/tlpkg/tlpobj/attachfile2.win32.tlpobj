@@ -1,0 +1,8 @@
+name attachfile2.win32
+category Package
+revision 15404
+shortdesc win32 files of attachfile2
+containersize 692
+containerchecksum 235a0f778335e16c585f601e79f557808c222d2fc06d6e83eda0bc9bcaa91bbc746ef6d4fb78800a2a89fa754c8f0a6d7478269460e3c39135afddc1d3fdffc1
+binfiles arch=win32 size=1
+ bin/win32/pdfatfi.exe

@@ -1,0 +1,15 @@
+%% This is a test file for ConTeXt
+
+\starttypescript [math][schola][all]
+    \definefontsynonym[MathRoman][name:TeX Gyre Schola Math][features=math\mathsizesuffix]
+\stoptypescript
+\setupbodyfont[schola]
+
+\setuppagenumbering[state=stop]
+
+\starttext
+
+\input math-test-context.tex
+
+\stoptext
+

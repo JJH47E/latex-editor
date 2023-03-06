@@ -1,0 +1,43 @@
+name euro-ce
+category Package
+revision 25714
+shortdesc Euro and CE sign font
+longdesc Metafont source for the symbols in several variants, designed
+longdesc to fit with the Computer Modern-set text.
+containersize 5936
+containerchecksum c1a864ebf022c8949b62195be6ce857ba108b7f930cf6e0152d70b7e3283e09c2f93fc670732cac79e3f48b860431186ea903324a02597b2a92fa43a0819b57b
+doccontainersize 5584
+doccontainerchecksum 3a44189546231f3bfde594142e6901a69f6e351e1d04203d1d646c476ca330431c0560faa79fec79485a4092b667864dcfb522ddf9a56bfc2b2ab76764b3852e
+docfiles size=6
+ texmf-dist/doc/fonts/euro-ce/euro-ce.doc
+ texmf-dist/doc/fonts/euro-ce/euro-ce.dvi
+ texmf-dist/doc/fonts/euro-ce/euro-ce.tex
+runfiles size=26
+ texmf-dist/fonts/source/public/euro-ce/ceit.mf
+ texmf-dist/fonts/source/public/euro-ce/cemac.mf
+ texmf-dist/fonts/source/public/euro-ce/cerm.mf
+ texmf-dist/fonts/source/public/euro-ce/cesl.mf
+ texmf-dist/fonts/source/public/euro-ce/eurobf.mf
+ texmf-dist/fonts/source/public/euro-ce/eurobfit.mf
+ texmf-dist/fonts/source/public/euro-ce/eurobfsl.mf
+ texmf-dist/fonts/source/public/euro-ce/euroit.mf
+ texmf-dist/fonts/source/public/euro-ce/euromac.mf
+ texmf-dist/fonts/source/public/euro-ce/euroof.mf
+ texmf-dist/fonts/source/public/euro-ce/eurorm.mf
+ texmf-dist/fonts/source/public/euro-ce/eurosl.mf
+ texmf-dist/fonts/source/public/euro-ce/eurosp.mf
+ texmf-dist/fonts/tfm/public/euro-ce/ceit.tfm
+ texmf-dist/fonts/tfm/public/euro-ce/cerm.tfm
+ texmf-dist/fonts/tfm/public/euro-ce/cesl.tfm
+ texmf-dist/fonts/tfm/public/euro-ce/eurobf.tfm
+ texmf-dist/fonts/tfm/public/euro-ce/eurobfit.tfm
+ texmf-dist/fonts/tfm/public/euro-ce/eurobfsl.tfm
+ texmf-dist/fonts/tfm/public/euro-ce/euroit.tfm
+ texmf-dist/fonts/tfm/public/euro-ce/euroof.tfm
+ texmf-dist/fonts/tfm/public/euro-ce/eurorm.tfm
+ texmf-dist/fonts/tfm/public/euro-ce/eurosl.tfm
+ texmf-dist/fonts/tfm/public/euro-ce/eurosp.tfm
+catalogue-ctan /fonts/euro-ce
+catalogue-license bsd
+catalogue-topics font font-specialist font-mf
+catalogue-version 3.0b

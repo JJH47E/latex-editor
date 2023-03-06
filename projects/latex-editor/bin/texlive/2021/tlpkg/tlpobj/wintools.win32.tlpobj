@@ -1,0 +1,99 @@
+name wintools.win32
+category TLCore
+revision 60685
+shortdesc utilities provided only for Windows
+longdesc Common utilities, mainly from the w32tex distribution.
+postaction filetype name="TL.PSViewer.view"  cmd='"TEXDIR/bin/win32/psviewer.exe" "%1"'
+postaction filetype name="TL.bitmap2eps.convert"  cmd='"TEXDIR/bin/win32/bitmap2eps.exe" "%1"'
+postaction progid extension=.bmp filetype="TL.bitmap2eps.convert"
+postaction progid extension=.eps filetype="TL.PSViewer.view"
+postaction progid extension=.gif filetype="TL.bitmap2eps.convert"
+postaction progid extension=.jpe filetype="TL.bitmap2eps.convert"
+postaction progid extension=.jpeg filetype="TL.bitmap2eps.convert"
+postaction progid extension=.jpg filetype="TL.bitmap2eps.convert"
+postaction progid extension=.png filetype="TL.bitmap2eps.convert"
+postaction progid extension=.ps filetype="TL.PSViewer.view"
+postaction progid extension=.tif filetype="TL.bitmap2eps.convert"
+postaction progid extension=.tiff filetype="TL.bitmap2eps.convert"
+containersize 5120404
+containerchecksum f52f4bf3325f6af16b5b9e1f8d6c616974d766f89cd78e5b61623460ae6fda65aa132aa32eb6cd920f7978d4b374e5c9e582863be1562ad25c6bc00e77a3603e
+doccontainersize 983380
+doccontainerchecksum 2d9d65c487fb902035df2823024418c05608b9702b052c281a11e15dd5945cf303a3aa952b256d16002965c39ae158f2960308ab975eece5e5210cddd90bd506
+docfiles size=334
+ texmf-dist/doc/psviewer/psviewer.README
+ texmf-dist/doc/psviewer/psviewer.ico
+ texmf-dist/doc/psviewer/psviewer.svg
+ texmf-dist/doc/support/tlaunch/COPYING
+ texmf-dist/doc/support/tlaunch/Changes
+ texmf-dist/doc/support/tlaunch/README
+ texmf-dist/doc/support/tlaunch/figures/custom_ed.png
+ texmf-dist/doc/support/tlaunch/figures/tlaunch_rug.png
+ texmf-dist/doc/support/tlaunch/figures/tlaunch_window.png
+ texmf-dist/doc/support/tlaunch/rug.zip
+ texmf-dist/doc/support/tlaunch/tlaunch.pdf
+ texmf-dist/doc/support/tlaunch/tlaunch.tex
+ texmf-dist/doc/support/wintools/fc-cache.pdf
+ texmf-dist/doc/support/wintools/fc-cat.pdf
+ texmf-dist/doc/support/wintools/fc-list.pdf
+ texmf-dist/doc/support/wintools/fc-match.pdf
+ texmf-dist/doc/support/wintools/fc-pattern.pdf
+ texmf-dist/doc/support/wintools/fc-query.pdf
+ texmf-dist/doc/support/wintools/fc-scan.pdf
+ texmf-dist/doc/support/wintools/fc-validate.pdf
+ texmf-dist/doc/support/wintools/gzip.pdf
+ texmf-dist/doc/support/wintools/pdfattach.pdf
+ texmf-dist/doc/support/wintools/pdfdetach.pdf
+ texmf-dist/doc/support/wintools/pdffonts.pdf
+ texmf-dist/doc/support/wintools/pdfimages.pdf
+ texmf-dist/doc/support/wintools/pdfinfo.pdf
+ texmf-dist/doc/support/wintools/pdfseparate.pdf
+ texmf-dist/doc/support/wintools/pdftocairo.pdf
+ texmf-dist/doc/support/wintools/pdftohtml.pdf
+ texmf-dist/doc/support/wintools/pdftoppm.pdf
+ texmf-dist/doc/support/wintools/pdftops.pdf
+ texmf-dist/doc/support/wintools/pdftotext.pdf
+ texmf-dist/doc/support/wintools/pdfunite.pdf
+ texmf-dist/doc/support/wintools/unzip.pdf
+ texmf-dist/doc/support/wintools/zip.pdf
+runfiles size=4
+ texmf-dist/scripts/bitmap2eps/bitmap2eps.vbs
+ texmf-dist/scripts/psviewer/psviewer.vbs
+ texmf-dist/scripts/tlaunch/tlaunchmode.pl
+ texmf-dist/web2c/tlaunch.ini
+binfiles arch=win32 size=8141
+ bin/win32/aftopl.exe
+ bin/win32/bitmap2eps.exe
+ bin/win32/bmeps.exe
+ bin/win32/bmp2png.exe
+ bin/win32/cjpeg.exe
+ bin/win32/djpeg.exe
+ bin/win32/gunzip.exe
+ bin/win32/gzip.exe
+ bin/win32/jbig2.exe
+ bin/win32/pdfattach.exe
+ bin/win32/pdfdetach.exe
+ bin/win32/pdffonts.exe
+ bin/win32/pdfimages.exe
+ bin/win32/pdfinfo.exe
+ bin/win32/pdfseparate.exe
+ bin/win32/pdftocairo.exe
+ bin/win32/pdftohtml.exe
+ bin/win32/pdftoppm.exe
+ bin/win32/pdftops.exe
+ bin/win32/pdftotext.exe
+ bin/win32/pdfunite.exe
+ bin/win32/png22pnm.exe
+ bin/win32/png2bmp.exe
+ bin/win32/psviewer.exe
+ bin/win32/sam2p.exe
+ bin/win32/texview.exe
+ bin/win32/tif22pnm.exe
+ bin/win32/tiff2png.exe
+ bin/win32/tlaunch.exe
+ bin/win32/tlaunchmode.exe
+ bin/win32/todos.exe
+ bin/win32/tomac.exe
+ bin/win32/tounix.exe
+ bin/win32/type1afm.exe
+ bin/win32/unzip.exe
+ bin/win32/zip.exe

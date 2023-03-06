@@ -1,0 +1,11 @@
+<div *ngIf="!!workspaceService.textData; then editor else error"></div>
+
+<ng-template #editor class="full-height">
+    <ngx-codemirror class="code-editor" [(ngModel)]="workspaceService.textData" [options]="options"></ngx-codemirror>
+</ng-template>
+
+<ng-template #error class="full-height">
+    <div *ngIf="fileSelected$ | async">
+        <p>An error has occured, try loading the file again, or refer to logs for further information</p>
+    </div>
+</ng-template>

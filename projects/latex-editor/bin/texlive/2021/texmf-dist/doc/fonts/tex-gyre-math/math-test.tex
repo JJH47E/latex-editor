@@ -1,0 +1,69 @@
+\pagestyle{empty}
+
+%Accents:
+\begin{displaymath}
+  \widehat{bcd} \ \widetilde{efg} \ \dot A \ \dot R  \ \symbf{\dot A \check t} 
+  \  \check{\mathcal{A}} \check{\mathcal{a}} \ \symbf{\acute \imath}
+\end{displaymath}
+
+%Angle brackets:
+\begin{displaymath}
+  \langle a \rangle \left\langle \frac{a}{b} \right\rangle
+  \left\langle \frac{\frac{a}{b}}{c} \right\rangle
+\end{displaymath}
+
+%Big operators:
+\begin{displaymath}
+  (x + a)^n = \sum_{k=0}^n \intop_{t_1}^{t_2} {n \choose k} x^k a^{n-k}f(x)\,dx
+\end{displaymath}
+
+%Logical operators
+\begin{displaymath}
+ \def\buildrel#1\below#2{\mathrel{\mathop{\kern0mm#2}\limits_{#1}}}
+ \bigcup_a^b \bigcap_c^d E {\buildrel ab \below \rightarrow} F' {\buildrel cd \below \Rightarrow} G
+\end{displaymath}
+
+%%Horizontal brackets:
+\begin{displaymath}
+ \underbrace{\overbracket{aaaaaaa}}_\textrm{Siédém}
+ \underbrace{\overparen{aaaaa}}_\textrm{pięć}
+\end{displaymath}
+
+%Squares:
+\begin{displaymath}
+ \sqrt{\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{2}}}}}} =
+ \frac{\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{2}}}}}}}}}{\frac{2}{3}}
+\end{displaymath}
+
+%Cardinal numbers
+\begin{displaymath}
+ \aleph_{0}<2^{\aleph_0}<2^{2^{\aleph_0}}
+\end{displaymath}
+
+%Powers
+\begin{displaymath}
+x^{\alpha} e^{\beta x^{\gamma} e^{\delta x^{\epsilon}}}
+\end{displaymath}
+
+%Integrals
+\begin{displaymath}
+ \oint_C\symbf{F}\cdot d\symbf{r}=\int_S\symbf{\nabla}\times\symbf{F}\cdot d\symbf{S}\qquad
+ \oint_C\vec{A}\cdot\vec{dr}=\iint_S(\nabla\times\vec{A})\,\vec{dS}
+\end{displaymath}
+
+%Sum
+\begin{displaymath}
+ (1+x)^n=1+\frac{nx}{1!}+\frac{n(n-1)x^2}{2!}+\cdots
+\end{displaymath}
+
+%Equations
+\setlength\arraycolsep{0.15em}
+\begin{eqnarray*}
+ \int_{-\infty}^\infty e^{-x^2}dx &=& \left[\int_{-\infty}^\infty e^{-x^2}dx
+  \int_{-\infty}^\infty e^{-y^2}dy\right]^{1/2}\\
+ &=& \left[\int_{0}^{2\pi} \int_0^\infty e^{-r^2}r\,dr\,d\theta\right]^{1/2}\\
+ &=& \left[\pi\int_{0}^\infty e^{-u}du\right]^{1/2}\\
+ &=& \sqrt{\pi}
+\end{eqnarray*}
+
+\endinput

@@ -1,0 +1,42 @@
+{
+  "name": "ngx-electronify",
+  "version": "2.0.1",
+  "scripts": {
+    "serve": "tsc -w -p packages\\builder\\tsconfig.json",
+    "build": "tsc -p packages\\builder\\tsconfig.json && npm run build:schematics",
+    "build:schematics": "tsc -p packages\\schematics\\tsconfig.schematics.json",
+    "copy": "copy packages\\builder\\*.json dist\\*.json && copy README.md dist\\README.md",
+    "copy:schematics": "copy packages\\schematics\\*.json dist\\schematics\\*.json",
+    "postbuild": "npm run copy && npm run copy:schematics && npm run clean:dist",
+    "clean:dist": "del dist\\tsconfig.json dist\\schematics\\tsconfig.schematics.json",
+    "release": "standard-version --tag-prefix=",
+    "release:major": "standard-version --tag-prefix= --release-as major",
+    "pretty": "prettier --write .",
+    "prepare": "cd ../.. && husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.1.2",
+    "@commitlint/config-conventional": "17.1.0",
+    "@types/jasmine": "~3.6.0",
+    "@types/node": "^12.11.1",
+    "husky": "8.0.1",
+    "jasmine": "^3.6.3",
+    "jasmine-node": "^3.0.0",
+    "prettier": "2.7.1",
+    "standard-version": "^9.1.0",
+    "ts-node": "~8.3.0",
+    "typescript": "~4.5.2"
+  },
+  "dependencies": {
+    "@angular-devkit/architect": "0.1402.1",
+    "@angular-devkit/core": "^14.2.1",
+    "@angular-devkit/schematics": "14.2.1",
+    "@electron/remote": "^2.0.9",
+    "@schematics/angular": "14.2.1",
+    "electron": "^19.0.8",
+    "electron-devtools-installer": "^3.2.0",
+    "ngx-electronyzer": "1.0.0",
+    "node-file-dialog": "file:node-file-dialog.tar.gz",
+    "uuid": "^9.0.0"
+  }
+}

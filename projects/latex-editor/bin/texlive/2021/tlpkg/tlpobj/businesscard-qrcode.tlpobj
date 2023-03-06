@@ -1,0 +1,48 @@
+name businesscard-qrcode
+category Package
+revision 61719
+shortdesc Business cards with QR-Code
+longdesc What happens when you give your visiting card to someone?
+longdesc Either they manually type the text into their computer or
+longdesc mobile phone, or it will end up in a box and be forgotten.
+longdesc Nowadays data is required electronically, not on paper. Here is
+longdesc the solution: A visiting card with QR-Code that contains a full
+longdesc vcard so that it can be scanned with an app on the mobile phone
+longdesc and thereby automatically imported into the electronic
+longdesc contacts. This also works well when you are offline and
+longdesc bluetooth transfer fails. So here is the highly configurable
+longdesc business card or visiting card with full vcard as QR-Code,
+longdesc ready to send to online printers. You can specify the exact
+longdesc size of the paper and the content within the paper, inluding
+longdesc generation of crop marks. The package depends on the following
+longdesc other LaTeX packages: calc, crop, DejaVuSans, etoolbox,
+longdesc fontawesome, fontenc, geometry, kvoptions, marvosym, qrcode,
+longdesc varwidth, and wrapfig. The package needs XeLaTeX for working
+longdesc properly.
+containersize 3724
+containerchecksum d991a7dfb9be936018a1946d2d3fbe24b775d99bce08da27e7451b54c679bf6565b207a7645ee4def2464ce08187b6ff25614dff9ec6925bce66fb6f48809412
+doccontainersize 540992
+doccontainerchecksum 6ff58a45f67ae55d82721f125bf3e9c8a5cbd049515b840eb4bdc79eea63bd82bccec41f53b05cab9e6720f3719cc58e882998249a738eaa9f033f14569b9f88
+docfiles size=158
+ texmf-dist/doc/xelatex/businesscard-qrcode/README.md details="Readme"
+ texmf-dist/doc/xelatex/businesscard-qrcode/examples/example.pdf details="Example of use (3)"
+ texmf-dist/doc/xelatex/businesscard-qrcode/examples/example.tex
+ texmf-dist/doc/xelatex/businesscard-qrcode/examples/john-doe-hongkong.pdf details="Example of use (1)"
+ texmf-dist/doc/xelatex/businesscard-qrcode/examples/john-doe-hongkong.tex
+ texmf-dist/doc/xelatex/businesscard-qrcode/examples/peter-muster-example-company-zuerich.pdf details="Example of use (2)"
+ texmf-dist/doc/xelatex/businesscard-qrcode/examples/peter-muster-example-company-zuerich.tex
+ texmf-dist/doc/xelatex/businesscard-qrcode/examples/special-papersize.pdf details="Example of use (4): Special papersize"
+ texmf-dist/doc/xelatex/businesscard-qrcode/examples/special-papersize.tex
+ texmf-dist/doc/xelatex/businesscard-qrcode/examples/texstudio_d30266.pdf
+ texmf-dist/doc/xelatex/businesscard-qrcode/examples/texstudio_d30266.tex
+ texmf-dist/doc/xelatex/businesscard-qrcode/screenshots/example.jpg
+ texmf-dist/doc/xelatex/businesscard-qrcode/screenshots/john-doe-hongkong.jpg
+ texmf-dist/doc/xelatex/businesscard-qrcode/screenshots/peter-muster-example-company-zuerich.jpg
+ texmf-dist/doc/xelatex/businesscard-qrcode/screenshots/special-papersize.jpg
+ texmf-dist/doc/xelatex/businesscard-qrcode/screenshots/texstudio_d30266.jpg
+runfiles size=3
+ texmf-dist/tex/xelatex/businesscard-qrcode/businesscard-qrcode.cls
+catalogue-ctan /macros/xetex/latex/businesscard-qrcode
+catalogue-license lgpl
+catalogue-topics class file-card qrcode xetex
+catalogue-version 1.2
