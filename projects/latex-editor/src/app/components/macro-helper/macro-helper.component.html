@@ -12,9 +12,9 @@
 
 <ng-template #macroSelected>
     <button mat-button (click)="unselectMacro()">Back</button>
-    <button mat-button [mat-dialog-close]="'ok'" cdkFocusInitial>Insert</button>
+    <button mat-button [disabled]="!this.currentEquation" (click)="insertAndCloseDialog()" cdkFocusInitial>Insert</button>
 </ng-template>
 
 <ng-template #macroDisplay>
-    <app-macro [macro]="selectedMacro!"></app-macro>
+    <app-macro [macro]="selectedMacro!" (equation)="equationToInsert($event)"></app-macro>
 </ng-template>

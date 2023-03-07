@@ -37,6 +37,11 @@ import { SubMacroComponent } from './components/sub-macro/sub-macro.component';
 import { VariableTemplateOptionComponent } from './components/variable-template-option/variable-template-option.component';
 import {MatRippleModule} from '@angular/material/core';
 import { PreviewToolbarComponent } from './components/preview-toolbar/preview-toolbar.component';
+import { GreekAlphabetComponent } from './components/greek-alphabet/greek-alphabet.component';
+import { GreekAlphabetDraggableComponent } from './components/greek-alphabet-draggable/greek-alphabet-draggable.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { OperatorAlphabetComponent } from './components/operator-alphabet/operator-alphabet.component';
+import { OperatorAlphabetDraggableComponent } from './components/operator-alphabet-draggable/operator-alphabet-draggable.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +60,11 @@ import { PreviewToolbarComponent } from './components/preview-toolbar/preview-to
     ImagePreviewComponent,
     SubMacroComponent,
     VariableTemplateOptionComponent,
-    PreviewToolbarComponent
+    PreviewToolbarComponent,
+    GreekAlphabetComponent,
+    GreekAlphabetDraggableComponent,
+    OperatorAlphabetComponent,
+    OperatorAlphabetDraggableComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +89,8 @@ import { PreviewToolbarComponent } from './components/preview-toolbar/preview-to
     MatTreeModule,
     CodemirrorModule,
     FormsModule,
-    MatRippleModule
+    MatRippleModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

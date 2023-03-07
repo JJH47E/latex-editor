@@ -16,6 +16,7 @@ export class WorkspaceService {
   private _fileBlob$ = new BehaviorSubject<FileBlob>({} as FileBlob);
   private _filePath$ = new BehaviorSubject<string>('');
   private _previewPdfBlob$ = new BehaviorSubject<FileBlob>({} as FileBlob);
+  private _toInsert$ = new BehaviorSubject<string>('');
   private encoder = new TextEncoder();
 
   public workspaceName$ = this._workspaceName$.pipe(shareReplay(1));
@@ -24,6 +25,7 @@ export class WorkspaceService {
   public fileBlob$ = this._fileBlob$.pipe(shareReplay(1));
   public filePath$ = this._filePath$.pipe(shareReplay(1));
   public previewPdfBlob$ = this._previewPdfBlob$.pipe(shareReplay(1));
+  public toInsert$ = this._toInsert$.pipe(shareReplay(1));
   public textData = '';
 
   constructor(
@@ -148,5 +150,13 @@ export class WorkspaceService {
 
   public downloadPdf(): void {
     this.electronService.ipcRenderer.send('downloadPdf');
+  }
+
+  public insertString(toInsert: string): void {
+    this._toInsert$.next(toInsert);
+  }
+
+  public acknowledgeInsert(): void {
+    this._toInsert$.next('');
   }
 }

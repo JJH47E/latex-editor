@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MacroHelperComponent } from '../macro-helper/macro-helper.component';
 import { HelpViewComponent } from '../help-view/help-view.component';
 import { MenuBar } from 'src/app/Enums/menu-bar.enum';
@@ -7,6 +7,8 @@ import { ToolbarActions } from 'src/app/Enums/toolbar-actions.enum';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 import { NewWorkspaceComponent } from '../new-workspace/new-workspace.component';
 import { BehaviorSubject } from 'rxjs';
+import { GreekAlphabetDraggableComponent } from '../greek-alphabet-draggable/greek-alphabet-draggable.component';
+import { OperatorAlphabetDraggableComponent } from '../operator-alphabet-draggable/operator-alphabet-draggable.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -22,8 +24,14 @@ export class ToolbarComponent implements OnInit {
   ];
 
   public editActions = [
-    {title: MenuBar.EditWorkspaceSettings, action: () => {this.workspaceService.loadFile('/images/rick.jpg')}}
+    {title: MenuBar.EditWorkspaceSettings, action: () => this.workspaceService.loadFile('/images/rick.jpg')}
   ];
+
+  public insertActions = [
+    {title: MenuBar.Macro, action: () => this.openMacroDialog()},
+    {title: MenuBar.GreekAlphabet, action: () => this.openGreekAlphabetDialog()},
+    {title: MenuBar.Operators, action: () => this.openOperatorAlphabetDialog()}
+  ]
 
   public helpActions = [
     {title: MenuBar.About, action: () => {}},
@@ -32,6 +40,9 @@ export class ToolbarComponent implements OnInit {
   ];
 
   public workspaceName$ = new BehaviorSubject<string>('LaTeX Editor');
+
+  private greekAlphabetRef: MatDialogRef<GreekAlphabetDraggableComponent, any> | undefined= undefined;
+  private operatorAlphabetRef: MatDialogRef<OperatorAlphabetDraggableComponent, any> | undefined= undefined;
 
   constructor(
     public dialog: MatDialog,
@@ -46,7 +57,7 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  openDialog(): void {
+  openMacroDialog(): void {
     const dialogRef = this.dialog.open(MacroHelperComponent, {
       width: '750px',
       maxHeight: '90%',
@@ -79,5 +90,29 @@ export class ToolbarComponent implements OnInit {
 
   saveWorkspace(): void {
     this.workspaceService.saveWorkspace();
+  }
+
+  openGreekAlphabetDialog(): void {
+    if (!!this.greekAlphabetRef) {
+      // close current window & open a new one
+      this.greekAlphabetRef.close();
+    }
+    this.greekAlphabetRef = this.dialog.open(GreekAlphabetDraggableComponent, {
+      width: '500px',
+      autoFocus: false,
+      hasBackdrop: false
+    });
+  }
+
+  openOperatorAlphabetDialog(): void {
+    if (!!this.operatorAlphabetRef) {
+      // close current window & open a new one
+      this.operatorAlphabetRef.close();
+    }
+    this.operatorAlphabetRef = this.dialog.open(OperatorAlphabetDraggableComponent, {
+      width: '500px',
+      autoFocus: false,
+      hasBackdrop: false
+    });
   }
 }
