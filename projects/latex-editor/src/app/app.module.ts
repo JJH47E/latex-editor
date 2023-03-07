@@ -42,6 +42,9 @@ import { GreekAlphabetDraggableComponent } from './components/greek-alphabet-dra
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OperatorAlphabetComponent } from './components/operator-alphabet/operator-alphabet.component';
 import { OperatorAlphabetDraggableComponent } from './components/operator-alphabet-draggable/operator-alphabet-draggable.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,8 @@ import { OperatorAlphabetDraggableComponent } from './components/operator-alphab
     GreekAlphabetComponent,
     GreekAlphabetDraggableComponent,
     OperatorAlphabetComponent,
-    OperatorAlphabetDraggableComponent
+    OperatorAlphabetDraggableComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +94,9 @@ import { OperatorAlphabetDraggableComponent } from './components/operator-alphab
     CodemirrorModule,
     FormsModule,
     MatRippleModule,
-    DragDropModule
+    DragDropModule,
+    MatBottomSheetModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

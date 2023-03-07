@@ -62,7 +62,7 @@ export class FileTreeComponent implements OnInit {
     }
 
     let toReturn = searchResult[0];
-    if (toReturn.startsWith('/')) {
+    if (toReturn != undefined && toReturn.startsWith('/')) {
       return toReturn.slice(1);
     }
 

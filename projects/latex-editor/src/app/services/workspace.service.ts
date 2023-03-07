@@ -51,6 +51,7 @@ export class WorkspaceService {
         console.log(`Warning: main.tex is not in the workspace`);
       } else {
         this.loadFile('main.tex');
+        this.reloadPreview();
       }
     });
     this.electronService.ipcRenderer.on('saveFileAsync-reply', (_, newFileToLoad: string) => {
@@ -126,13 +127,13 @@ export class WorkspaceService {
     console.log(`loaded: ${filePath}`);
   }
 
-  public async createWorkspace(workspaceName: string): Promise<boolean> {
+  public async createWorkspace(workspaceName: string, template: string): Promise<boolean> {
     if (isNullOrWhitespace(workspaceName)) {
       throw new Error(`Workspace name must have a non-whitespace value. Value: ${workspaceName}`);
     }
 
     console.log('sending');
-    this.electronService.ipcRenderer.send('createWorkspace', workspaceName);
+    this.electronService.ipcRenderer.send('createWorkspace', workspaceName, template);
 
     return Promise.resolve(true);
   }

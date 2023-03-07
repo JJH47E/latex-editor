@@ -1,0 +1,148 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage[brazil]{babel}   
+\usepackage[utf8]{inputenc}  
+
+     
+\sloppy
+
+\title{Modelo de Proposta de Trabalho de Conclusão de Curso - CEDS - ITA}
+
+\author{Nome Completo\inst{1}}
+
+
+\address{Divisão de Ciência da Computação -- Instituto Tecnológico de Aeronáutica\\
+  Praça Mal. Eduardo Gomes 50 -- São José dos Campos -- SP -- Brasil
+ \email{user@ita.br}
+}
+
+\begin{document} 
+
+\maketitle
+
+\begin{abstract}
+  Resumo em inglês, sempre obrigatório.
+\end{abstract}
+     
+\begin{resumo} 
+  Resumo em português, obrigatório apenas para TCC em português. Este meta-artigo descreve o estilo a ser usado na confecção de Trabalhos de Conclusão de Curso (TCC) para o Curso de Especialização em Ciência de Dados fornecido pela Divisão de Ciência da Computação do Instituto Tecnológico de Aeronáutica (ITA). É solicitada a escrita de resumo e abstract apenas para os artigos escritos em português. Artigos em inglês deverão apresentar apenas abstract.   Nos dois casos, o autor deve tomar cuidado para que o resumo (e o abstract) não ultrapassem 10 linhas cada, sendo que ambos devem estar na primeira
+  página do artigo.
+\end{resumo}
+
+\section{Informação Geral}
+
+Todos os Trabalhos de Conclusão de Curso (TCC)  devem ser escritos em inglês ou em português. O formato do papel deve ser A4 com coluna simples, 3,5 cm para margem, 2,5 cm para a margem inferior e 3,0 cm para as margens laterais, sem cabeçalhos ou rodapés. A fonte principal deve ser Times, tamanho nominal 12, com 6 pontos de espaço antes de cada parágrafo. Os números das páginas devem ser suprimidos. Os trabalhos devem respeitar o limite mínimo de 10 páginas de conteúdo, sem incluir as referências.
+
+Caminho para o \textit{template} em LaTeX:
+
+
+Caminho para o \textit{template} em Microsoft Word\copyright:
+
+{\small \url{https://1drv.ms/w/s!AnwH34e356I3grxIeG87k-c0MrYi3g?e=WdWDJV}}
+
+\section{Primeira Página} \label{sec:firstpage}
+
+A primeira página deve conter o título do trabalho, o nome e o endereço do
+autores, resumo em inglês e ``resumo'' em português (``resumos'' são
+exigido apenas para artigos escritos em português). O título deve ser centralizado
+em toda a página, em negrito, tamanho 16 e espaço de 12 pontos
+antes de si. Os nomes dos autores devem ser centralizados em fonte 12, negrito, todos dispostos na mesma linha, separados por vírgulas e com 12 vírgulas
+espaço após o título. Os endereços devem ser centralizados em fonte tamanho 12, também com 12 pontos de espaço após os nomes dos autores. Os endereços de e-mail devem ser escrita na fonte Courier New, tamanho nominal de 10 pontos, com espaço de 6 pontos antes e 6 pontos de espaço depois.
+
+O \textit{abstract} e resumo (se for o caso) devem estar em fonte Times 12,
+recuo de 0,8 cm em ambos os lados. A palavra \textbf{Abstract} e \textbf{Resumo},
+devem ser escritas em negrito e devem preceder o texto.
+
+\section{Seções e Parágrafos}
+
+Os títulos das seções devem estar em negrito, 13pt, alinhados à esquerda. Deve haver um extra 12 pt de espaço antes de cada título. A numeração das seções é opcional. O primeiro parágrafo de cada seção não deve ser recuado, enquanto as primeiras linhas de parágrafos subsequentes devem ter recuo de 1,27 cm.
+
+\subsection{Subseções}
+
+Os títulos das subseções devem estar em negrito, 12pt, alinhados à esquerda.
+
+\section{Figuras e Legendas}\label{sec:figs}
+
+
+Legendas de figuras e tabelas devem ser centralizadas se menos de uma linha
+(Figura~\ref{fig:exemploFig1}), justificado e recuado por 0,8 cm em ambas as margens, conforme mostrado na Figura~\ref{fig:exemploFig2}. A fonte da legenda deve
+ser Helvetica, 10 pontos, negrito, com 6 pontos de espaço antes e depois de cada
+rubrica.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{fig1.jpg}
+\caption{Uma figura com título curto}
+\label{fig:exemploFig1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.3\textwidth]{fig2.jpg}
+\caption{Esta figura é um exemplo de uma legenda de figura que leva mais de uma
+   linha e justificado considerando as margens mencionadas na Seção~\ref{sec:figs}.}
+\label{fig:exemploFig2}
+\end{figure}
+
+Nas tabelas, procure evitar o uso de fundos coloridos ou sombreados e evite
+linhas de enquadramento grossas, duplicadas ou desnecessárias. Ao relatar dados empíricos, não use mais dígitos decimais do que o permitido por sua precisão e
+reprodutibilidade. A legenda da tabela deve ser colocada antes da tabela (ver Tabela \ref{tab:exTable1}) e a fonte utilizada também deve ser Helvetica, 10 pontos, negrito, com 6 pontos de espaço antes e depois de cada legenda.
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+Cor      & Valores Numéricos          \\ \hline
+Azul     & R\$ 5,00                   \\ \hline
+Amarelo  & 3.1456                     \\ \hline
+Vermelho & 5 x 10\textasciicircum{}-2 \\ \hline
+\end{tabular}
+\caption{Exemplo de Tabela}
+\label{tab:exTable1}
+\end{table}
+
+\section{Estrutura da Proposta Trabalho de Conclusão de Curso)}
+
+Essa proposta de TCC deverá ser fornecida neste \textit{template} com a seguinte estrutura \textbf{obrigatória}:
+\begin{itemize}
+\item Seção 1 - Introdução
+\item Seção 1.1 - Contextualização
+\item Seção 1.2 - Problema de Pesquisa
+\item Seção 1.3 - Objetivo Geral
+\item Seção 1.4 - Objetivos Específicos
+\item Seção 2 - Resultados Esperados
+\item Seção 3 - Cronograma de Pesquisa
+\end{itemize}
+
+\section{Estrutura do Trabalho de Conclusão de Curso)}
+
+O TCC deverá estar com a seguinte estrutura (mínima)
+
+\begin{itemize}
+\item Seção 1 - Introdução
+\item Seção 1.1 - Contextualização
+\item Seção 1.2 - Problema de Pesquisa
+\item Seção 1.3 - Objetivo Geral
+\item Seção 1.4 - Objetivos Específicos
+\item Seção 2 - Desenvolvimento*
+\item Seção 3 - Analise e Discussão dos Resultados*
+\item Seção 4 - Conclusão
+\end{itemize}
+
+*Essas seções poderão ter a estrutura que for mais adequada e a ser definida com o orientador.
+
+\section{Referências}
+
+As referências bibliográficas devem ser inequívocas e uniformes. É obrigatório fornecer as referências dos nomes dos autores entre colchetes, por exemplo, \cite{knuth:84}, \cite{boulic:91} e \cite{smith:99}.
+
+As referências devem ser listadas usando tamanho de fonte de 12 pontos, com 6 pontos de espaço antes de cada referência. A primeira linha de cada referência não deve ser recuada, enquanto as seguintes devem ser recuadas em 0,5 cm.
+
+\bibliographystyle{sbc}
+\bibliography{sbc-template}
+
+\end{document}

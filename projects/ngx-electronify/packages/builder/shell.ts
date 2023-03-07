@@ -16,6 +16,7 @@ const appUrl = `http://localhost:${port}/`;
 const workingDirectory = './.tmp/active';
 const templateDirectory = './templates';
 const binDirectory = './bin';
+const blankTemplateFileName = 'blank.tex';
 const workspaceFilters = [
   {
     name: 'TeXProject',
@@ -72,8 +73,8 @@ async function installAngularDevtools() {
 app.whenReady().then(async () => {
   await installAngularDevtools();
   console.log('setting up handlers');
-  ipcMain.on('createWorkspace', async (event, workspaceName) => {
-    await createWorkspace(workspaceName, 'test_template.tex');
+  ipcMain.on('createWorkspace', async (event, workspaceName, template) => {
+    await createWorkspace(workspaceName, template);
     event.sender.send('loadWorkspace-reply', await getConfigContents(workingDirectory));
   });
   ipcMain.on('selectWorkspace', async event => {
@@ -184,7 +185,7 @@ async function createWorkspace(name: string, template: string) {
 
   // create .config & save to working directory & copy main.tex from template
   const workspaceConfig = {name, filePaths: ['main.tex']} as WorkspaceConfig;
-  await copyTemplate(template, 'main.tex');
+  await copyTemplate(!template ? blankTemplateFileName : template, 'main.tex');
   await writeFile(`${workingDirectory}/.config`, JSON.stringify(workspaceConfig));
 }
 

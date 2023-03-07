@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Empty",
+        "fileName": ""
+    },
+    {
+        "name": "Sample",
+        "fileName": "test_template.tex"
+    },
+    {
+        "name": "Cover Letter",
+        "fileName": "cover_letter.tex"
+    },
+    {
+        "name": "CV",
+        "fileName": "cv.tex"
+    },
+    {
+        "name": "Thesis",
+        "fileName": "thesis.tex"
+    },
+    {
+        "name": "Report",
+        "fileName": "report.tex"
+    }
+]

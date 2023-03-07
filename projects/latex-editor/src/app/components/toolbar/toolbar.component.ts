@@ -9,6 +9,8 @@ import { NewWorkspaceComponent } from '../new-workspace/new-workspace.component'
 import { BehaviorSubject } from 'rxjs';
 import { GreekAlphabetDraggableComponent } from '../greek-alphabet-draggable/greek-alphabet-draggable.component';
 import { OperatorAlphabetDraggableComponent } from '../operator-alphabet-draggable/operator-alphabet-draggable.component';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { WelcomeComponent } from '../welcome/welcome.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -47,13 +49,18 @@ export class ToolbarComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public workspaceService: WorkspaceService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit(): void {
     this.workspaceService.workspaceName$.subscribe(name => {
       this.workspaceName$.next(name);
       this.changeDetectorRef.detectChanges();
+    });
+
+    this.bottomSheet.open(WelcomeComponent, {
+      disableClose: true
     });
   }
 
@@ -75,13 +82,11 @@ export class ToolbarComponent implements OnInit {
   }
 
   openNewWorkspace(): void {
-    const dialogRef = this.dialog.open(NewWorkspaceComponent, {
+    this.dialog.open(NewWorkspaceComponent, {
       //TODO: adjust for phones etc
       width: '750px',
       autoFocus: false
     });
-
-    dialogRef.afterClosed().subscribe(_ => { });
   }
 
   openWorkspace(): void {

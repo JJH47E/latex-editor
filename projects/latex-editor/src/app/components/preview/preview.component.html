@@ -1,5 +1,5 @@
 <div class="max-height preview">
-    <app-preview-toolbar></app-preview-toolbar>
+    <app-preview-toolbar (fitToScreenEmitter)="fitToScreen()" (zoomInEmitter)="zoomIn()" (zoomOutEmitter)="zoomOut()"></app-preview-toolbar>
     <div class="preview-container">
         <pdf-viewer
             [src]="pdfSrc"
@@ -9,6 +9,7 @@
             [zoom-scale]="'page-width'"
             [fit-to-page]="true"
             [show-all]="true"
+            [zoom]="zoom"
             style="height: 100%; width: 100%">
         </pdf-viewer>
     </div>

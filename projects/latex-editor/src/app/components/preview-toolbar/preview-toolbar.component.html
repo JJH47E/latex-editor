@@ -2,6 +2,15 @@
     <mat-toolbar-row>
     <span>Preview</span>
     <span class="fill-remaining-space"></span>
+    <button mat-icon-button (click)="zoomIn()">
+        <mat-icon>zoom_in</mat-icon>
+    </button>
+    <button mat-icon-button (click)="zoomOut()">
+        <mat-icon>zoom_out</mat-icon>
+    </button>
+    <button mat-icon-button (click)="fitToScreen()">
+        <mat-icon>fit_screen</mat-icon>
+    </button>
     <button mat-icon-button (click)="reloadPreview()">
         <mat-icon>sync</mat-icon>
     </button>
