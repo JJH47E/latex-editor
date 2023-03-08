@@ -1,26 +1,22 @@
 [
     {
         "name": "Empty",
-        "fileName": ""
+        "fileName": "blank"
     },
     {
         "name": "Sample",
-        "fileName": "test_template.tex"
+        "fileName": "test_template"
     },
     {
-        "name": "Cover Letter",
-        "fileName": "cover_letter.tex"
+        "name": "Calendar",
+        "fileName": "calendar"
     },
     {
         "name": "CV",
-        "fileName": "cv.tex"
+        "fileName": "cv"
     },
     {
         "name": "Thesis",
-        "fileName": "thesis.tex"
-    },
-    {
-        "name": "Report",
-        "fileName": "report.tex"
+        "fileName": "thesis"
     }
 ]

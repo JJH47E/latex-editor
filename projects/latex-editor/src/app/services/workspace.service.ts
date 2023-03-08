@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ElectronService } from 'ngx-electronyzer';
-import { BehaviorSubject, shareReplay } from 'rxjs';
+import { BehaviorSubject, shareReplay, tap } from 'rxjs';
 import { FileBlob } from '../models/file-blob';
 import { WorkspaceConfig } from '../models/workspace-config';
 import { isNullOrWhitespace } from '../utils/string.utils';
@@ -22,7 +22,7 @@ export class WorkspaceService {
   public workspaceName$ = this._workspaceName$.pipe(shareReplay(1));
   public workspaceId$ = this._workspaceId$.pipe(shareReplay(1));
   public workspaceFiles$ = this._workspaceFiles$.pipe(shareReplay(1));
-  public fileBlob$ = this._fileBlob$.pipe(shareReplay(1));
+  public fileBlob$ = this._fileBlob$.pipe(shareReplay(1), tap(blob => console.log(`Recieved: ${blob.id}, ${blob.contentType} from main process`)));
   public filePath$ = this._filePath$.pipe(shareReplay(1));
   public previewPdfBlob$ = this._previewPdfBlob$.pipe(shareReplay(1));
   public toInsert$ = this._toInsert$.pipe(shareReplay(1));
@@ -59,10 +59,16 @@ export class WorkspaceService {
       this.loadFile(newFileToLoad);
     });
     this.electronService.ipcRenderer.on('generatePreview-error', (_, errs: string[]) => {
+      // display the last error, avoid potential issue with files names?
+      // TODO: Needs to be tested more
+      if (errs.length == 0) {
+        console.log('Main process reported error, but did not return any information!');
+        return;
+      }
       const err = errs.at(-1);
-      const line = err?.substring(2);
+      const line = err!.slice(7);
       this.zone.run(() => {
-        const snackbar = this.snackBar.open(`An error occured when generating preview. Line ${line}`, 'OK', { duration: 5000 });
+        const snackbar = this.snackBar.open(`An error occured when generating preview. ${line}`, 'OK', { duration: 5000 });
         snackbar.onAction().subscribe(() => {
           snackbar.dismiss();
         })
@@ -87,6 +93,8 @@ export class WorkspaceService {
     // send save request to main process
     let blob = this._fileBlob$.getValue();
 
+    console.log(blob.id + ' ' + blob.contentType);
+
     if (blob.contentType.includes('image')) {
       // hacky fix, could be done better
       this.loadFile(newFileToLoad);
@@ -102,7 +110,9 @@ export class WorkspaceService {
     // send save request to main process
     let blob = this._fileBlob$.getValue();
 
-    if (blob.contentType.includes('image')) {
+    console.log(blob.id + ' ' + blob.contentType);
+
+    if (blob.contentType?.includes('image')) {
       // hacky fix, could be done better
       this.loadFile(newFileToLoad);
       return;
