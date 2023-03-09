@@ -45,6 +45,7 @@ import { OperatorAlphabetDraggableComponent } from './components/operator-alphab
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import {MatSelectModule} from '@angular/material/select';
+import { DraggableDialogComponent } from './components/draggable-dialog/draggable-dialog.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import {MatSelectModule} from '@angular/material/select';
     GreekAlphabetDraggableComponent,
     OperatorAlphabetComponent,
     OperatorAlphabetDraggableComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    DraggableDialogComponent
   ],
   imports: [
     BrowserModule,

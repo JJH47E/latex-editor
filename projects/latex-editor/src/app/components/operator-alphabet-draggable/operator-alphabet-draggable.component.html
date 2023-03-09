@@ -1,13 +1,3 @@
-<div class="dialog">
-    <div mat-dialog-title class="draggable dialog-title" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
-        <h1>
-            Operators
-        </h1>
-        <button mat-icon-button aria-label="close dialog" mat-dialog-close>
-            <mat-icon>close</mat-icon>
-        </button>
-    </div>
-    <div mat-dialog-content>
-        <app-operator-alphabet></app-operator-alphabet>
-    </div>
-</div>
+<app-draggable-dialog dialogTitle="Operators">
+    <app-operator-alphabet></app-operator-alphabet>
+</app-draggable-dialog>

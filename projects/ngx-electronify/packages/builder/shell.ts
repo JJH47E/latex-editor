@@ -178,6 +178,8 @@ function getBoolean(value: string) {
 }
 
 async function createWorkspace(name: string, template: string) {
+  // fixes bug when new workspace is created after existing one is loaded in, probably a better place to put this
+  workspacePath = '';
   await refreshWorkingDirectory();
 
   console.log(`creating workspace, ${name}, directory: ${workingDirectory}`);
@@ -309,14 +311,18 @@ async function generatePreview(event: Electron.IpcMainEvent): Promise<void> {
       console.log('error, returning');
       const errorRegex = /^! LaTeX Error: /g;
       const fallbackErrorRegex = /l\.[0-9]+\ .+/g;
-      var lines = readFileSync(`${workingDirectory}/main.log`).toString().split("\n")
-      
-      var errorLines = lines.filter(line => errorRegex.test(line));
-      if (errorLines.length == 0) {
-        errorLines = lines.filter(line => fallbackErrorRegex.test(line));
+      try {
+        var lines = readFileSync(`${workingDirectory}/main.log`).toString().split("\n")
+        
+        var errorLines = lines.filter(line => errorRegex.test(line));
+        if (errorLines.length == 0) {
+          errorLines = lines.filter(line => fallbackErrorRegex.test(line));
+        }
+        event.sender.send('generatePreview-error', errorLines);
+        return;
+      } catch {
+        event.sender.send('generatePreview-error', ['An unknown error occurred, check application logs for more info']);
       }
-      event.sender.send('generatePreview-error', errorLines);
-      return;
     }
 
     console.log('Finished successfully');

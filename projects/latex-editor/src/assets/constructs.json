@@ -1,0 +1,14 @@
+[
+    "\\frac{abc}{xyz}",
+    "f'",
+    "\\overline{abc}",
+    "\\underline{abc}",
+    "\\overrightarrow{abc}",
+    "\\overleftarrow{abc}",
+    "\\sqrt{abc}",
+    "\\sqrt[n]{abc}",
+    "\\widehat{abc}",
+    "\\widetilde{abc}",
+    "\\overbrace{abc}",
+    "\\underbrace{abc}"
+]

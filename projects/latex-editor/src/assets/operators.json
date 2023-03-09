@@ -20,5 +20,20 @@
     "\\vee",
     "\\otimes",
     "\\boxtimes",
-    "\\cong"
+    "\\cong",
+    "\\sum",
+    "\\prod",
+    "\\coprod",
+    "\\int",
+    "\\oint",
+    "\\iint",
+    "\\biguplus",
+    "\\bigcap",
+    "\\bigcup",
+    "\\bigoplus",
+    "\\bigotimes",
+    "\\bigodot",
+    "\\bigvee",
+    "\\bigwedge",
+    "\\bigsqcup"
 ]
