@@ -8,5 +8,9 @@ export enum MenuBar {
     Help = 'Help',
     Macro = 'Macro',
     GreekAlphabet = 'Greek Alphabet',
-    Operators = 'Operators'
+    Operators = 'Operators',
+    Delimiters = 'Delimiters',
+    Constructs = 'Mathematical Constructs',
+    Accents = 'Accents',
+    Misc = 'Miscellaneous'
 }

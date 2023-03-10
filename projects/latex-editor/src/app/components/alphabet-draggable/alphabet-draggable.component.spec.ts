@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OperatorAlphabetDraggableComponent } from './operator-alphabet-draggable.component';
+import { AlphabetDraggableComponent } from './alphabet-draggable.component';
 
 describe('OperatorAlphabetDraggableComponent', () => {
-  let component: OperatorAlphabetDraggableComponent;
-  let fixture: ComponentFixture<OperatorAlphabetDraggableComponent>;
+  let component: AlphabetDraggableComponent;
+  let fixture: ComponentFixture<AlphabetDraggableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OperatorAlphabetDraggableComponent ]
+      declarations: [ AlphabetDraggableComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OperatorAlphabetDraggableComponent);
+    fixture = TestBed.createComponent(AlphabetDraggableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

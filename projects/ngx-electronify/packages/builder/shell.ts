@@ -31,12 +31,14 @@ const pdfFilters = [
 ];
 
 let workspacePath = '';
+var hasConfirmedClose = false;
 
 function createWindow() {
   const options: Electron.BrowserWindowConstructorOptions = {
     width: 800,
     height: 600,
-    show: false
+    show: false,
+    autoHideMenuBar: true
   };
 
   // expose the Electron API into the global window object
@@ -58,6 +60,44 @@ function createWindow() {
       mainWindow.webContents.openDevTools();
     }
   });
+
+  mainWindow.on('close', async (event) => {
+    if (!hasConfirmedClose) {
+      // stop window closing
+      event.preventDefault();
+      // Show dialog asking is the user wants to save their work
+      const result = dialog.showMessageBoxSync({
+          title: 'Confirm',
+          message: 'Are you sure you want to exit? Any unsaved work will be lost',
+          buttons: ['Save', 'Don\'t Save', 'Cancel']
+      })
+  
+      if (result === 0) {
+        // save
+        if (!workspacePath) {
+          // trigger save as flow
+          var configContents = await getConfigContents(workingDirectory)
+          var savePath = await openSavePrompt(configContents.name, workspaceFilters)
+          if (!savePath) {
+            console.log('Save aborted');
+            return;
+          }
+          await saveWorkspace(workspacePath, savePath);
+        } else {
+          // save like normal
+          await saveWorkspace(workspacePath);
+        }
+        hasConfirmedClose = true;
+        mainWindow.close();
+      } else if (result === 1) {
+        hasConfirmedClose = true;
+        mainWindow.close();
+      } if (result === 2) {
+        // Do not close
+        return;
+      }
+    }
+});
 }
 
 async function installAngularDevtools() {
@@ -286,8 +326,8 @@ async function saveFile(buffer: Buffer, destinationPath: string) {
   return await writeFile(destinationPath, buffer);
 }
 
-async function openSavePrompt(title: string, fileFilters: FileFilter[]): Promise<string> {
-  var saveResult = await dialog.showSaveDialog({title, filters: fileFilters});
+async function openSavePrompt(fileName: string, fileFilters: FileFilter[]): Promise<string> {
+  var saveResult = await dialog.showSaveDialog({title: fileName, filters: fileFilters});
   if (!!saveResult.filePath) {
     return saveResult.filePath;
   } else {

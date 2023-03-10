@@ -1,4 +1,4 @@
-<div class="full-height tree-container accent" *ngIf="filePaths$ | async as nodes">
+<div class="full-height tree-container" *ngIf="filePaths$ | async as nodes">
     <mat-action-list>
         <div *ngFor="let node of nodes">
             <ng-container *ngTemplateOutlet="nestedNode; context: node"></ng-container>

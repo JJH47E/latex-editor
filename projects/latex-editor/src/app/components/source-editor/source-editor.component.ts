@@ -21,7 +21,7 @@ export class SourceEditorComponent implements OnInit {
     this.workspaceService.fileBlob$.pipe(filter(x => !!x))
       .subscribe(blob => {
         console.log('blob loaded');
-        this.useImagePreview$.next(blob.contentType.startsWith('image'));
+        this.useImagePreview$.next(!!blob.contentType ? blob.contentType.startsWith('image') : false);
         this.fileBlob$.next(blob);
         this.changeDetecterRef.detectChanges();
       });

@@ -40,12 +40,13 @@ import { PreviewToolbarComponent } from './components/preview-toolbar/preview-to
 import { GreekAlphabetComponent } from './components/greek-alphabet/greek-alphabet.component';
 import { GreekAlphabetDraggableComponent } from './components/greek-alphabet-draggable/greek-alphabet-draggable.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { OperatorAlphabetComponent } from './components/operator-alphabet/operator-alphabet.component';
-import { OperatorAlphabetDraggableComponent } from './components/operator-alphabet-draggable/operator-alphabet-draggable.component';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import {MatSelectModule} from '@angular/material/select';
 import { DraggableDialogComponent } from './components/draggable-dialog/draggable-dialog.component';
+import { AlphabetComponent } from './components/alphabet/alphabet.component';
+import { AlphabetDraggableComponent } from './components/alphabet-draggable/alphabet-draggable.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -67,8 +68,8 @@ import { DraggableDialogComponent } from './components/draggable-dialog/draggabl
     PreviewToolbarComponent,
     GreekAlphabetComponent,
     GreekAlphabetDraggableComponent,
-    OperatorAlphabetComponent,
-    OperatorAlphabetDraggableComponent,
+    AlphabetComponent,
+    AlphabetDraggableComponent,
     WelcomeComponent,
     DraggableDialogComponent
   ],
@@ -98,7 +99,8 @@ import { DraggableDialogComponent } from './components/draggable-dialog/draggabl
     MatRippleModule,
     DragDropModule,
     MatBottomSheetModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

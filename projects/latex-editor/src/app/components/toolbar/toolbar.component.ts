@@ -8,7 +8,7 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 import { NewWorkspaceComponent } from '../new-workspace/new-workspace.component';
 import { BehaviorSubject } from 'rxjs';
 import { GreekAlphabetDraggableComponent } from '../greek-alphabet-draggable/greek-alphabet-draggable.component';
-import { OperatorAlphabetDraggableComponent } from '../operator-alphabet-draggable/operator-alphabet-draggable.component';
+import { AlphabetDraggableComponent } from '../alphabet-draggable/alphabet-draggable.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { WelcomeComponent } from '../welcome/welcome.component';
 
@@ -32,7 +32,11 @@ export class ToolbarComponent implements OnInit {
   public insertActions = [
     {title: MenuBar.Macro, action: () => this.openMacroDialog()},
     {title: MenuBar.GreekAlphabet, action: () => this.openGreekAlphabetDialog()},
-    {title: MenuBar.Operators, action: () => this.openOperatorAlphabetDialog()}
+    {title: MenuBar.Delimiters, action: () => this.openDelimitersAlphabetDialog()},
+    {title: MenuBar.Constructs, action: () => this.openConstructsAlphabetDialog()},
+    {title: MenuBar.Accents, action: () => this.openAccentsAlphabetDialog()},
+    {title: MenuBar.Operators, action: () => this.openOperatorAlphabetDialog()},
+    {title: MenuBar.Misc, action: () => this.openMiscAlphabetDialog()}
   ]
 
   public helpActions = [
@@ -44,7 +48,11 @@ export class ToolbarComponent implements OnInit {
   public workspaceName$ = new BehaviorSubject<string>('LaTeX Editor');
 
   private greekAlphabetRef: MatDialogRef<GreekAlphabetDraggableComponent, any> | undefined= undefined;
-  private operatorAlphabetRef: MatDialogRef<OperatorAlphabetDraggableComponent, any> | undefined= undefined;
+  private operatorAlphabetRef: MatDialogRef<AlphabetDraggableComponent, any> | undefined= undefined;
+  private delimterAlphabetRef: MatDialogRef<AlphabetDraggableComponent, any> | undefined= undefined;
+  private constructsAlphabetRef: MatDialogRef<AlphabetDraggableComponent, any> | undefined= undefined;
+  private accentsAlphabetRef: MatDialogRef<AlphabetDraggableComponent, any> | undefined= undefined;
+  private miscAlphabetRef: MatDialogRef<AlphabetDraggableComponent, any> | undefined= undefined;
 
   constructor(
     public dialog: MatDialog,
@@ -77,7 +85,8 @@ export class ToolbarComponent implements OnInit {
 
   openHelp(): void {
     this.dialog.open(HelpViewComponent, {
-      autoFocus: false
+      autoFocus: false,
+      width: '500px',
     });
   }
 
@@ -109,15 +118,68 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  openOperatorAlphabetDialog(): void {
+  private openOperatorAlphabetDialog(): void {
     if (!!this.operatorAlphabetRef) {
       // close current window & open a new one
       this.operatorAlphabetRef.close();
     }
-    this.operatorAlphabetRef = this.dialog.open(OperatorAlphabetDraggableComponent, {
+    this.operatorAlphabetRef = this.dialog.open(AlphabetDraggableComponent, {
       width: '500px',
       autoFocus: false,
-      hasBackdrop: false
+      hasBackdrop: false,
+      data: {fileName: 'operators', headerName: MenuBar.Operators}
+    });
+  }
+
+  private openDelimitersAlphabetDialog(): void {
+    if (!!this.delimterAlphabetRef) {
+      // close current window & open a new one
+      this.delimterAlphabetRef.close();
+    }
+    this.delimterAlphabetRef = this.dialog.open(AlphabetDraggableComponent, {
+      width: '500px',
+      autoFocus: false,
+      hasBackdrop: false,
+      data: {fileName: 'delimiters', headerName: MenuBar.Delimiters}
+    });
+  }
+
+  private openConstructsAlphabetDialog(): void {
+    if (!!this.constructsAlphabetRef) {
+      // close current window & open a new one
+      this.constructsAlphabetRef.close();
+    }
+    this.constructsAlphabetRef = this.dialog.open(AlphabetDraggableComponent, {
+      width: '500px',
+      autoFocus: false,
+      hasBackdrop: false,
+      data: {fileName: 'constructs', headerName: MenuBar.Constructs}
+    });
+  }
+
+  private openAccentsAlphabetDialog(): void {
+    if (!!this.accentsAlphabetRef) {
+      // close current window & open a new one
+      this.accentsAlphabetRef.close();
+    }
+    this.accentsAlphabetRef = this.dialog.open(AlphabetDraggableComponent, {
+      width: '500px',
+      autoFocus: false,
+      hasBackdrop: false,
+      data: {fileName: 'accents', headerName: MenuBar.Accents}
+    });
+  }
+
+  private openMiscAlphabetDialog(): void {
+    if (!!this.miscAlphabetRef) {
+      // close current window & open a new one
+      this.miscAlphabetRef.close();
+    }
+    this.miscAlphabetRef = this.dialog.open(AlphabetDraggableComponent, {
+      width: '500px',
+      autoFocus: false,
+      hasBackdrop: false,
+      data: {fileName: 'miscellaneous', headerName: MenuBar.Misc}
     });
   }
 }

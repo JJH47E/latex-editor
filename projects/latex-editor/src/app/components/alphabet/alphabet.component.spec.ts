@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OperatorAlphabetComponent } from './operator-alphabet.component';
+import { AlphabetComponent } from './alphabet.component';
 
 describe('OperatorAlphabetComponent', () => {
-  let component: OperatorAlphabetComponent;
-  let fixture: ComponentFixture<OperatorAlphabetComponent>;
+  let component: AlphabetComponent;
+  let fixture: ComponentFixture<AlphabetComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OperatorAlphabetComponent ]
+      declarations: [ AlphabetComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OperatorAlphabetComponent);
+    fixture = TestBed.createComponent(AlphabetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
