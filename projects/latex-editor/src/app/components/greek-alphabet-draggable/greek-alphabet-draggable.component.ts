@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WorkspaceService } from 'src/app/services/workspace.service';
 
 @Component({
   selector: 'app-greek-alphabet-draggable',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GreekAlphabetDraggableComponent implements OnInit {
 
-  constructor() { }
+  constructor(private workspaceService: WorkspaceService) { }
 
   ngOnInit(): void {
   }
+
+  public insertCharacter(str: string) {
+    this.workspaceService.insertString(this.qualifyInlineInsert(str));
+  }
+
+  private qualifyInlineInsert = (str: string) => `\\(${str}\\)`;
 
 }

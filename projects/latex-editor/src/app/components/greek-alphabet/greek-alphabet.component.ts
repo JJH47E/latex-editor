@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { GreekCharacter } from 'src/app/models/greek-character.model';
-import { WorkspaceService } from 'src/app/services/workspace.service';
 import characters from '../../../assets/greek-alphabet.json';
 
 @Component({
@@ -10,9 +9,12 @@ import characters from '../../../assets/greek-alphabet.json';
 })
 export class GreekAlphabetComponent implements OnInit {
 
+  @Output()
+  public toInsertEmitter = new EventEmitter<string>();
+
   public dataToDisplay: string[] = [];
   private characterList: GreekCharacter[] = characters;
-  constructor(private workspaceService: WorkspaceService) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.dataToDisplay = this.characterList
@@ -22,13 +24,11 @@ export class GreekAlphabetComponent implements OnInit {
   }
 
   public insertCharacter(character: string): void {
-    this.workspaceService.insertString(this.qualifyInlineInsert(character));
+    this.toInsertEmitter.emit(character);
   }
 
   private onlyUnique(value: string, index: number, array: string[]) {
     return array.indexOf(value) === index;
   }
-
-  private qualifyInlineInsert = (character: string) => `\\(${character}\\)`;
 
 }

@@ -47,6 +47,7 @@ import { DraggableDialogComponent } from './components/draggable-dialog/draggabl
 import { AlphabetComponent } from './components/alphabet/alphabet.component';
 import { AlphabetDraggableComponent } from './components/alphabet-draggable/alphabet-draggable.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { PrebuiltAlphabetComponent } from './components/prebuilt-alphabet/prebuilt-alphabet.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AlphabetComponent,
     AlphabetDraggableComponent,
     WelcomeComponent,
-    DraggableDialogComponent
+    DraggableDialogComponent,
+    PrebuiltAlphabetComponent
   ],
   imports: [
     BrowserModule,

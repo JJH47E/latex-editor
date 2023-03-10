@@ -1,11 +1,31 @@
 <h1 mat-dialog-title>Variable Templates</h1>
 <div mat-dialog-content>
-    <div *ngFor="let template of templates" (click)="closeDialog(template)">
-        <button mat-button class="option">
-            <app-variable-template-option [option]="template"></app-variable-template-option>
-        </button>
+    <div *ngIf="!(selectedOption$ | async); else showSection">
+        <div *ngFor="let section of sections" (click)="openSection(section)">
+            <button mat-button class="option">
+                {{ section }}
+            </button>
+        </div>
     </div>
 </div>
 <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="null">Cancel</button>
+    <button *ngIf="!(selectedOption$ | async); else showBackButton" mat-button [mat-dialog-close]="null">Cancel</button>
 </div>
+
+<ng-template #showSection><!--TODO: fix this switch statement-->
+    <div *ngSwitch="selectedOption$ | async; let option">
+        <div *ngSwitchCase="JsonMapping.Prebuilt">
+            <app-prebuilt-alphabet (toInsertEmitter)="closeDialog($event)"></app-prebuilt-alphabet>
+        </div>
+        <div *ngSwitchCase="JsonMapping.Greek">
+            <app-greek-alphabet (toInsertEmitter)="closeDialog($event)"></app-greek-alphabet>
+        </div>
+        <div *ngSwitchDefault>
+            <app-alphabet [fileName]="option" (insertStringEmitter)="closeDialog($event)"></app-alphabet>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #showBackButton>
+    <button mat-button (click)="resetSelection()">Back</button>
+</ng-template>

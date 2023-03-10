@@ -1,4 +1,9 @@
 [
+    "\\sum_{a=1}^{b}",
+    "\\int_{a}^{b} x^2 \\,dx",
+    "\\prod_{i=a}^{b} f(i)",
+    "\\bigotimes_{i=1}^{n}",
+    "\\lim_{x\\to\\infty} f(x)",
     "\\frac{abc}{xyz}",
     "f'",
     "\\overline{abc}",

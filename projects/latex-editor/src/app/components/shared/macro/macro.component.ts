@@ -125,7 +125,7 @@ export class MacroComponent implements OnInit {
       throw Error('Unable to find control');
     }
     const dialogRef = this.dialog.open(SubMacroComponent, {
-      width: '300px',
+      width: '500px',
       autoFocus: false
     });
 
