@@ -37,6 +37,17 @@ import { SubMacroComponent } from './components/sub-macro/sub-macro.component';
 import { VariableTemplateOptionComponent } from './components/variable-template-option/variable-template-option.component';
 import {MatRippleModule} from '@angular/material/core';
 import { PreviewToolbarComponent } from './components/preview-toolbar/preview-toolbar.component';
+import { GreekAlphabetComponent } from './components/greek-alphabet/greek-alphabet.component';
+import { GreekAlphabetDraggableComponent } from './components/greek-alphabet-draggable/greek-alphabet-draggable.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import {MatSelectModule} from '@angular/material/select';
+import { DraggableDialogComponent } from './components/draggable-dialog/draggable-dialog.component';
+import { AlphabetComponent } from './components/alphabet/alphabet.component';
+import { AlphabetDraggableComponent } from './components/alphabet-draggable/alphabet-draggable.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { PrebuiltAlphabetComponent } from './components/prebuilt-alphabet/prebuilt-alphabet.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +66,14 @@ import { PreviewToolbarComponent } from './components/preview-toolbar/preview-to
     ImagePreviewComponent,
     SubMacroComponent,
     VariableTemplateOptionComponent,
-    PreviewToolbarComponent
+    PreviewToolbarComponent,
+    GreekAlphabetComponent,
+    GreekAlphabetDraggableComponent,
+    AlphabetComponent,
+    AlphabetDraggableComponent,
+    WelcomeComponent,
+    DraggableDialogComponent,
+    PrebuiltAlphabetComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +98,11 @@ import { PreviewToolbarComponent } from './components/preview-toolbar/preview-to
     MatTreeModule,
     CodemirrorModule,
     FormsModule,
-    MatRippleModule
+    MatRippleModule,
+    DragDropModule,
+    MatBottomSheetModule,
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

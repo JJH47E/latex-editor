@@ -1,0 +1,18 @@
+.draggable:hover {
+    cursor: move;
+}
+
+.dialog-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+.dialog {
+    display: block;
+}
+
+.min-height-80 {
+    min-height: 80px;
+}

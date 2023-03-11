@@ -1,0 +1,3 @@
+<div class="alphabet-box">
+    <button *ngFor="let character of dataToDisplay" (click)="insertCharacter(character)" mat-button><ng-katex [equation]="character"></ng-katex></button>
+</div>

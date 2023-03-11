@@ -1,5 +1,5 @@
 <div class="list-option" *ngIf="!!option">
-    <span>{{option.name}}</span>
+    <span>{{option.name}}:&nbsp;</span>
     <div>
         <ng-katex [options]="previewOptions" [equation]="option.template"></ng-katex>
     </div>

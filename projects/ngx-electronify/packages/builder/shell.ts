@@ -1,5 +1,5 @@
 import { app, BrowserWindow, ipcMain, shell, dialog, FileFilter } from 'electron';
-import { copyFile, readFile, rm, writeFile } from 'node:fs/promises';
+import { copyFile, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import installExtension from 'electron-devtools-installer';
 import { existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { WorkspaceConfig } from './workspace-config';
@@ -31,12 +31,14 @@ const pdfFilters = [
 ];
 
 let workspacePath = '';
+var hasConfirmedClose = false;
 
 function createWindow() {
   const options: Electron.BrowserWindowConstructorOptions = {
     width: 800,
     height: 600,
-    show: false
+    show: false,
+    autoHideMenuBar: true
   };
 
   // expose the Electron API into the global window object
@@ -58,6 +60,44 @@ function createWindow() {
       mainWindow.webContents.openDevTools();
     }
   });
+
+  mainWindow.on('close', async (event) => {
+    if (!hasConfirmedClose) {
+      // stop window closing
+      event.preventDefault();
+      // Show dialog asking is the user wants to save their work
+      const result = dialog.showMessageBoxSync({
+          title: 'Confirm',
+          message: 'Are you sure you want to exit? Any unsaved work will be lost',
+          buttons: ['Save', 'Don\'t Save', 'Cancel']
+      })
+  
+      if (result === 0) {
+        // save
+        if (!workspacePath) {
+          // trigger save as flow
+          var configContents = await getConfigContents(workingDirectory)
+          var savePath = await openSavePrompt(configContents.name, workspaceFilters)
+          if (!savePath) {
+            console.log('Save aborted');
+            return;
+          }
+          await saveWorkspace(workspacePath, savePath);
+        } else {
+          // save like normal
+          await saveWorkspace(workspacePath);
+        }
+        hasConfirmedClose = true;
+        mainWindow.close();
+      } else if (result === 1) {
+        hasConfirmedClose = true;
+        mainWindow.close();
+      } if (result === 2) {
+        // Do not close
+        return;
+      }
+    }
+});
 }
 
 async function installAngularDevtools() {
@@ -72,8 +112,8 @@ async function installAngularDevtools() {
 app.whenReady().then(async () => {
   await installAngularDevtools();
   console.log('setting up handlers');
-  ipcMain.on('createWorkspace', async (event, workspaceName) => {
-    await createWorkspace(workspaceName, 'test_template.tex');
+  ipcMain.on('createWorkspace', async (event, workspaceName, template) => {
+    await createWorkspace(workspaceName, template);
     event.sender.send('loadWorkspace-reply', await getConfigContents(workingDirectory));
   });
   ipcMain.on('selectWorkspace', async event => {
@@ -178,18 +218,30 @@ function getBoolean(value: string) {
 }
 
 async function createWorkspace(name: string, template: string) {
+  // fixes bug when new workspace is created after existing one is loaded in, probably a better place to put this
+  workspacePath = '';
   await refreshWorkingDirectory();
 
   console.log(`creating workspace, ${name}, directory: ${workingDirectory}`);
 
   // create .config & save to working directory & copy main.tex from template
-  const workspaceConfig = {name, filePaths: ['main.tex']} as WorkspaceConfig;
-  await copyTemplate(template, 'main.tex');
+  const files = await copyTemplate(template);
+  const workspaceConfig = {name, filePaths: files} as WorkspaceConfig;
   await writeFile(`${workingDirectory}/.config`, JSON.stringify(workspaceConfig));
 }
 
-async function copyTemplate(template: string, destFileName: string) {
-  await copyFile(`${templateDirectory}/${template}`, `${workingDirectory}/${destFileName}`, COPYFILE_EXCL)
+async function copyTemplate(template: string): Promise<string[]> {
+  // get list of files present in template directory
+  // copy each individual file
+  const templateDir = `${templateDirectory}/${template}/`;
+  const files = await readdir(templateDir);
+
+  for (const file of files) {
+    console.log(`found file: ${file}`);
+    await copyFile(`${templateDir}${file}`, `${workingDirectory}/${file}`, COPYFILE_EXCL);
+  }
+
+  return files;
 }
 
 async function selectWorkspace() {
@@ -229,7 +281,7 @@ async function getFileContents(relativePath: string): Promise<FileBlob> {
   try {
     const filePath = path.resolve(`${workingDirectory}/${relativePath}`)
     const data = await readFile(filePath, { encoding: 'base64' });
-    return {path: relativePath, data: Buffer.from(data, 'base64'), contentType: mime.contentType(filePath)} as FileBlob;
+    return {path: relativePath, data: Buffer.from(data, 'base64'), contentType: mime.contentType(filePath) || 'application/octet-stream'} as FileBlob;
   } catch(err) {
     console.log(err);
     return {} as FileBlob;
@@ -274,8 +326,8 @@ async function saveFile(buffer: Buffer, destinationPath: string) {
   return await writeFile(destinationPath, buffer);
 }
 
-async function openSavePrompt(title: string, fileFilters: FileFilter[]): Promise<string> {
-  var saveResult = await dialog.showSaveDialog({title, filters: fileFilters});
+async function openSavePrompt(fileName: string, fileFilters: FileFilter[]): Promise<string> {
+  var saveResult = await dialog.showSaveDialog({title: fileName, filters: fileFilters});
   if (!!saveResult.filePath) {
     return saveResult.filePath;
   } else {
@@ -297,8 +349,20 @@ async function generatePreview(event: Electron.IpcMainEvent): Promise<void> {
   exec(path.resolve(`${binDirectory}/pdflatex.bat ${path.resolve(workingDirectory)}`), (error: Error, _: string, stderr: string) => {
     if (error || stderr) {
       console.log('error, returning');
-      event.sender.send('generatePreview-error', stderr);
-      return;
+      const errorRegex = /^! LaTeX Error: /g;
+      const fallbackErrorRegex = /l\.[0-9]+\ .+/g;
+      try {
+        var lines = readFileSync(`${workingDirectory}/main.log`).toString().split("\n")
+        
+        var errorLines = lines.filter(line => errorRegex.test(line));
+        if (errorLines.length == 0) {
+          errorLines = lines.filter(line => fallbackErrorRegex.test(line));
+        }
+        event.sender.send('generatePreview-error', errorLines);
+        return;
+      } catch {
+        event.sender.send('generatePreview-error', ['An unknown error occurred, check application logs for more info']);
+      }
     }
 
     console.log('Finished successfully');

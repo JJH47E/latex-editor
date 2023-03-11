@@ -1,0 +1,5 @@
+<div class="alphabet-box">
+    <button *ngFor="let template of templateList" (click)="insertTemplate(template)" mat-button>
+        <app-variable-template-option [option]="template"></app-variable-template-option>
+    </button>
+</div>

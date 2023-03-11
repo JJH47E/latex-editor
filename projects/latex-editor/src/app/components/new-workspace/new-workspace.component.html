@@ -1,16 +1,23 @@
 <h1 mat-dialog-title>New Workspace</h1>
 <div mat-dialog-content>
-    To create a new workspace, enter the name in the field below:
-    <form [formGroup]="form">
+    <span class="sub-header">To create a new workspace, enter the name in the field below:</span>
+    <form [formGroup]="form" class="form">
         <mat-form-field>
             <mat-label color="accent">Workspace Name</mat-label>
             <input matInput formControlName="workspaceName" placeholder="Ex. Dissertation">
-            <mat-error *ngIf="workspaceName.hasError('required')">Please enter a workspace name</mat-error>
-            <mat-error *ngIf="workspaceName.hasError('maxlength')">Workspace name must not exceed 30 characters</mat-error>
+            <mat-error *ngIf="workspaceNameControl.hasError('required')">Please enter a workspace name</mat-error>
+            <mat-error *ngIf="workspaceNameControl.hasError('maxlength')">Workspace name must not exceed 30
+                characters</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Choose a template</mat-label>
+            <mat-select formControlName="workspaceTemplate" placeholder="Template">
+                <mat-option *ngFor="let template of dataToDisplay" [value]="template.fileName">{{ template.name }}</mat-option>
+            </mat-select>
         </mat-form-field>
     </form>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions align="end">
     <button mat-button [mat-dialog-close]="null">Close</button>
-    <button mat-button type="submit" (click)="createWorkspace()">Create</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="createWorkspace()">Create</button>
 </div>

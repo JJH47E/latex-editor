@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Empty",
+        "fileName": "blank"
+    },
+    {
+        "name": "Sample",
+        "fileName": "test_template"
+    },
+    {
+        "name": "Calendar",
+        "fileName": "calendar"
+    },
+    {
+        "name": "CV",
+        "fileName": "cv"
+    },
+    {
+        "name": "Thesis",
+        "fileName": "thesis"
+    }
+]

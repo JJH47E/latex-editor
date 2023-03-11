@@ -1,9 +1,16 @@
-<div class="max-height">
-    <app-preview-toolbar></app-preview-toolbar>
-    <pdf-viewer [src]="pdfSrc"
-        [render-text]="true"
-        [original-size]="false"
-        [autoresize]="true"
-        style="width: 100%; height: 100%">
-    </pdf-viewer>
+<div class="max-height preview">
+    <app-preview-toolbar (fitToScreenEmitter)="fitToScreen()" (zoomInEmitter)="zoomIn()" (zoomOutEmitter)="zoomOut()"></app-preview-toolbar>
+    <div class="preview-container">
+        <pdf-viewer
+            [src]="pdfSrc"
+            [render-text]="true"
+            [original-size]="false"
+            [autoresize]="true"
+            [zoom-scale]="'page-width'"
+            [fit-to-page]="true"
+            [show-all]="true"
+            [zoom]="zoom"
+            style="height: 100%; width: 100%">
+        </pdf-viewer>
+    </div>
 </div>

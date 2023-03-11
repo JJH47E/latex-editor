@@ -1,0 +1,18 @@
+<div>
+    <h2 class="bottom-sheet-header">
+        Welcome to LaTeX Editor
+    </h2>
+    <span>Choose an option to begin.</span>
+    <mat-nav-list>
+        <mat-list-item (click)="newWorkspace()">
+            <mat-icon matListicon>create</mat-icon>
+            <span mat-line>Create Workspace</span>
+            <span mat-line>Creates a new project from a selection of templates</span>
+        </mat-list-item>
+        <mat-list-item (click)="openWorkspace()">
+            <mat-icon matListicon>file_open</mat-icon>
+            <span mat-line>Open Workspace</span>
+            <span mat-line>Opens an existing workspace (.texproj format)</span>
+        </mat-list-item>
+    </mat-nav-list>
+</div>

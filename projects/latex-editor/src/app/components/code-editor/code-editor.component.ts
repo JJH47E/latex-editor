@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { CodemirrorComponent } from '@ctrl/ngx-codemirror';
+import { filter, map, Observable } from 'rxjs';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
   templateUrl: './code-editor.component.html',
   styleUrls: ['./code-editor.component.scss']
 })
-export class CodeEditorComponent implements OnInit {
+export class CodeEditorComponent implements OnInit, AfterViewInit {
   private decoder = new TextDecoder();
   
   public fileSelected$ = new Observable<boolean>();
@@ -25,6 +26,9 @@ export class CodeEditorComponent implements OnInit {
     lint: true
   };
 
+  @ViewChild(CodemirrorComponent)
+  codemirrorComponent: CodemirrorComponent | undefined;
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     public workspaceService: WorkspaceService,
@@ -39,6 +43,20 @@ export class CodeEditorComponent implements OnInit {
         this.workspaceService.textData = this.decoder.decode(data);
         console.log(`set text data`);
         this.changeDetectorRef.detectChanges();
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.workspaceService.toInsert$.pipe(filter(x => !!x)).subscribe(toInsert => {
+      if (!this.codemirrorComponent?.codeMirror) {
+        // component not instantiated, return
+        console.log('Codemirror Component to instantiated, unable to insert string');
+        return;
+      }
+      let doc = this.codemirrorComponent.codeMirror?.getDoc();
+      let cursor = doc.getCursor();
+      doc.replaceRange(toInsert, cursor);
+      this.workspaceService.acknowledgeInsert();
     });
   }
 }

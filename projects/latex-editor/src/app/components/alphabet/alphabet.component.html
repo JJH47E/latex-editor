@@ -1,0 +1,7 @@
+<div *ngIf="dataToDisplay$ | async as data; else spinner" class="alphabet-box">
+    <button *ngFor="let character of data" (click)="insertCharacter(character)" mat-button><ng-katex [equation]="character"></ng-katex></button>
+</div>
+
+<ng-template #spinner>
+    <mat-progress-spinner></mat-progress-spinner>
+</ng-template>

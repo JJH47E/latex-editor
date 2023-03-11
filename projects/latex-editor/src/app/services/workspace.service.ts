@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ElectronService } from 'ngx-electronyzer';
-import { BehaviorSubject, shareReplay } from 'rxjs';
+import { BehaviorSubject, shareReplay, tap } from 'rxjs';
 import { FileBlob } from '../models/file-blob';
 import { WorkspaceConfig } from '../models/workspace-config';
 import { isNullOrWhitespace } from '../utils/string.utils';
@@ -15,18 +16,22 @@ export class WorkspaceService {
   private _fileBlob$ = new BehaviorSubject<FileBlob>({} as FileBlob);
   private _filePath$ = new BehaviorSubject<string>('');
   private _previewPdfBlob$ = new BehaviorSubject<FileBlob>({} as FileBlob);
+  private _toInsert$ = new BehaviorSubject<string>('');
   private encoder = new TextEncoder();
 
   public workspaceName$ = this._workspaceName$.pipe(shareReplay(1));
   public workspaceId$ = this._workspaceId$.pipe(shareReplay(1));
   public workspaceFiles$ = this._workspaceFiles$.pipe(shareReplay(1));
-  public fileBlob$ = this._fileBlob$.pipe(shareReplay(1));
+  public fileBlob$ = this._fileBlob$.pipe(shareReplay(1), tap(blob => console.log(`Recieved: ${blob.id}, ${blob.contentType} from main process`)));
   public filePath$ = this._filePath$.pipe(shareReplay(1));
   public previewPdfBlob$ = this._previewPdfBlob$.pipe(shareReplay(1));
+  public toInsert$ = this._toInsert$.pipe(shareReplay(1));
   public textData = '';
 
   constructor(
-    private electronService: ElectronService
+    private electronService: ElectronService,
+    private snackBar: MatSnackBar,
+    private zone: NgZone
   ) {
     this.electronService.ipcRenderer.on('selectWorkspace-reply', (event, path: string) => {
       console.log(`Path selected: ${path}`)
@@ -46,14 +51,33 @@ export class WorkspaceService {
         console.log(`Warning: main.tex is not in the workspace`);
       } else {
         this.loadFile('main.tex');
+        this.reloadPreview();
       }
     });
     this.electronService.ipcRenderer.on('saveFileAsync-reply', (_, newFileToLoad: string) => {
       console.log(`file saved, loading new file: ${newFileToLoad}`);
       this.loadFile(newFileToLoad);
     });
-    this.electronService.ipcRenderer.on('generatePreview-error', (_) => {
-      console.log('An error occured when generating the PDF');
+    this.electronService.ipcRenderer.on('generatePreview-error', (_, errs: string[]) => {
+      // display the last error, avoid potential issue with files names?
+      // TODO: Needs to be tested more
+      if (errs.length == 0) {
+        console.log('Main process reported error, but did not return any information!');
+        return;
+      }
+      const err = errs.at(-1);
+      let line: string;
+      if (err?.startsWith('Unknown')) {
+        line = err;
+      } else {
+        line = err!.slice(7);
+      }
+      this.zone.run(() => {
+        const snackbar = this.snackBar.open(`An error occured when generating preview. ${line}`, 'OK', { duration: 5000 });
+        snackbar.onAction().subscribe(() => {
+          snackbar.dismiss();
+        })
+      });
     });
     this.electronService.ipcRenderer.on('generatePreview-reply', (_, pdfData: FileBlob) => {
       console.log('PDF generated successfully, updating blob');
@@ -74,6 +98,8 @@ export class WorkspaceService {
     // send save request to main process
     let blob = this._fileBlob$.getValue();
 
+    console.log(blob.id + ' ' + blob.contentType);
+
     if (blob.contentType.includes('image')) {
       // hacky fix, could be done better
       this.loadFile(newFileToLoad);
@@ -89,7 +115,9 @@ export class WorkspaceService {
     // send save request to main process
     let blob = this._fileBlob$.getValue();
 
-    if (blob.contentType.includes('image')) {
+    console.log(blob.id + ' ' + blob.contentType);
+
+    if (blob.contentType?.includes('image')) {
       // hacky fix, could be done better
       this.loadFile(newFileToLoad);
       return;
@@ -114,30 +142,19 @@ export class WorkspaceService {
     console.log(`loaded: ${filePath}`);
   }
 
-  public async createWorkspace(workspaceName: string): Promise<boolean> {
+  public async createWorkspace(workspaceName: string, template: string): Promise<boolean> {
     if (isNullOrWhitespace(workspaceName)) {
       throw new Error(`Workspace name must have a non-whitespace value. Value: ${workspaceName}`);
     }
 
     console.log('sending');
-    this.electronService.ipcRenderer.send('createWorkspace', workspaceName);
+    this.electronService.ipcRenderer.send('createWorkspace', workspaceName, template);
 
     return Promise.resolve(true);
   }
 
   public saveWorkspace() {
-    // save current file
-    /*
-      There is no nice way to do this given how saving is currently set up.
-      Options:
-        1. Introduce yet another observable to alert the code editor component to trigger a save (will not scale well at all)
-        2. Move the NgModel used by the code editor component into the workspace server (could get nasty)
-        3. Use IPC to send a message to main process that is then relayed back (not nice)
-        4.
-
-        2 is probably the best option here
-    */
-    // send request to save workspace
+    // save current file & then save workspace
     this.saveData(this.encoder.encode(this.textData), this._filePath$.getValue());
     this.electronService.ipcRenderer.send('saveWorkspace');
   }
@@ -149,5 +166,13 @@ export class WorkspaceService {
 
   public downloadPdf(): void {
     this.electronService.ipcRenderer.send('downloadPdf');
+  }
+
+  public insertString(toInsert: string): void {
+    this._toInsert$.next(toInsert);
+  }
+
+  public acknowledgeInsert(): void {
+    this._toInsert$.next('');
   }
 }

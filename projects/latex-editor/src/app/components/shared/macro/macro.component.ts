@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { KatexOptions } from 'ng-katex';
@@ -34,6 +34,9 @@ export class MacroComponent implements OnInit {
     this.equationTemplate = newMacro.template;
   };
 
+  @Output()
+  public equation = new EventEmitter<string>();
+
   constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -56,6 +59,12 @@ export class MacroComponent implements OnInit {
       var variables = this.getAllVariables(macro.template);
       this.equationVariables$.next(variables);
     });
+
+    this.inlineCheckboxControl.valueChanges.subscribe(_ => {
+      this.onEquationUpdate(this.qualifyEquation(this.getTemplateEquation()));
+    });
+
+    this.onEquationUpdate(this.qualifyEquation(this.getTemplateEquation()));
   }
 
   public getVariableControl(controlName: string): FormControl {
@@ -67,6 +76,8 @@ export class MacroComponent implements OnInit {
 
   public renderEquation(): void {
     if (this.variableFormGroup.invalid) {
+      // Emit invalid equation to disable button in parent component
+      this.onEquationUpdate('');
       return;
     }
 
@@ -76,6 +87,7 @@ export class MacroComponent implements OnInit {
       newEquation = newEquation.replaceAll(this.qualifyEquationVariable(controlName), this.getVariableControl(controlName).value);
     });
 
+    this.onEquationUpdate(this.qualifyEquation(newEquation));
     this.currentEquation$.next(newEquation);
   }
 
@@ -113,7 +125,7 @@ export class MacroComponent implements OnInit {
       throw Error('Unable to find control');
     }
     const dialogRef = this.dialog.open(SubMacroComponent, {
-      width: '300px',
+      width: '500px',
       autoFocus: false
     });
 
@@ -121,9 +133,13 @@ export class MacroComponent implements OnInit {
       if (!templateValue) {
         return;
       }
-      control.setValue(templateValue);
+      control.setValue(control.value + templateValue);
       this.renderEquation();
     });
+  }
+
+  public onEquationUpdate(equation: string): void {
+    this.equation.emit(equation);
   }
 
   private getAllVariables(template: string): string[] {
@@ -140,6 +156,8 @@ export class MacroComponent implements OnInit {
 
     return varNames;
   }
+
+  private qualifyEquation = (equation: string) => this.inlineCheckboxControl.value ? `\\(${equation}\\)` : `\\[${equation}\\]`;
 
   private qualifyEquationVariable = (variableName: string) => `{{#${variableName}#}}`
 }

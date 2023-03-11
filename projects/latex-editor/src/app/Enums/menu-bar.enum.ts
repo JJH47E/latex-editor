@@ -5,5 +5,12 @@ export enum MenuBar {
     EditWorkspaceSettings = 'Edit Workspace Settings',
     About = 'About',
     OpenSourceNotes = 'Open Source Notes',
-    Help = 'Help'
+    Help = 'Help',
+    Macro = 'Macro',
+    GreekAlphabet = 'Greek Alphabet',
+    Operators = 'Operators',
+    Delimiters = 'Delimiters',
+    Constructs = 'Mathematical Constructs',
+    Accents = 'Accents',
+    Misc = 'Miscellaneous'
 }

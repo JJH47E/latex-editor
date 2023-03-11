@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { TeXTemplate } from 'src/app/models/tex-template.model';
 import { WorkspaceService } from 'src/app/services/workspace.service';
+import templateData from '../../../assets/templates.json';
 
 @Component({
   selector: 'app-new-workspace',
@@ -16,16 +17,23 @@ export class NewWorkspaceComponent implements OnInit {
     private workspaceService: WorkspaceService
     ) { }
 
-  public workspaceName = new FormControl('', [
+  public workspaceNameControl = new FormControl('', [
     Validators.required,
     Validators.maxLength(30)
-  ]) 
+  ]);
+
+  public workspaceTemplateControl = new FormControl('', [ ]);
 
   public form = new FormGroup({
-    workspaceName: this.workspaceName
+    workspaceName: this.workspaceNameControl,
+    workspaceTemplate: this.workspaceTemplateControl
   });
 
+  public dataToDisplay: TeXTemplate[] = templateData;
+
   ngOnInit(): void {
+    console.log('templates:');
+    console.log(this.dataToDisplay);
   }
 
   public async createWorkspace() {
@@ -35,7 +43,8 @@ export class NewWorkspaceComponent implements OnInit {
 
     //TODO: tidy this up
     const name = this.form.get('workspaceName')?.value!;
-    await this.workspaceService.createWorkspace(name)
+    const template = this.form.get('workspaceTemplate')?.value!;
+    await this.workspaceService.createWorkspace(name, template)
       .then(response => this.dialogRef.close(response));
   }
 }
