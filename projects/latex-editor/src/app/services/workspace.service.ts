@@ -66,7 +66,12 @@ export class WorkspaceService {
         return;
       }
       const err = errs.at(-1);
-      const line = err!.slice(7);
+      let line: string;
+      if (err?.startsWith('Unknown')) {
+        line = err;
+      } else {
+        line = err!.slice(7);
+      }
       this.zone.run(() => {
         const snackbar = this.snackBar.open(`An error occured when generating preview. ${line}`, 'OK', { duration: 5000 });
         snackbar.onAction().subscribe(() => {

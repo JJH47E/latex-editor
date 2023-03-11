@@ -1,180 +1,35 @@
-\documentclass{micro-econ-thesis}
+\documentclass[11pt]{article}
+
 \usepackage{graphicx}
-\usepackage{setspace}
 
-\usepackage[utf8]{inputenc} % depends on the font encoding that you are using
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
 
-% For formatting of your bibliography, please use the following package with options 
-\usepackage[giveninits=true, uniquename=init, authordate]{biblatex-chicago}
-
-\addbibresource{bibliography.bib} % add a bib-reference file
+\title{Thesis Template}
+\author{Author Name}
+\date{\today}
 
 \begin{document}
-% ----------------------------------------------------------------------------
-% Details for the titlepage
-% ----------------------------------------------------------------------------
-\thesisTitle{Title of your Thesis}
-\thesisType{Master Thesis} % 'Master Thesis' or 'Seminar Paper'
-\thesisAuthor{Your Name}
-\thesisMail{your.email@uni-jena.de}
-\thesisGrade{Master of Science in Economics} % leave empty for seminar papers
-\thesisTutora{The name of your first supervisor}
-\thesisTutorb{The name of your second supervisor, if applicable}
-\thesisMatrikel{12345}
-\thesisAddress{Street\\[.5ex]
-								PLZ City}
-\thesisDate{\today}
-% In case of external supervisor
-\thesisCompany{}
+\maketitle	
+\pagebreak
 
-% Print titlepage
-\thesisMakeTitle
+% Optional TOC
+% \tableofcontents
+% \pagebreak
 
-% ----------------------------------------------------------------------------
-% Abstract
-% ----------------------------------------------------------------------------
-\cleardoublepage
-\pagenumbering{roman}
-\pagestyle{plain}
-%\thispagestyle{empty}
-\subsection*{Abstract}
-Short summary of your thesis (max. 250 words) \ldots
+%--Paper--
 
-\clearpage
-\subsection*{Acknowledgements}
-If you want to thank anyone (optional) \ldots
-
-% ----------------------------------------------------------------------------
-% Table of contents
-% ----------------------------------------------------------------------------
-\cleardoublepage
-%\thispagestyle{empty}
-\tableofcontents
-
-% ----------------------------------------------------------------------------
-% List of figures/tables
-% ----------------------------------------------------------------------------
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{section}{List of Figures}
-\listoffigures
-% --------------------------
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{section}{List of Tables}
-\listoftables
-% --------------------------
-
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{section}{List of Acronyms}
-\section*{List of Acronyms}
-\begin{tabular}{@{}ll}
-FSU Jena & Friedrich-Schiller-Universität Jena\\
-\end{tabular}
-
-% --------------------------
-
-% ----------------------------------------------------------------------------
-% Contents
-% ----------------------------------------------------------------------------
-\cleardoublepage
-\pagestyle{headings}
-\pagenumbering{arabic}
-\setcounter{page}{1}
-% Contents
-\onehalfspacing % for linespacing 1.5, you can turn it off with \singlespacing, e.g. for quotes or tables with multiline cells
+\section{Section 1}
 
 
-\section{Introduction}
-\label{sec:intro}
+\pagebreak
+\section{Section 2}
 
-Some of your text. Maybe with an acronym, such as Friedrich-Schiller-Universität Jena (FSU Jena).
-
-\section{First Section}
-\label{sec:first}
-
-
-\subsection{First Subsection}
-\label{subsec:first}
-
-
-\subsection{Second Subsection}
-\label{subsec:second}
-
-Some more of your text. Maybe you want to cite \textcite{Nels1959} or enforce a statement because many have said that before \parencite[e.g.][]{NeWi1982, Dosi1982, Lund1992,Acem2002}. You might want to refer to subsection~\ref{subsec:first}, where you defined some important concepts.
-
-
-\section{Second Section}
-\label{sec:second}
-
-\subsection{Another Subsection}
-\label{subsec:another}
-Here is a reference to Table~\ref{t1:tab}. In Figure~\ref{fig:pasteur}, you see ... . 
-
-
-\begin{table}[ht]
-  \centering
-  \caption{GDP per capita}
-  \begin{tabular}{lr}
-     \hline
-     Country & \multicolumn{1}{c}{GDP per capita}\\ \hline 
-     Qatar & 132,099 \\ 
-     Luxembourg & 98,987 \\ 
-     Singapore & 85,253 \\ \hline
-  \end{tabular}\\
-	Source: International Monetary Fund (2015) 
-  \label{t1:tab}
-\end{table}  
-
-
-\begin{figure}[ht]
-  \centering
-	\includegraphics[width=.75\textwidth]{Pasteurs-quadrant.pdf}
-  {\small\flushleft Source: Donald E. Stokes, Pasteur's Quadrant: Basic Science and Technological Innovation, Brookings Institution Press, 1997.}
-  \caption{Pasteur's Quadrant}   
-    \label{fig:pasteur}
-\end{figure}  
-
-\subsection{Yet another Subsection}
-\label{subsec:yetanother}
-
-If you want to typeset formulas, there is the inline version $ y = x_1^{0.5} x_2^{0.5}$, centered like this
-\[
-y = x_1^{0.5} x_2^{0.5}
-\]
-or numbered:
-\begin{equation}\label{eq:prod}
-y = x_1^{0.5} x_2^{0.5}	
-\end{equation}
- so that you can refer to equation~\ref{eq:prod} in the text.
-
-\subsection{Last Subsection}
-\label{subsec:last}
-
-\section{Conclusion}
-
-
-% ----------------------------------------------------------------------------
-% Bibliography
-% ----------------------------------------------------------------------------
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{section}{\refname} % to add Bibliography to toc
-\printbibliography
-
-% --------------------------
-\cleardoublepage
-\begin{appendix}
-\section{Appendix}
-If needed for supplementary material, such as detailed description of data collection, tables, or figures.
-
-\end{appendix}
-
-% ----------------------------------------------------------------------------
-% Statutory declaration
-% ----------------------------------------------------------------------------
-\makeThesisDeclaration
+%--/Paper--
 
 \end{document}
-

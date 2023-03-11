@@ -133,7 +133,7 @@ export class MacroComponent implements OnInit {
       if (!templateValue) {
         return;
       }
-      control.setValue(templateValue);
+      control.setValue(control.value + templateValue);
       this.renderEquation();
     });
   }

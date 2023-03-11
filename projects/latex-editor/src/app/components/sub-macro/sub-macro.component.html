@@ -12,8 +12,8 @@
     <button *ngIf="!(selectedOption$ | async); else showBackButton" mat-button [mat-dialog-close]="null">Cancel</button>
 </div>
 
-<ng-template #showSection><!--TODO: fix this switch statement-->
-    <div *ngSwitch="selectedOption$ | async; let option">
+<ng-template #showSection>
+    <div [ngSwitch]="selectedOption$ | async">
         <div *ngSwitchCase="JsonMapping.Prebuilt">
             <app-prebuilt-alphabet (toInsertEmitter)="closeDialog($event)"></app-prebuilt-alphabet>
         </div>
@@ -21,7 +21,7 @@
             <app-greek-alphabet (toInsertEmitter)="closeDialog($event)"></app-greek-alphabet>
         </div>
         <div *ngSwitchDefault>
-            <app-alphabet [fileName]="option" (insertStringEmitter)="closeDialog($event)"></app-alphabet>
+            <app-alphabet [fileName]="(selectedOptionString$ | async) || ''" (insertStringEmitter)="closeDialog($event)"></app-alphabet>
         </div>
     </div>
 </ng-template>

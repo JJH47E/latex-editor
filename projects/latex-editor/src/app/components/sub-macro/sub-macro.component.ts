@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { EquationSections } from 'src/app/Enums/equation-sections.enum';
 import { JsonMapping } from 'src/app/Enums/json-mapping.enum';
 
@@ -25,12 +25,20 @@ export class SubMacroComponent implements OnInit {
   public EquationSections = EquationSections;
 
   public selectedOption$ = new BehaviorSubject<JsonMapping | undefined>(undefined);
+  public selectedOptionString$ = new Observable<string>();
 
   constructor(
     public dialogRef: MatDialogRef<SubMacroComponent>
   ) { }
 
   ngOnInit(): void {
+    this.selectedOptionString$ = this.selectedOption$.pipe(map(x => {
+      if (!x) {
+        return '';
+      } else {
+        return x.toString()
+      }
+    }));
   }
 
   public openSection(section: EquationSections): void {
