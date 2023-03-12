@@ -1,6 +1,4 @@
-<div class="list-option" *ngIf="!!option">
-    <span>{{option.name}}:&nbsp;</span>
-    <div>
-        <ng-katex [options]="previewOptions" [equation]="option.template"></ng-katex>
-    </div>
+<div class="small-padding">
+    <span mat-line>{{option.name}}</span>
+    <ng-katex mat-line [options]="previewOptions" [equation]="cleanInput(option).template"></ng-katex>
 </div>

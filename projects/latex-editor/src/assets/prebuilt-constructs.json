@@ -10,5 +10,9 @@
     {
         "name": "Bra-ket",
         "template": "\\langle\\phi|\\varphi\\rangle"
+    },
+    {
+        "name": "Ket-bra",
+        "template": "\\vert \\varphi\\rangle \\langle\\phi \\vert"
     }
 ]

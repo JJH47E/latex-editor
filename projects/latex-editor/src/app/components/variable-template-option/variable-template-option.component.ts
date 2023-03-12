@@ -19,4 +19,11 @@ export class VariableTemplateOptionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public cleanInput(template: VariableTemplate): VariableTemplate {
+    let newTemplate = {...template} as VariableTemplate;
+    newTemplate.template = newTemplate.template.replaceAll('{{#', '');
+    newTemplate.template = newTemplate.template.replaceAll('#}}', '');
+    return newTemplate;
+  }
+
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MacroModel } from 'src/app/macros/macro.model';
+import { AssetService } from 'src/app/services/asset.service';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 
 @Component({
@@ -10,14 +12,7 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 })
 export class MacroHelperComponent implements OnInit {
 
-  public testList: MacroModel[] = [{
-    name: "Mass-energy equivalence",
-    template: "{{#E#}}={{#m#}}{{#c#}}^2",
-  },
-  {
-    name: "Pythagorean theorem",
-    template: "{{#x#}}^2 + {{#y#}}^2 = {{#z#}}^2",
-  }];
+  public equationList$ = new BehaviorSubject<MacroModel[]>([]);
 
   public isMacroSelected = false;
   public selectedMacro: MacroModel | null = null;
@@ -25,10 +20,14 @@ export class MacroHelperComponent implements OnInit {
 
   constructor(
     private worksapceService: WorkspaceService,
+    private assetService: AssetService,
     private dialogRef: MatDialogRef<MacroHelperComponent>
   ) { }
 
   ngOnInit(): void {
+    this.assetService.getJsonData<MacroModel>('equation-template').subscribe(templates => {
+      this.equationList$.next(templates);
+    });
   }
 
   public selectMacro(macro: MacroModel): void {

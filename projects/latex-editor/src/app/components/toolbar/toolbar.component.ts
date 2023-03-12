@@ -25,9 +25,9 @@ export class ToolbarComponent implements OnInit {
     {title: MenuBar.OpenWorkspace, action: () => this.openWorkspace()}
   ];
 
-  public editActions = [
-    {title: MenuBar.EditWorkspaceSettings, action: () => this.workspaceService.loadFile('/images/rick.jpg')}
-  ];
+  // public editActions = [
+  //   {title: MenuBar.EditWorkspaceSettings, action: () => this.workspaceService.loadFile('/images/rick.jpg')}
+  // ];
 
   public insertActions = [
     {title: MenuBar.Macro, action: () => this.openMacroDialog()},
@@ -40,8 +40,8 @@ export class ToolbarComponent implements OnInit {
   ]
 
   public helpActions = [
-    {title: MenuBar.About, action: () => {}},
-    {title: MenuBar.OpenSourceNotes, action: () => {}},
+    //{title: MenuBar.About, action: () => {}},
+    //{title: MenuBar.OpenSourceNotes, action: () => {}},
     {title: MenuBar.Help, action: () => this.openHelp()}
   ];
 

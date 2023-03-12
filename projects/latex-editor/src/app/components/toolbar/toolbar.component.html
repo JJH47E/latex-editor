@@ -9,7 +9,7 @@
     <mat-toolbar-row class="sub-toolbar">
         <span class="toolbar-options">
             <button mat-button [matMenuTriggerFor]="fileMenu">{{ToolbarActions.File}}</button>
-            <button mat-button [matMenuTriggerFor]="editMenu">{{ToolbarActions.Edit}}</button>
+            <!--<button mat-button [matMenuTriggerFor]="editMenu">{{ToolbarActions.Edit}}</button>-->
             <button mat-button [matMenuTriggerFor]="insertMenu">{{ToolbarActions.Insert}}</button>
             <button mat-button [matMenuTriggerFor]="helpMenu">{{ToolbarActions.Help}}</button>
         </span>
@@ -20,9 +20,9 @@
     <button *ngFor="let action of fileActions" mat-menu-item (click)="action.action()">{{ action.title }}</button> 
 </mat-menu>
 
-<mat-menu #editMenu="matMenu">
+<!-- <mat-menu #editMenu="matMenu">
     <button *ngFor="let action of editActions" mat-menu-item (click)="action.action()">{{ action.title }}</button> 
-</mat-menu>
+</mat-menu> -->
 
 <mat-menu #insertMenu="matMenu">
     <button *ngFor="let action of insertActions" mat-menu-item (click)="action.action()">{{ action.title }}</button>

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Wavefunction probability density",
+        "template": "\\rho = \\vert \\Psi \\vert ^2 = \\Psi \\times \\Psi"
+    },
+    {
+        "name": "Schrödinger equation",
+        "template": "\\imath \\hbar \\frac{\\partial }{\\partial t} \\vert \\psi (t) \\rangle = \\hat{H} \\vert \\psi(t) \\rangle"
+    },
+    {
+        "name": "Heisenberg equation",
+        "template": "\\frac{\\mathrm{d} }{\\mathrm{d} t} \\hat{A}(t) = \\frac{\\imath}{\\hbar}\\left [ \\hat{H}, \\hat{A}(t) \\right ] + \\frac{\\partial \\hat{A}(t)}{\\partial t}"
+    },
+    {
+        "name": "Dirac Equation",
+        "template": "\\imath \\hbar \\gamma^\\mu \\partial_\\mu \\psi (x) - mc \\psi (x) = 0"
+    },
+    {
+        "name": "Mass-energy equivalence",
+        "template": "{{#E#}}={{#m#}}{{#c#}}^2"
+    },
+    {
+        "name": "Pythagorean theorem",
+        "template": "{{#x#}}^2 + {{#y#}}^2 = {{#z#}}^2"
+    }
+]
