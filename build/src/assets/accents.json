@@ -1,0 +1,22 @@
+[
+    "\\acute{a}",
+    "\\bar{a}",
+    "\\acute{\\acute{A}}",
+    "\\bar{\\bar{A}}",
+    "\\breve{a}",
+    "\\check{a}",
+    "\\breve{\\breve{A}}",
+    "\\check{\\check{A}}",
+    "\\ddot{a}",
+    "\\dot{a}",
+    "\\ddot{\\ddot{A}}",
+    "\\dot{\\dot{A}}",
+    "\\grave{a}",
+    "\\hat{a}",
+    "\\grave{\\grave{A}}",
+    "\\hat{\\hat{A}}",
+    "\\tilde{a}",
+    "\\vec{a}",
+    "\\tilde{\\tilde{A}}",
+    "\\vec{\\vec{A}}"
+]

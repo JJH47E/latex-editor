@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{bidi-atbegshi}
+\usepackage{ptext}
+\usepackage{xepersian}
+\settextfont{IRXLotus}
+\setbox0\hboxR{\Huge\textbf{چپ بالا}}
+\setbox1\hboxR{\Huge\textbf{راست بالا}}
+\setbox2\hboxR{\Huge\textbf{چپ پایین}}
+\setbox3\hboxR{\Huge\textbf{راست پایین}}
+\AtBeginShipout{%
+\AtBeginShipoutUpperRightForeground{%
+\put(-\wd1,-\ht1){\box1}
+}%
+\AtBeginShipoutUpperLeftForeground{%
+\put(0,-\ht0){\usebox0}
+}%
+\AtBeginShipoutLowerRightForeground{%
+\put(-\wd3,\dp3){\usebox3}
+}%
+\AtBeginShipoutLowerLeftForeground{%
+\put(0,\dp2){\usebox2}
+}%
+}
+\begin{document}
+\ptext
+\end{document}

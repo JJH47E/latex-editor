@@ -1,0 +1,46 @@
+name pdfpages
+category Package
+revision 61801
+shortdesc Include PDF documents in LaTeX
+longdesc This package simplifies the inclusion of external multi-page
+longdesc PDF documents in LaTeX documents. Pages may be freely selected
+longdesc and similar to psnup it is possible to put several logical
+longdesc pages onto each sheet of paper. Furthermore a lot of hypertext
+longdesc features like hyperlinks and article threads are provided. The
+longdesc package supports pdfTeX (pdfLaTeX) and VTeX. With VTeX it is
+longdesc even possible to use this package to insert PostScript files,
+longdesc in addition to PDF files.
+depend eso-pic
+depend graphics
+depend oberdiek
+depend tools
+containersize 14012
+containerchecksum 4baa870f33d598d596ffa0ab540460828120b77fe3d0468aad4217837b15dbe4a53f75fc861c632803f23b26f7bf127aaf57e34c37c6d753179564488c779000
+doccontainersize 322684
+doccontainerchecksum 5d934c70eb0de4335ad147fb2957f1623916f4e85906f86574917054f3c86036c81b5bb90c07f795e459e29f92cf25b62c2b79126ed5a165f24d5a81f3383321
+docfiles size=90
+ texmf-dist/doc/latex/pdfpages/dummy-l.pdf
+ texmf-dist/doc/latex/pdfpages/dummy.pdf
+ texmf-dist/doc/latex/pdfpages/pdf-ex.tex
+ texmf-dist/doc/latex/pdfpages/pdf-hyp.tex
+ texmf-dist/doc/latex/pdfpages/pdf-toc.tex
+ texmf-dist/doc/latex/pdfpages/pdfpages.pdf details="Package documentation"
+srccontainersize 35232
+srccontainerchecksum 9e02d45a236fb22e2842c893dd0ea9d6af88aa3e5c95c041a2f058a322bd8d2c748360687ded04559abae6ab933955166d1b5e66da834df8405512b5f9ba1ed6
+srcfiles size=46
+ texmf-dist/source/latex/pdfpages/README
+ texmf-dist/source/latex/pdfpages/pdfpages.dtx
+ texmf-dist/source/latex/pdfpages/pdfpages.ins
+runfiles size=25
+ texmf-dist/tex/latex/pdfpages/pdfpages.sty
+ texmf-dist/tex/latex/pdfpages/ppdvipdfmx.def
+ texmf-dist/tex/latex/pdfpages/ppdvips.def
+ texmf-dist/tex/latex/pdfpages/ppluatex.def
+ texmf-dist/tex/latex/pdfpages/ppnull.def
+ texmf-dist/tex/latex/pdfpages/pppdftex.def
+ texmf-dist/tex/latex/pdfpages/ppvtex.def
+ texmf-dist/tex/latex/pdfpages/ppxetex.def
+catalogue-ctan /macros/latex/contrib/pdfpages
+catalogue-license lppl1.3c
+catalogue-topics graphics-incl pdf-feat
+catalogue-version 0.5u

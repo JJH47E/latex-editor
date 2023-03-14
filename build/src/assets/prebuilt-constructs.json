@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Bra",
+        "template": "\\langle\\phi|"
+    },
+    {
+        "name": "Ket",
+        "template": "|\\varphi\\rangle"
+    },
+    {
+        "name": "Bra-ket",
+        "template": "\\langle\\phi|\\varphi\\rangle"
+    },
+    {
+        "name": "Ket-bra",
+        "template": "\\vert \\varphi\\rangle \\langle\\phi \\vert"
+    }
+]

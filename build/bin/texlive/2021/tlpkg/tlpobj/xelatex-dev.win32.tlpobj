@@ -1,0 +1,8 @@
+name xelatex-dev.win32
+category TLCore
+revision 57883
+shortdesc win32 files of xelatex-dev
+containersize 872
+containerchecksum 0157319cf3b10db32a12567c7501d9ca751558f29801b5b40b5085d2d9c4ce6ac85fc739132df269e762b8358987ab671952a2913403013475400e4379f7aacb
+binfiles arch=win32 size=1
+ bin/win32/xelatex-dev.exe

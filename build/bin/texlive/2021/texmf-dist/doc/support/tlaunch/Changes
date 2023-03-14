@@ -1,0 +1,36 @@
+2017-06-29 Siep Kroonenberg <siepo@cybercomm.nl> Release 0.5.3
+
+	* Remember command-line option: restores file associations on login
+	* Better path handling: avoid duplicate entries in user path
+	* Save overwritten filetype associations as secondary ProgID
+	* Less rudimentary command-line parser, supporting more keywords
+	* Cancel button for editor choice dialog
+	* Manifest: added explicit support for all windows versions >= 7
+
+2017-03-09 Siep Kroonenberg <siepo@cybercomm.nl> Release 0.5.2
+
+	* Various silent command-line options added
+	* Updated documentation
+
+2017-02-01 Siep Kroonenberg <siepo@cybercomm.nl> Release 0.5.1
+
+	* Tlaunch uninst options are now called uninst and uninst_all
+	  rather than uninst_keep_tldir and uninst.
+	* Added -v/--version option and help output
+	* Simpler root texmf.cnf in RUG example files
+	* Reorganized packaging
+
+2017-01-27 Siep Kroonenberg <siepo@cybercomm.nl> Release 0.5.0
+
+	* Name- and terminology changes:
+	  installing => configuring; uninstalling => forgetting.
+	* Forgetter, formerly uninstaller, can now run silently.
+	* Changes in appearance
+	* Added rudimentary real install- and uninstall modes
+	* tlaunchmode.pl Perl script for switching between launcher- and
+	  classic mode
+	* Added a manual
+
+2016-02-27 Siep Kroonenberg <siepo@cybercomm.nl> Release 0.4.0
+
+	Initial public release

@@ -1,0 +1,166 @@
+%%
+%% This is file `lwarp-wrapfig2.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% lwarp.dtx  (with options: `wrapfig2')
+%% This is a generated file.
+%% Copyright 2016-2022 Brian Dunn
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+
+
+
+
+\@ifpackageloaded{color}{}{%
+   \@ifpackageloaded{xcolor}{}{\LWR@origRequirePackage{xcolor}}%
+ }
+
+\RequirePackage{float}
+
+\IfPackageLoadedWithOptionsTF{wrapfig2}{WFold}
+{}% v4.0
+{% v5+
+  \floatstyle{plain}
+  \ifcsname chapter\endcsname
+    \newfloat{text}{tbp}{lotx}[chapter]
+  \else
+    \newfloat{text}{tbp}{lotx}
+  \fi
+  \floatname{text}{Text}
+}
+
+\LWR@ProvidesPackageDrop{wrapfig2}[2022-02-16]
+
+\LWR@origRequirePackage{lwarp-wrapfig}
+\RenewDocumentEnvironment{wrapfigure}{o m o G{0pt} s}% original
+  {\wrapfloat{figure}[#1]{#2}[#3]{#4}}%
+  {\endwrapfloat}
+
+\RenewDocumentEnvironment{wraptable}{o m o G{0pt} s}% original
+  {\wrapfloat{table}[#1]{#2}[#3]{#4}}%
+  {\endwrapfloat}
+
+\RenewDocumentEnvironment{wrapfloat}{m o m o G{0pt}}% lwarp
+{%
+    \begin{LWR@setvirtualpage}*%
+    \LWR@subwrapfigure{#3}{#5}%
+    \renewcommand*{\@captype}{#1}%
+}
+{%
+    \endLWR@BlockClassWP%
+    \end{LWR@setvirtualpage}%
+}
+\IfPackageLoadedWithOptionsTF{wrapfig2}{WFold}
+{% v4.0:
+    \NewDocumentEnvironment{wraptext}%
+        {O{l}    D||{0.5\columnwidth} D<>{0}   D(){figure}}%
+    {%
+        \wrapfloat{#4}[]{#1}[]{#2}%
+        \tcolorbox%
+    }
+    {%
+        \endtcolorbox%
+        \endwrapfloat%
+        \ignorespaces%
+    }
+}{}
+
+\IfPackageLoadedWithOptionsTF{wrapfig2}{WFfive}
+{% v5
+    \definecolor{WFbackground}{rgb}{0.95,0.95,0.95}
+    \definecolor{WFframe}{rgb}{0.1,0.1,0.1}
+    \colorlet{WFtext}{black}
+    \def\SetWFbgd#1{\colorlet{WFbackground}{#1}}
+    \def\SetWFfrm#1{\colorlet{WFframe}{#1}}
+    \def\SetWFtxt#1{\colorlet{WFtext}{#1}}
+    \def\WFsplitdimens#1,#2!{\fboxrule=#1\relax\fboxsep=#2\relax}
+
+    \NewDocumentEnvironment{wraptext}{O{0} m O{0pt} G{0.5\columnwidth}}
+    {%
+        \wrapfloat{text}[]{#2}[]{#4}%
+    }
+    {%
+        \endwrapfloat%
+        \ignorespaces%
+    }
+
+    \NewDocumentCommand\includeframedtext{O{\insertwidth} m O{1pt,1ex} o}%
+    {%
+        \WFsplitdimens #3!
+        \convertcolorspec{named}{WFtext}{HTML}\LWR@tempcolor%
+        \LWR@HTML@fcolorboxBlock%
+            [named]{WFframe}[named]{WFbackground}{#2}%
+            (%
+                color:\ \LWR@origpound\LWR@tempcolor ; %
+                border-radius:\ 1ex%
+            )%
+    }
+}{% v6+
+    \RequirePackage{xkeyval}
+
+    \definecolor{WFbackground}{rgb}{0.95,0.95,0.95}
+    \definecolor{WFframe}{rgb}{0.1,0.1,0.1}
+    \colorlet{WFtext}{black}
+    \def\SetWFbgd#1{\colorlet{WFbackground}{#1}}
+    \def\SetWFfrm#1{\colorlet{WFframe}{#1}}
+    \def\SetWFtxt#1{\colorlet{WFtext}{#1}}
+    \def\WFsplitdimens#1,#2!{\fboxrule=#1\relax\fboxsep=#2\relax}
+
+    \newlength{\LWR@wrapfigtwo@radius}
+    \setlength{\LWR@wrapfigtwo@radius}{1ex}
+
+    \DeclareOptionX<wraptext>{scalefactor}[0.8]{%
+    }
+    \DeclareOptionX<wraptext>{fboxrule}[1pt]{\fboxrule=#1}
+    \DeclareOptionX<wraptext>{fboxsep}[1ex]{\fboxsep=#1}
+    \DeclareOptionX<wraptext>{framecolor}[WFframe]{\SetWFfrm{#1}}
+    \DeclareOptionX<wraptext>{backgroundcolor}[WFbackground]{\SetWFbgd{#1}}
+    \DeclareOptionX<wraptext>{textcolor}[WFtext]{\SetWFtxt{#1}}
+    \DeclareOptionX<wraptext>{fontstyle}[\normalfont]{#1}
+    \DeclareOptionX<wraptext>{radius}[\fboxsep]{%
+        \setlength{\LWR@wrapfigtwo@radius}{#1}%
+    }
+    \DeclareOptionX<wraptext>{insertionwidth}[0.5\columnwidth]{%
+    }
+
+    \DeclareOptionX*{\PackageWarning{wrapfig2}{`\CurrentOption' ignored}}
+
+    \ExecuteOptionsX<wraptext>{scalefactor, fboxrule, fboxsep, framecolor,
+    backgroundcolor, textcolor, fontstyle, radius, insertionwidth}
+
+    \ProcessOptionsX*
+
+    \NewDocumentEnvironment{wraptext}{O{0} m O{0pt} G{0.5\columnwidth}}
+    {%
+        \wrapfloat{text}[]{#2}[]{#4}%
+    }
+    {%
+        \endwrapfloat%
+        \ignorespaces%
+    }
+
+    \NewDocumentCommand\includeframedtext{O{\insertwidth} m O{} o}
+    {%
+        \ExecuteOptionsX<wraptext>{#3}%     executes possible key=value options
+        \convertcolorspec{named}{WFtext}{HTML}\LWR@tempcolor%
+        \LWR@HTML@fcolorboxBlock%
+            [named]{WFframe}[named]{WFbackground}%
+            {\LWR@textcurrentfont{#2}}%
+            (%
+                color:\ \LWR@origpound\LWR@tempcolor ; %
+                border-radius:\ \LWR@printlength{\LWR@wrapfigtwo@radius}%
+            )%
+    }
+}
+
+\endinput
+%%
+%% End of file `lwarp-wrapfig2.sty'.

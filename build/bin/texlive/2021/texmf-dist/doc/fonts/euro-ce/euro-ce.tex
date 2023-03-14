@@ -1,0 +1,129 @@
+% EURO-CE.TEX --- version 3.0 (6 March 2002) --- (c) Harold W. de Wijn
+% Testing euro and CE symbols
+% Run with plain TeX
+
+\parindent0pt \nopagenumbers
+
+\def\E#1#2{\smallskip\leavevmode
+  #1 pt\qquad{\font\euro=#2\euro EDFG ONPQ edfg onpq}}
+\def\F#1#2{\smallskip\leavevmode
+  #1 pt\qquad{\font\euro=#2\euro EDFG O edfg o}}
+\def\G#1#2{\smallskip\leavevmode
+  #1 pt\qquad{\font\euro=#2\euro dcEab Eefg ihEjk lmn\/opq}}
+\def\CE#1{\hfill{\font\ce=#1\ce CE ce}}
+
+\vglue-20pt {\bf TEST OF EURO CURRENCY SYMBOL\hfill TEST OF CE MARK}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%  Comment out sizes you are not interested in!  %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+ROMAN
+%\E{\enskip 7}{eurorm scaled 700}  %\CE{cerm scaled 700}
+%\E{\enskip 8}{eurorm scaled 800}  %\CE{cerm scaled 800}
+%\E{\enskip 9}{eurorm scaled 900}  %\CE{cerm scaled 900}
+ \E{10}{eurorm}                     \CE{cerm}
+%\E{11}{eurorm scaled \magstephalf} \CE{cerm scaled \magstephalf}
+ \E{12}{eurorm scaled \magstep1}    \CE{cerm scaled \magstep1}
+%\E{14}{eurorm scaled \magstep2}    \CE{cerm scaled \magstep2}
+ \E{17}{eurorm scaled \magstep3}    \CE{cerm scaled \magstep3}
+%\E{21}{eurorm scaled \magstep4}    \CE{cerm scaled \magstep4}
+ \E{25}{eurorm scaled \magstep5}    \CE{cerm scaled \magstep5}
+%\E{30}{eurorm scaled 2986}
+
+\bigskip
+BOLDFACE
+%\E{\enskip 7}{eurobf scaled 700}
+%\E{\enskip 8}{eurobf scaled 800}
+%\E{\enskip 9}{eurobf scaled 900}
+ \E{10}{eurobf}
+%\E{11}{eurobf scaled \magstephalf}
+ \E{12}{eurobf scaled \magstep1}
+%\E{14}{eurobf scaled \magstep2}
+ \E{17}{eurobf scaled \magstep3}
+%\E{21}{eurobf scaled \magstep4}
+ \E{25}{eurobf scaled \magstep5}
+%\F{30}{eurobf scaled 2986}
+
+\bigskip
+ITALIC
+%\E{\enskip 7}{euroit scaled 700}  %\CE{ceit scaled 700}
+%\E{\enskip 8}{euroit scaled 800}  %\CE{ceit scaled 800}
+%\E{\enskip 9}{euroit scaled 900}  %\CE{ceit scaled 900}
+ \E{10}{euroit}                     \CE{ceit}
+%\E{11}{euroit scaled \magstephalf} \CE{ceit scaled \magstephalf}
+ \E{12}{euroit scaled \magstep1}    \CE{ceit scaled \magstep1}
+%\E{14}{euroit scaled \magstep2}    \CE{ceit scaled \magstep2}
+ \E{17}{euroit scaled \magstep3}    \CE{ceit scaled \magstep3}
+%\E{21}{euroit scaled \magstep4}    \CE{ceit scaled \magstep4}
+ \E{25}{euroit scaled \magstep5}    \CE{ceit scaled \magstep5}
+%\F{30}{euroit scaled 2986}
+
+\bigskip
+BOLDFACE ITALIC
+%\E{\enskip 7}{eurobfit scaled 700}
+%\E{\enskip 8}{eurobfit scaled 800}
+%\E{\enskip 9}{eurobfit scaled 900}
+ \E{10}{eurobfit}
+%\E{11}{eurobfit scaled \magstephalf}
+ \E{12}{eurobfit scaled \magstep1}
+%\E{14}{eurobfit scaled \magstep2}
+ \E{17}{eurobfit scaled \magstep3}
+%\E{21}{eurobfit scaled \magstep4}
+ \E{25}{eurobfit scaled \magstep5}
+%\F{30}{eurobfit scaled 2986}
+
+\bigskip
+SLANTED
+%\E{\enskip 7}{eurosl scaled 700}  %\CE{cesl scaled 700}
+%\E{\enskip 8}{eurosl scaled 800}  %\CE{cesl scaled 800}
+%\E{\enskip 9}{eurosl scaled 900}  %\CE{cesl scaled 900}
+ \E{10}{eurosl}                     \CE{cesl}
+%\E{11}{eurosl scaled \magstephalf} \CE{cesl scaled \magstephalf}
+ \E{12}{eurosl scaled \magstep1}    \CE{cesl scaled \magstep1}
+%\E{14}{eurosl scaled \magstep2}    \CE{cesl scaled \magstep2}
+ \E{17}{eurosl scaled \magstep3}    \CE{cesl scaled \magstep3}
+%\E{21}{eurosl scaled \magstep4}    \CE{cesl scaled \magstep4}
+ \E{25}{eurosl scaled \magstep5}    \CE{cesl scaled \magstep5}
+%\F{30}{eurosl scaled 2986}
+
+\bigskip
+BOLDFACE SLANTED
+%\E{\enskip 7}{eurobfsl scaled 700}
+%\E{\enskip 8}{eurobfsl scaled 800}
+%\E{\enskip 9}{eurobfsl scaled 900}
+ \E{10}{eurobfsl}
+%\E{11}{eurobfsl scaled \magstephalf}
+ \E{12}{eurobfsl scaled \magstep1}
+%\E{14}{eurobfsl scaled \magstep2}
+ \E{17}{eurobfsl scaled \magstep3}
+%\E{21}{eurobfsl scaled \magstep4}
+ \E{25}{eurobfsl scaled \magstep5}
+%\F{30}{eurobfsl scaled 2986}
+%\F{36}{eurobfsl scaled 3583}
+
+\bigskip
+SPECIALS
+%\G{10}{eurosp}
+%\G{12}{eurosp scaled \magstep1}
+%\G{14}{eurosp scaled \magstep2}
+ \G{17}{eurosp scaled \magstep3}
+%\G{25}{eurosp scaled \magstep5}
+
+\bigskip
+EXAMPLES in 10 point:
+\smallskip
+Roman euro symbol
+  \font\euro = eurorm {\euro E}000 {\euro F}123\hfill
+{\it Italic euro symbol
+  \font\euro = euroit {\euro E}000 {\euro F}123\hfill
+{\sl Slanted euro symbol
+  \font\euro = eurosl {\euro E}000 {\euro F}123}
+\smallskip
+{\bf Boldface euro symbol
+  \font\euro = eurobf {\euro E}000 {\euro F}123}
+
+\vglue-20pt
+\bye
+

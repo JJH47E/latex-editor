@@ -1,0 +1,8 @@
+name lwarp.win32
+category Package
+revision 43292
+shortdesc win32 files of lwarp
+containersize 684
+containerchecksum 2ce2508febb001d0c1a7a4c1224161b001571a6fa7145b47bf4ed9e4c1280e195c9bdd241048630ddeaaf19f6c8efc894e31b3a14cceb6a339be94590d0fe15d
+binfiles arch=win32 size=1
+ bin/win32/lwarpmk.exe

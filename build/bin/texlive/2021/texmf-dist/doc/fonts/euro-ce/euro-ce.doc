@@ -1,0 +1,211 @@
+README, euro-ce.doc ---  version 3.0b  (6 March 2012)
+(c) 1998-2012  Harold W. de Wijn <h.w.dewijn@uu.nl>   All rights reserved
+
+ABOUT THE AUTHOR: www.staff.science.uu.nl/~wijn0104
+
+IN CASE YOU APPRECIATE THE euro-ce PACKAGE, OR HAVE ANY COMMENTS OR
+SUGGESTIONS FOR IMPROVEMENTS, PLEASE CONTACT THE AUTHOR BY E-MAIL
+
+
+           EURO CURRENCY SYMBOL and CE MARK -- DOCUMENTATION
+
+                           *** SUMMARY ***
+
+(1) METAFONT source of the official euro currency symbol and scores of
+    variants, including italic, slanted, boldface, boldface italic
+    boldface slanted, condensed, and outline.  Varying single parameters
+    for compression, thickness, and slanting allows the user to add new
+    variants.
+
+(2) METAFONT source of the CE mark and several variants.
+
+
+                            *** FILES ***
+
+euro-ce.doc   documentation in text format (this file)
+README        identical to euro-ce.doc
+euroof.mf     METAFONT source of the official euro currency symbol
+eurorm.mf     METAFONT source of the official euro currency symbol
+              and its condensed variants, both filled and in outline
+euroit.mf     METAFONT source of the italic variants
+eurosl.mf     METAFONT source of the slanted variants
+eurobf.mf     METAFONT source of the boldface variants
+eurobfit.mf   METAFONT source of the boldface italic variants
+eurobfsl.mf   METAFONT source of the boldface slanted variants
+eurosp.mf     Example of METAFONT source for specials
+euromac.mf    driver file for generating euro symbols
+cerm.mf       METAFONT source of the CE mark
+ceit.mf       METAFONT source of the italic variant
+cesl.mf       METAFONT source of the slanted variant
+cemac.mf      driver file for generating CE marks
+euro-ce.tex   test (to be run with plain TeX)
+
+The METAFONT source files should be run with plain METAFONT.
+
+Files should be renamed whenever they are modified!  This in particular
+concerns the files euroit.mf and alike, defining the constants C, S, and
+T for compression, slanting, and thickness.
+
+
+                          *** CHARACTERS ***
+
+The euro symbol is provided in roman (eurorm.mf), italic (euroit.mf),
+slanted (eurosl.mf), boldface (eurobf.mf), boldface italic (eurobfit.mf),
+and boldface slanted (eurobfsl.mf) typefaces, each of which comprises the
+letters:
+
+  E,e     official width
+  D,d     demicondensed
+  F,f     condensed
+  G,g     double condensed
+  O,o     one-pixel-outline, official width
+  N,n     one-pixel-outline, demicondensed
+  P,p     one-pixel-outline, condensed
+  Q,q     one-pixel-outline, double condensed
+
+Upper-case letters refer to euro symbols having the height of the
+capital C of the corresponding Computer Modern roman font.  Lower-case
+letters refer to euro symbols having the height of the Computer Modern
+roman numerals (which you may like better).
+
+The file euroof.mf contains only the official symbol.
+
+The file eurosp.mf provides a number of "strange" euro symbols.
+
+The CE mark is available in roman (cerm.mf), italic (ceit.mf), and
+slanted (cesl.mf) typefaces:
+
+  CE      CE mark
+  ce      CE mark, one-pixel-outline
+
+
+                     *** NOTES ON PROGRAMMING ***
+
+The euro currency symbols are computed on the basis of the geometry
+published on the European Union's web site www.europa.eu.int/euro.  The
+official symbol, which is of roman type and inspired by the Greek letter
+epsilon (rather than the capital C), is composed of a well-defined
+280-degree segment of a perfect circle and two cross bars.  It features a
+uniform thickness, 1/12 of its outer diameter, and distinctive oblique
+ends.
+
+With regard to the condensed (i.e., horizontally compressed), italic, and
+slanted variants derived here from the official geometry, the following
+observations are of relevance:
+
+(i) Horizontal compression and slanting are straightforwardly implemented
+by the use of METAFONT's transformations.  These transformations permit
+control of compression and slanting through single parameters;
+
+(ii) It is desirable that a uniform thickness be preserved.  In case the
+official euro symbol has been drawn by filling its outline, however, this
+requirement precludes constructing its variants by transformations.
+Horizontal compression would narrow the upright strokes of the circle,
+while slanting would make the first and third quadrants thicker, and the
+second and fourth quadrants thinner;
+
+(iii) By contrast, METAFONT's pen nibs are invariant under METAFONT's
+transformations.
+
+The symbols are therefore drawn by (a) picking up a circular pen of a
+diameter equal to the chosen thickness, (b) drawing a full circle and
+oversized cross bars, and (c) erasing the excess according to the demands
+of the geometry.  Horizontal scaling and slanting transformations, to the
+extent applicable, then provide the desired result.
+
+Horizontal compression, slanting, and thickness are controlled by the
+parameters C, S, and T, which are input to the generating macro
+"draw_euro" in the driver file "euromac.mf".  Their default values
+correspond to the official symbol, i.e., C=1 (no compression), S=0 (no
+slanting), and T=1 (thickness is 1/12 of the outer diameter).  Possible
+combinations are of course limited by the geometry.
+
+The width of the box is taken equal to the overall width of the
+compressed, but unslanted symbol at the given thickness, augmented with
+uniform cmr10-sized margins at either side.  The italic corrections
+provided are designed to maintain the right margin.
+
+More technical details are commented on in the driver file "euromac.mf"
+itself.  Running "eurosp.mf" in proof mode demonstrates the robustness of
+"draw_euro" against variations of C, S, and T from their default values.
+
+The above is of equal concern to the CE mark and, for that matter, any
+other fully or partly circular image.
+
+
+                       *** EXAMPLES OF USAGE ***
+In TeX:
+
+\font\euro=eurorm scaled \magstephalf       % 11-point roman euro symbol
+\def\EUR{{\euro E}}
+\EUR 123.00
+
+\font\ce=cerm                               % 10-point CE symbol
+{\ce CE}
+
+
+In LaTeX:
+
+\newfont{\euroit}{euroit scaled \magstep1}  % 12-point italic euro symbol
+\newcommand{\EUR}{{\euroit E}}
+\EUR 123.00
+
+\newfont{\ce}{cerm}                         % 10-point CE symbol
+{\ce CE}
+
+
+                           *** HISTORY ***
+
+v1.2 (2 June 1998)       eurorm, euroit, eurosl, cerm, ceit, cesl.
+
+v1.3 (9 February 2001)   Adding the eurobf; modification of euromac.mf to
+                         accommodate boldface euro symbols;  improved
+                         handling of font dimensions;  minor corrections.
+
+v1.3a (15 February 2002) Patch in euromac.mf to remove spurious speckles.
+
+v2.0 (3 March 2002)      Adding demicondensed euro symbols (which seem
+                         quite popular), eurobfit, and eurobfsl.
+
+v3.0 (6 March 2002)      Completely revised package.  Improved METAFONT
+                         code.  Improvements include better positioning
+                         of euro symbol in box, better rendition at low
+                         resolution, and adding eurosp.
+
+v3.0b (6 March 2012)     Added permissions regarding usage and redistri-
+                         bution to README and euro-ce.doc.  Other files
+                         remained as in version 3.0.  Author's contact
+                         data updated.
+
+
+                           *** LICENSE ***
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright notice,
+this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.
+ * Neither the name of Harold W. de Wijn nor the names of any
+contributors may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER AND CONTRIBUTORS ''AS
+IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+                         *** END OF FILE ***
+
+
+
+

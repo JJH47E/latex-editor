@@ -1,0 +1,129 @@
+%
+% this is a substitute if the wasy fonts are missing
+%
+\font\tenwasy = lasy10
+\font\wasyb = lasyb10
+\font\ninewasy = lasy9
+\font\eightwasy = lasy8
+\font\sevenwasy = lasy7
+\font\fivewasy = lasy5
+\newfam\wasyfam
+\newcount\wasyfamcount
+\wasyfamcount=\wasyfam \multiply\wasyfamcount by 256
+\def\wasy{\fam\wasyfam\tenwasy}
+\textfont\wasyfam=\tenwasy
+\scriptfont\wasyfam=\sevenwasy
+\scriptscriptfont\wasyfam=\fivewasy
+\let\wsl\sl \let\wbf\bf
+%%%%%% special macro
+\def\overstrike#1#2{{\setbox0\hbox{$#2$}\hbox to \wd0{\hss
+    $#1$\hss}\kern-\wd0\box0}}
+%%%%%%%%%%%%%%%%%%%%%% <) angle
+\def\varangle{\hbox{$<$\lower 0.5pt\hbox{\kern -0.5em\tt)}}}
+%%%%%%%%%%%%%%%%%%%%%% < approx, > approx
+\def\apprle{\mathrel{\mathpalette\buildover{<\sim {-1.15pt}{-0.25pt}}}}
+\def\apprge{\mathrel{\mathpalette\buildover{>\sim {-1.15pt}{-0.25pt}}}}
+\newdimen\buildraise\newdimen\buildspace
+\def\buildover#1#2{\getargs#2\raise\buildraise\vbox{%
+    \resetall{\buildspace}\halign{$#1\hfil##\hfil$\crcr
+    \buildtop\crcr\buildbot\crcr}}}
+\def\getargs#1#2#3#4{\def\buildtop{#1}\def\buildbot{#2}%
+    \global\buildraise=#3\global\buildspace=#4\relax}
+\def\resetall#1{\mathsurround=0pt\everycr={}\tabskip=0pt
+    \baselineskip=0pt\lineskiplimit=0pt\lineskip=#1}
+%%%%%%%%%%%%%%%%%%%%%% >O<
+\def\currency{\hbox{\tt\kern -1.0pt
+    \lower 4.4pt\hbox to 0pt{\char"13\hss}%
+    \lower 1.3pt\hbox to 0pt{\kern 0.82pt\char"12\hss}%
+    \kern  2.9pt{\tensy\char"0E}\kern -3.3pt%
+    \lower 1.3pt\hbox to 0pt{\char"13\hss}%
+    \lower 4.4pt\hbox to 0pt{%
+    \kern 0.82pt\char"12\hss}\kern 4.2pt}}
+\def\euro{\leavevmode\hbox{\kern 0.03em
+    \vrule height 0.7ex depth -0.6ex width 0.5em
+    \kern -0.47em
+    \vrule height 1.0ex depth -0.9ex width 0.5em
+    \kern -0.5em C}}
+\def\z{{\teni 3}}
+%%%%%%%%%%%%%%%%%%%%%%
+\def\clock{\hbox{\kern 1pt
+    \vrule width 0.4pt height 3.6pt depth -1.2pt
+    \vrule width 0.4pt height 1.2pt depth -0.8pt\kern -0.4pt
+    \vrule width 0.4pt height 4.0pt depth -3.6pt
+    \vrule width 0.4pt height 0.8pt depth -0.4pt\kern -0.4pt
+    \vrule width 0.4pt height 4.4pt depth -4.0pt
+    \vrule width 2.4pt height 0.4pt depth  0.0pt\kern -2.4pt
+    \vrule width 2.4pt height 4.8pt depth -4.4pt\kern -1.4pt
+    \vrule width 0.4pt height 3.6pt depth -2.2pt
+    \vrule width 1.0pt height 2.6pt depth -2.2pt
+    \vrule width 0.4pt height 0.8pt depth -0.4pt\kern -0.4pt
+    \vrule width 0.4pt height 4.4pt depth -4.0pt
+    \vrule width 0.4pt height 1.2pt depth -0.8pt\kern -0.4pt
+    \vrule width 0.4pt height 4.0pt depth -3.6pt
+    \vrule width 0.4pt height 3.6pt depth -1.2pt
+    \kern 1pt}}
+%%%%%%%%%%%%%%%%%%%%%% bell
+\def\bell{\hbox{\kern 1pt
+    \vrule width 0.8pt height 0.8pt depth 0pt
+    \vrule width 1.0pt height 4.5pt depth 0pt
+    \vrule width 0.8pt height 5.3pt depth 0.8pt
+    \vrule width 1.0pt height 4.5pt depth 0pt
+    \vrule width 0.8pt height 0.8pt depth 0pt
+    \kern 1pt}}
+%%%%%%%%%%%%%%%%%%%%%% note
+\def\eighthnote{\hbox{\kern 0.5pt\lower 0.2pt
+    \hbox{\sevensy\char"0F\kern -0.9pt}%
+    \vrule width 0.2pt height 6.8pt depth -1.4pt
+    \raise 0.8pt\hbox{\tt\kern -1.3pt\char"12}\kern -1pt}}
+%%%%%%%%%%%%%%%%%%%%%%
+\def\phone{\hbox{Tel.}}
+\def\Box{\hbox{\wasy\char"32}}\let\Square\Box
+\def\Diamond{\hbox{\wasy\char"33}}
+\def\RIGHTarrow{{\wasy\char"03}}
+\def\LEFTarrow{{\wasy\char"01}}
+%%%%%%%%%%%%%%%%%%%%%%
+\def\notbackslash{\overstrike{\backslash}{-}}
+\def\notslash{\overstrike{/}{-}}
+\def\APLnot#1{\overstrike{\sim}{#1}}
+\def\APLcirc#1{\overstrike{\circ}{#1}}
+\def\APLvert#1{\overstrike{\vert}{#1}}
+\def\APLminus{\raise0.7ex\hbox{$-$}}
+\def\diameter{\overstrike{\circ}{/}}
+%%%%%%%%%%%%%%%%%%%%%%
+\def\AC{\hbox{\kern0.5pt\wasy\char"3A\kern0.5pt}}
+\def\HF{\lower0.9pt\hbox to 0pt{\kern0.5pt\wasy\char"3A\hss}%
+        \raise0.9pt\hbox{\kern0.5pt\wasy\char"3A\kern0.5pt}}
+\def\VHF{\lower1.7pt\hbox to 0pt{\kern0.5pt\wasy\char"3A\hss}%
+        \hbox to 0pt{\kern0.5pt\wasy\char"3A\kern0.5pt\hss}%
+        \raise1.7pt\hbox{\kern0.5pt\wasy\char"3A\kern0.5pt}}
+%%%%%%%%%%%%%%%%%%%%%%
+\def\iint{\int\mkern -2mu\int}
+\def\iiint{\int\mkern -2mu\int\mkern -2mu\int}
+%%%%%% math characters
+\def\Bowtie{\hbox{\wasy\char"31}}
+%%%%%% special characters
+\def\permil{\ifmmode{^0\!{/}\!{}_{00}}\else$^0\!{/}\!{}_{00}$\fi}
+\def\agemO{{\wasy\char"30}}
+\def\Dh{\leavevmode{\setbox0\hbox{D}%
+    \hbox to\wd0{\kern 0.04em\char32\hss D}}}
+\def\cent{\overstrike/{\rm c}}
+\def\thorn{\overstrike{\rm b}{\rm p}}
+\def\astrosun{\hbox{\tensy\char"0C}}
+\let\Paragraph\S
+%%%%%% math operators as mathchars
+\def\wasymathchardef#1#2{%
+    \count"FF=\wasyfamcount
+    \advance\count"FF by"#1
+    \mathchardef#2\count"FF}
+\wasymathchardef{3001}{\lhd}
+\wasymathchardef{3001}{\LHD}
+\wasymathchardef{3003}{\rhd}
+\wasymathchardef{3003}{\RHD}
+\wasymathchardef{3002}{\unlhd}
+\wasymathchardef{3004}{\unrhd}
+\wasymathchardef{303C}{\sqsubset}
+\wasymathchardef{303D}{\sqsupset}
+\wasymathchardef{303B}{\leadsto}
+%%%%%%%%%%%%%%%%%%%%%%
+\let\newpropto\relax
+\let\newint\relax

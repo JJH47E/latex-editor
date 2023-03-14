@@ -1,0 +1,142 @@
+[
+	{
+		"name": "Alpha",
+		"templateLowerCase": "\\alpha",
+		"templateUpperCase": "A"
+	},
+	{
+		"name": "Beta",
+		"templateLowerCase": "\\beta",
+		"templateUpperCase": "B"
+	},
+	{
+		"name": "Gamma",
+		"templateLowerCase": "\\gamma",
+		"templateUpperCase": "\\Gamma"
+	},
+	{
+		"name": "delta",
+		"templateLowerCase": "\\delta",
+		"templateUpperCase": "\\Delta"
+	},
+	{
+		"name": "Epsilon",
+		"templateLowerCase": "\\epsilon",
+		"templateUpperCase": "E"
+	},
+	{
+		"name": "Epsilon",
+		"templateLowerCase": "\\varepsilon",
+		"templateUpperCase": "E"
+	},
+	{
+		"name": "Zeta",
+		"templateLowerCase": "\\zeta",
+		"templateUpperCase": "Z"
+	},
+	{
+		"name": "eta",
+		"templateLowerCase": "\\eta",
+		"templateUpperCase": "H"
+	},
+	{
+		"name": "Theta",
+		"templateLowerCase": "\\theta",
+		"templateUpperCase": "\\Theta"
+	},
+	{
+		"name": "Theta",
+		"templateLowerCase": "\\vartheta",
+		"templateUpperCase": "\\Theta"
+	},
+	{
+		"name": "Iota",
+		"templateLowerCase": "\\iota",
+		"templateUpperCase": "I"
+	},
+	{
+		"name": "Kappa",
+		"templateLowerCase": "\\kappa",
+		"templateUpperCase": "K"
+	},
+	{
+		"name": "Lambda",
+		"templateLowerCase": "\\lambda",
+		"templateUpperCase": "\\Lambda"
+	},
+	{
+		"name": "Mu",
+		"templateLowerCase": "\\mu",
+		"templateUpperCase": "M"
+	},
+	{
+		"name": "Nu",
+		"templateLowerCase": "\\nu",
+		"templateUpperCase": "N"
+	},
+	{
+		"name": "Xi",
+		"templateLowerCase": "\\xi",
+		"templateUpperCase": "\\Xi"
+	},
+	{
+		"name": "O",
+		"templateLowerCase": "o",
+		"templateUpperCase": "O"
+	},
+	{
+		"name": "Pi",
+		"templateLowerCase": "\\pi",
+		"templateUpperCase": "\\Pi"
+	},
+	{
+		"name": "Rho",
+		"templateLowerCase": "\\rho",
+		"templateUpperCase": "P"
+	},
+	{
+		"name": "Rho",
+		"templateLowerCase": "\\varrho",
+		"templateUpperCase": "P"
+	},
+	{
+		"name": "Sigma",
+		"templateLowerCase": "\\sigma",
+		"templateUpperCase": "\\Sigma"
+	},
+	{
+		"name": "Tau",
+		"templateLowerCase": "\\tau",
+		"templateUpperCase": "T"
+	},
+	{
+		"name": "Upsilon",
+		"templateLowerCase": "\\upsilon",
+		"templateUpperCase": "\\Upsilon"
+	},
+	{
+		"name": "Phi",
+		"templateLowerCase": "\\phi",
+		"templateUpperCase": "\\Phi"
+	},
+	{
+		"name": "Phi",
+		"templateLowerCase": "\\varphi",
+		"templateUpperCase": "\\Phi"
+	},
+	{
+		"name": "Chi",
+		"templateLowerCase": "\\chi",
+		"templateUpperCase": "X"
+	},
+	{
+		"name": "Psi",
+		"templateLowerCase": "\\psi",
+		"templateUpperCase": "\\Psi"
+	},
+	{
+		"name": "Omega",
+		"templateLowerCase": "\\omega",
+		"templateUpperCase": "\\Omega"
+	}
+]

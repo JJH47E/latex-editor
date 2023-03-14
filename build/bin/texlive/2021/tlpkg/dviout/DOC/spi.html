@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD W3 HTML//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Susie plug-inと画像フォーマット</title>
+</head>
+
+<body bgcolor="#eeffff">
+
+<hr align="left" noShade SIZE="4" width="75%">
+
+<h1 align="center">Susie plug-inと画像フォーマット</h1>
+
+<hr align="right" noShade SIZE="4" width="75%">
+
+<p>Susie 
+は、日本で使われている多数のグラフィックフォーマットに対応した 
+Windows上の画像ビューアです。詳しくは、作者による <a href="http://www.digitalpad.co.jp/~takechin/">Susie's room </a>を参照してください。</p>
+
+<p>Susie は、画像の表示の際、そのフォーマットに対応した Windows の 
+DLL （plug-inと呼ばれ、拡張子が、"spi" 
+となっている）を使います。</p>
+
+<p>Susieの作者自身により、 <a href="http://www.digitalpad.co.jp/~takechin/download.html">JPEG/PIC/TIFF/XLD4/MAG/PIC/PIC2/Pi 
+などの plug-in</a>が提供されています。</p>
+
+<p>その他、多くの方が各種画像フォーマットに関する plug-in 
+を開発し、公開 しています。</p>
+
+<p>各種 plug-inについては、<a href="http://www2f.biglobe.ne.jp/~kana/link.html">加菜さんのページ</a> 
+に情報があり、そこからたどって downloadできます。 PNG/PCD/PGM/PPM/Sun 
+Raster/TGA/ICON/... などの plug-in が公開されています。 </p>
+
+<hr>
+
+<p>TeX の previewer の dviout for Windows は、カラーBMP、PBM 
+や、Ghostscript を使った PostScript画像の取り込みをサポートしてきました。 
+さらに、Ver.3.05.3 より、以下のように改良されました。</p>
+
+<p><strong>1.</strong> 独自の<a href="cmode.html#CompBMC"><strong>BMC圧縮画像</strong></a>をサポートし、これを 
+PostScript画像を扱うための中間ファイルとしました。ディスクスペースの節約と高速化が目的です。</p>
+
+<p><strong>2.</strong> Susie の plug-in 
+に対応した画像の取り込みをサポートしました（読み込みたい画像に対応する 
+plug-in を自動的に探して、存在すればそれを使います。 ただし、Win16でなくて 
+Win32用のものが必要）</p>
+
+<p>関連して、以下のものを公開します。<br>
+これらは、Ver.3.06 以降の dviout for Windowsのパッケージに含まれます。 
+
+</p><dl>
+  <dd><strong>ifbmc.spi</strong>: BMC画像ファイルのSusie plug-in</dd>
+  <dd><strong>exbmc.xpi</strong>: BMC画像ファイルのABC出力 plug-in<br>
+    <strong>bmc.txt</strong> : BMCフォーマットのドキュメント<br>
+    <strong>bmc.exe</strong> : BMP &lt;-&gt; BMC の相互変換、および、Susie plug-in 
+    がサポートする画像ファイルからABC出力プラグインがサポート画像するファイルへの変換（<a href="http://www.asahi-net.or.jp/~kh4s-smz/spi/my_spi.html">A to B Converter</a>の機能のコマンド版）、画像情報出力、BoundingBox（*.bbのファイル）出力、EPSFファイルからバイナリヘッダの除去、などの機能<br>
+  </dd>
+  <dd>ifbmc.spi, exbmc.xpi, bmc.exe のソースプログラム </dd>
+</dl>
+
+<p><strong>3.</strong> dviout は、プレビュー画面の画像出力として 
+BMP/EMF/BMC（BMC は Ver.3.12.2以降） 
+がサポートされています。これらから画像処理をして BMP/PNG/JPG 
+画像に変更するには、Susei plug-in対応のグラフィックコンバータ<a href="https://www.vector.co.jp/soft/win95/art/se074357.html">BTJ32</a>に ifbmc.spi 
+を登録して使うと便利です（各種フィルター、色調補正、gray scale、透視色指定などが可能）。中間画像形式としては、BMPの代わりにBMCを使うと、ファイルサイズが節約できます。<br>
+<br>
+<strong>4</strong>. dviout の画面を切り出しての画像出力は、BMP/EMF/BMC 
+のほか、<a href="http://www.asahi-net.or.jp/~kh4s-smz/">ABC出力プラグイン</a>（Susie 
+plug-in の画像出力版）をサポートしています（Ver.3.12.2以降）。256色以下の画像ファイル出力に対応し、現在PNG画像用のものや<a href="https://web.archive.org/web/20040726101523/http://at.sakura.ne.jp/~t-mz/">EPS画像用のもの (Web archive)</a>などが dviout で使用できます。</p>
+
+<hr>
+
+</body></html>
+
+

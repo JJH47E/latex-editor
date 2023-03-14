@@ -1,0 +1,63 @@
+name memoir
+category Package
+revision 62105
+shortdesc Typeset fiction, non-fiction and mathematical books
+longdesc The memoir class is for typesetting poetry, fiction,
+longdesc non-fiction, and mathematical works. Permissible document
+longdesc 'base' font sizes range from 9 to 60pt. There is a range of
+longdesc page-styles and well over a dozen chapter-styles to choose
+longdesc from, as well as methods for specifying your own layouts and
+longdesc designs. The class also provides the functionality of over
+longdesc thirty of the more popular packages, thus simplifying document
+longdesc sources. Users who wish to use the hyperref package, in a
+longdesc document written with the memoir class, should also use the
+longdesc memhfixc package (part of this bundle). Note, however, that any
+longdesc current version of hyperref actually loads the package
+longdesc automatically if it detects that it is running under memoir.
+containersize 75228
+containerchecksum 526dc62682d6a081cbcb5b3fe4fcdef784efe32e73455bf57d6f9c29fc0b70f0edcef47f74a6ec8c8702b27a24a0377090ba4ed321fdbea481d4d82d77d8f51c
+doccontainersize 3137488
+doccontainerchecksum a96bf91f04d6c09c86b48be5e0797da15bef53661495b18e9873cf68ac1707b8d4ea44a8784e625bfc0ed8303d4c5433f02b48dbafac8582dd177ad8772c4f4e
+docfiles size=1154
+ texmf-dist/doc/latex/memoir/Makeidxglo
+ texmf-dist/doc/latex/memoir/README details="Readme"
+ texmf-dist/doc/latex/memoir/anvil2.mps
+ texmf-dist/doc/latex/memoir/memfonts.sty
+ texmf-dist/doc/latex/memoir/memlays.sty
+ texmf-dist/doc/latex/memoir/memman.gst
+ texmf-dist/doc/latex/memoir/memman.ist
+ texmf-dist/doc/latex/memoir/memman.pdf details="Basic user manual"
+ texmf-dist/doc/latex/memoir/memman.tex
+ texmf-dist/doc/latex/memoir/memnoidxnum.tex
+ texmf-dist/doc/latex/memoir/memsty.sty
+ texmf-dist/doc/latex/memoir/setpage-example.pdf
+ texmf-dist/doc/latex/memoir/titlepages.sty
+ texmf-dist/doc/latex/memoir/trims-example.tex
+srccontainersize 242252
+srccontainerchecksum 28bf032e0fa69f28258f1085f9c0c36d563287881639e9f146410c75e12d7c00e8404dab16a73d6e58f85a531e7579fdb33f50606fb9e865b1bec9e8c29004e1
+srcfiles size=320
+ texmf-dist/source/latex/memoir/memoir.dtx
+ texmf-dist/source/latex/memoir/memoir.ins
+ texmf-dist/source/latex/memoir/mempatch.dtx
+ texmf-dist/source/latex/memoir/mempatch.ins
+runfiles size=120
+ texmf-dist/makeindex/memoir/basic.gst
+ texmf-dist/tex/latex/memoir/mem10.clo
+ texmf-dist/tex/latex/memoir/mem11.clo
+ texmf-dist/tex/latex/memoir/mem12.clo
+ texmf-dist/tex/latex/memoir/mem14.clo
+ texmf-dist/tex/latex/memoir/mem17.clo
+ texmf-dist/tex/latex/memoir/mem20.clo
+ texmf-dist/tex/latex/memoir/mem25.clo
+ texmf-dist/tex/latex/memoir/mem30.clo
+ texmf-dist/tex/latex/memoir/mem36.clo
+ texmf-dist/tex/latex/memoir/mem48.clo
+ texmf-dist/tex/latex/memoir/mem60.clo
+ texmf-dist/tex/latex/memoir/mem9.clo
+ texmf-dist/tex/latex/memoir/memhfixc.sty
+ texmf-dist/tex/latex/memoir/memoir.cls
+catalogue-also memdesign
+catalogue-ctan /macros/latex/contrib/memoir
+catalogue-license lppl1.3
+catalogue-topics book-pub class
+catalogue-version 3.7q
