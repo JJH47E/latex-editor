@@ -2,23 +2,23 @@
     <mat-toolbar-row>
     <span>Preview</span>
     <span class="fill-remaining-space"></span>
-    <button mat-icon-button (click)="zoomIn()">
+    <button mat-icon-button (click)="zoomIn()" matTooltip="Zoom In">
         <mat-icon>zoom_in</mat-icon>
     </button>
-    <button mat-icon-button (click)="zoomOut()">
+    <button mat-icon-button (click)="zoomOut()" matTooltip="Zoom Out">
         <mat-icon>zoom_out</mat-icon>
     </button>
-    <button mat-icon-button (click)="fitToScreen()">
+    <button mat-icon-button (click)="fitToScreen()" matTooltip="Fit to Screen">
         <mat-icon>fit_screen</mat-icon>
     </button>
-    <button mat-icon-button (click)="reloadPreview()">
+    <button mat-icon-button (click)="reloadPreview()"matTooltip="Reload Preview">
         <mat-icon>sync</mat-icon>
     </button>
-    <button mat-icon-button (click)="downloadPdf()">
+    <button mat-icon-button (click)="downloadPdf()" matTooltip="Save as PDF">
         <mat-icon>download</mat-icon>
     </button>
-    <button mat-icon-button (click)="moreClicked()">
+    <!-- <button mat-icon-button (click)="moreClicked()" matTooltip="More">
         <mat-icon>more_vert</mat-icon>
-    </button>
+    </button> -->
     </mat-toolbar-row>
 </mat-toolbar>

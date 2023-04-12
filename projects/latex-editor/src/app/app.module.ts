@@ -48,6 +48,7 @@ import { AlphabetComponent } from './components/alphabet/alphabet.component';
 import { AlphabetDraggableComponent } from './components/alphabet-draggable/alphabet-draggable.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PrebuiltAlphabetComponent } from './components/prebuilt-alphabet/prebuilt-alphabet.component';
+import {MatTooltipModule} from '@angular/material/tooltip'; 
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { PrebuiltAlphabetComponent } from './components/prebuilt-alphabet/prebui
     DragDropModule,
     MatBottomSheetModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
