@@ -73,14 +73,12 @@ export class ToolbarComponent implements OnInit {
   }
 
   openMacroDialog(): void {
-    const dialogRef = this.dialog.open(MacroHelperComponent, {
+    this.dialog.open(MacroHelperComponent, {
       width: '750px',
       maxHeight: '90%',
       height: 'auto',
       autoFocus: false
     });
-
-    dialogRef.afterClosed().subscribe(_ => { });
   }
 
   openHelp(): void {
@@ -118,7 +116,7 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  private openOperatorAlphabetDialog(): void {
+  public openOperatorAlphabetDialog(): void {
     if (!!this.operatorAlphabetRef) {
       // close current window & open a new one
       this.operatorAlphabetRef.close();
@@ -131,7 +129,7 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  private openDelimitersAlphabetDialog(): void {
+  public openDelimitersAlphabetDialog(): void {
     if (!!this.delimterAlphabetRef) {
       // close current window & open a new one
       this.delimterAlphabetRef.close();
@@ -144,7 +142,7 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  private openConstructsAlphabetDialog(): void {
+  public openConstructsAlphabetDialog(): void {
     if (!!this.constructsAlphabetRef) {
       // close current window & open a new one
       this.constructsAlphabetRef.close();
@@ -157,7 +155,7 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  private openAccentsAlphabetDialog(): void {
+  public openAccentsAlphabetDialog(): void {
     if (!!this.accentsAlphabetRef) {
       // close current window & open a new one
       this.accentsAlphabetRef.close();
@@ -170,7 +168,7 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  private openMiscAlphabetDialog(): void {
+  public openMiscAlphabetDialog(): void {
     if (!!this.miscAlphabetRef) {
       // close current window & open a new one
       this.miscAlphabetRef.close();

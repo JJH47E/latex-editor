@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubMacroComponent } from './sub-macro.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('SubMacroComponent', () => {
   let component: SubMacroComponent;
@@ -8,7 +9,10 @@ describe('SubMacroComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SubMacroComponent ]
+      declarations: [ SubMacroComponent ],
+      providers: [
+        { provide: MatDialogRef, useValue: {} }
+      ]
     })
     .compileComponents();
 
