@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Variable Templates</h1>
 <div mat-dialog-content>
-    <div *ngIf="!(selectedOption$ | async); else showSection">
+    <div *ngIf="(selectedOption$ | async) === undefined; else showSection">
         <div *ngFor="let section of sections" (click)="openSection(section)">
             <button mat-button class="option">
                 {{ section }}
@@ -9,7 +9,7 @@
     </div>
 </div>
 <div mat-dialog-actions>
-    <button *ngIf="!(selectedOption$ | async); else showBackButton" mat-button [mat-dialog-close]="null">Cancel</button>
+    <button *ngIf="(selectedOption$ | async) === undefined; else showBackButton" mat-button [mat-dialog-close]="null">Cancel</button>
 </div>
 
 <ng-template #showSection>
